@@ -1,0 +1,105 @@
+{
+  "id": "tools",
+  "label": "Outils",
+  "sections": [
+    {
+      "title": "Outils",
+      "meta": "à compléter",
+      "note": "Ce qui tourne réellement dans les projets — plateforme, données, design, génération.",
+      "groups": [
+        {
+          "label": "plateforme & données",
+          "items": [
+            {
+              "name": "Vercel",
+              "url": "https://vercel.com",
+              "tags": ["hébergement", "next"],
+              "desc": "Déploiement de nav_builder_dcs. main = production, staging pour les features."
+            },
+            {
+              "name": "Supabase",
+              "url": "https://supabase.com",
+              "tags": ["base de données", "auth"],
+              "desc": "Auth et cloud sync. Deux projets : dev jizhkvxbomgcddrllepc, prod xozunsziucmmxtjjbmyp."
+            },
+            {
+              "name": "Context7",
+              "url": "https://context7.com",
+              "tags": ["docs", "mcp"],
+              "desc": "Docs de librairies à jour servies aux agents, plutôt que la mémoire du modèle."
+            }
+          ]
+        },
+        {
+          "label": "design & composants",
+          "items": [
+            {
+              "name": "shadcn/ui",
+              "url": "https://ui.shadcn.com",
+              "tags": ["composants", "react"],
+              "desc": "Composants React à copier dans le projet. Tailwind + Radix, pas une dépendance runtime."
+            },
+            {
+              "name": "Basecoat",
+              "url": "https://basecoatui.com",
+              "tags": ["composants", "html"],
+              "desc": "Portage de shadcn/ui en HTML + Tailwind pur, sans React. CSS prébuild disponible en CDN."
+            },
+            {
+              "name": "Nucleo",
+              "url": "https://nucleoapp.com",
+              "tags": ["icônes"],
+              "desc": "Les icônes glyph-duo du redesign nav_builder_dcs. Jamais substituer une famille outline."
+            },
+            {
+              "name": "Pencil",
+              "url": "https://pencil.dev",
+              "tags": ["design", "mcp"],
+              "desc": "Éditeur de fichiers .pen pilotable par agent, pour maquetter avant de coder."
+            }
+          ]
+        },
+        {
+          "label": "génération & motion",
+          "items": [
+            {
+              "name": "Higgsfield",
+              "url": "https://higgsfield.ai",
+              "tags": ["image", "vidéo", "mcp"],
+              "desc": "Génération image, vidéo, audio et 3D. Utilisé pour les visuels et les animations de boucle."
+            },
+            {
+              "name": "GSAP",
+              "url": "https://gsap.com",
+              "tags": ["motion", "js"],
+              "desc": "Animation JS pour les timelines complexes que CSS ne couvre pas."
+            },
+            {
+              "name": "Remotion",
+              "url": "https://www.remotion.dev",
+              "tags": ["vidéo", "react"],
+              "desc": "Rendu de vidéos en React. Pour les démos produit et les captures animées."
+            }
+          ]
+        },
+        {
+          "label": "travail",
+          "items": [
+            {
+              "name": "Claude Code",
+              "url": "https://claude.ai/code",
+              "tags": ["agent", "cli"],
+              "desc": "L'agent principal. Skills, plugins et hooks configurés dans ~/.claude."
+            },
+            {
+              "name": "Obsidian",
+              "url": "https://obsidian.md",
+              "tags": ["notes"],
+              "desc": "Vault de notes en Markdown, accessible aux agents via la skill obsidian-vault."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

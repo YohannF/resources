@@ -1,0 +1,141 @@
+{
+  "id": "inspiration",
+  "label": "Inspiration",
+  "sections": [
+    {
+      "title": "Inspiration front-end",
+      "meta": "à compléter",
+      "note": "Amorce à remplacer par tes propres références — ajoute, retire, réordonne dans data/inspiration.json.",
+      "groups": [
+        {
+          "label": "galeries",
+          "items": [
+            {
+              "name": "Godly",
+              "url": "https://godly.website",
+              "tags": ["gallerie", "web design"],
+              "desc": "Sélection resserrée de sites au design remarquable, filtrable par style et par industrie."
+            },
+            {
+              "name": "Awwwards",
+              "url": "https://www.awwwards.com",
+              "tags": ["gallerie", "awards"],
+              "desc": "La référence historique. Beaucoup de démonstration technique, à trier."
+            },
+            {
+              "name": "Land-book",
+              "url": "https://land-book.com",
+              "tags": ["gallerie", "landing"],
+              "desc": "Landing pages uniquement, avec un filtre par catégorie et par style efficace."
+            },
+            {
+              "name": "Minimal Gallery",
+              "url": "https://minimal.gallery",
+              "tags": ["gallerie", "minimal"],
+              "desc": "Sites minimalistes. Utile quand tu cherches la retenue plutôt que l'effet."
+            },
+            {
+              "name": "SaaS Landing Page",
+              "url": "https://saaslandingpage.com",
+              "tags": ["gallerie", "saas"],
+              "desc": "Landing pages SaaS classées par section — hero, pricing, testimonials."
+            },
+            {
+              "name": "Curated.design",
+              "url": "https://curated.design",
+              "tags": ["gallerie"],
+              "desc": "Curation par catégories visuelles : typographie, couleur, layout, motion."
+            }
+          ]
+        },
+        {
+          "label": "patterns produit",
+          "items": [
+            {
+              "name": "Mobbin",
+              "url": "https://mobbin.com",
+              "tags": ["patterns", "app"],
+              "desc": "Captures d'apps réelles classées par flow — onboarding, paywall, settings. Le meilleur pour les patterns."
+            },
+            {
+              "name": "Refero",
+              "url": "https://refero.design",
+              "tags": ["patterns", "web app"],
+              "desc": "Même idée mais côté web app, avec la recherche par composant."
+            },
+            {
+              "name": "Apple HIG",
+              "url": "https://developer.apple.com/design/human-interface-guidelines",
+              "tags": ["guidelines", "apple"],
+              "desc": "Les Human Interface Guidelines. Le raisonnement compte plus que les specs."
+            },
+            {
+              "name": "Vercel Design",
+              "url": "https://vercel.com/design",
+              "tags": ["design system"],
+              "desc": "Geist : un design system public complet, tokens et composants documentés."
+            }
+          ]
+        },
+        {
+          "label": "motion & détail",
+          "items": [
+            {
+              "name": "Animations on the Web",
+              "url": "https://animations.dev",
+              "tags": ["motion", "cours"],
+              "desc": "Le cours d'Emil Kowalski. La source derrière les skills motion installées."
+            },
+            {
+              "name": "Codrops",
+              "url": "https://tympanus.net/codrops",
+              "tags": ["motion", "demos"],
+              "desc": "Démos et tutoriels d'effets. Pour piocher une technique, pas une direction."
+            },
+            {
+              "name": "Easings",
+              "url": "https://easings.net",
+              "tags": ["motion", "outil"],
+              "desc": "Catalogue de courbes d'easing avec aperçu animé et équivalent CSS."
+            },
+            {
+              "name": "rauno.me",
+              "url": "https://rauno.me",
+              "tags": ["motion", "craft"],
+              "desc": "Notes d'interface de Rauno Freiberg. Le détail au niveau du pixel et du geste."
+            },
+            {
+              "name": "Josh Comeau",
+              "url": "https://www.joshwcomeau.com",
+              "tags": ["css", "articles"],
+              "desc": "Articles CSS interactifs. Les explications les plus claires sur le layout et les ombres."
+            }
+          ]
+        },
+        {
+          "label": "typo & couleur",
+          "items": [
+            {
+              "name": "Fonts In Use",
+              "url": "https://fontsinuse.com",
+              "tags": ["typo"],
+              "desc": "Archive de typographies dans leur contexte réel. Pour voir une fonte travailler avant de la choisir."
+            },
+            {
+              "name": "OKLCH Color Picker",
+              "url": "https://oklch.com",
+              "tags": ["couleur", "outil"],
+              "desc": "Sélecteur OKLCH avec visualisation du gamut. Indispensable avec Tailwind v4."
+            },
+            {
+              "name": "Realtime Colors",
+              "url": "https://www.realtimecolors.com",
+              "tags": ["couleur", "outil"],
+              "desc": "Teste une palette sur une vraie maquette de site plutôt que sur des swatches."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

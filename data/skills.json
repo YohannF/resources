@@ -1,0 +1,294 @@
+{
+  "id": "skills",
+  "label": "Skills",
+  "sections": [
+    {
+      "title": "Jakub Krehel",
+      "meta": "interfaces:",
+      "note": "Un système découpé par couche d'interface. Chaque skill couvre une décision distincte ; better-interface sert de chapeau et renvoie vers la bonne.",
+      "groups": [
+        {
+          "label": "interfaces",
+          "items": [
+            {
+              "name": "better-interface",
+              "desc": "Le chapeau du système : donne la direction générale et oriente vers la sous-skill pertinente."
+            },
+            {
+              "name": "better-layout",
+              "desc": "Structure de page : groupement, alignement, ordre de lecture, divulgation progressive, breakpoints, RTL."
+            },
+            {
+              "name": "better-typography",
+              "desc": "Choix et réglage des fontes : échelle typographique, variable fonts, OpenType, césures, longueur de ligne."
+            },
+            {
+              "name": "better-colors",
+              "desc": "Tout en OKLCH : conversion depuis hex/rgb, génération de palettes, contraste, limites de gamut P3, thèmes Tailwind v4."
+            },
+            {
+              "name": "better-ui",
+              "desc": "Le polish final : hover, ombres, bordures, micro-interactions, animations d'entrée/sortie, choix d'icônes."
+            },
+            {
+              "name": "better-accessibility",
+              "desc": "États de focus, navigation clavier, ARIA, formulaires, widgets custom, lecteurs d'écran."
+            },
+            {
+              "name": "better-writing",
+              "desc": "La copy comme matériau de design : labels, messages d'erreur, ton, vocabulaire côté utilisateur."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Emil Kowalski",
+      "meta": "skills locales",
+      "note": "L'école du motion et du détail. Le cycle naturel : find pour explorer, improve pour planifier, implémenter, puis review pour valider.",
+      "groups": [
+        {
+          "label": "motion & design engineering",
+          "items": [
+            {
+              "name": "emil-design-eng",
+              "desc": "La philosophie de fond : quand animer, quand s'abstenir, et les détails invisibles qui font qu'un logiciel semble juste."
+            },
+            {
+              "name": "apple-design",
+              "desc": "Motion physique façon Apple traduite pour le web : springs, gestes, momentum, transitions interruptibles, matériaux translucides."
+            },
+            {
+              "name": "animation-vocabulary",
+              "desc": "Glossaire inversé : tu décris l'effet en mots vagues, il te rend son nom exact. Pour nommer, pas pour construire."
+            },
+            {
+              "name": "find-animation-opportunities",
+              "desc": "Repère ce qui devrait bouger et ne bouge pas — et rejette tout le reste. Lecture seule, valeurs précises à l'appui."
+            },
+            {
+              "name": "improve-animations",
+              "desc": "Audit priorisé du motion existant, avec plans d'implémentation autonomes à confier à d'autres agents."
+            },
+            {
+              "name": "review-animations",
+              "desc": "Revue de diff contre la barre de craft d'Emil. Par défaut ça flague ; l'approbation se mérite."
+            },
+            {
+              "name": "pick-ui-library",
+              "desc": "Liste curatée et assumée, par besoin : nombres, OTP, charts, command menu, virtualisation, drag and drop, toasts."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Matt Pocock",
+      "meta": "mattpocock-skills:",
+      "note": "La méthode de travail complète, de la planification au merge. Source de vérité : l'issue tracker du repo — jamais de STATE.md.",
+      "groups": [
+        {
+          "label": "engineering",
+          "items": [
+            {
+              "name": "ask-matt",
+              "desc": "Le routeur : quelle skill, quel flow, pour la situation où tu es. Point d'entrée par défaut."
+            },
+            {
+              "name": "setup-matt-pocock-skills",
+              "desc": "Configuration unique par repo : tracker d'issues, vocabulaire de labels de triage, emplacement des docs domaine."
+            },
+            {
+              "name": "wayfinder",
+              "desc": "Planifie un chantier trop gros pour une session : une carte de tickets de décision, résolus un par un jusqu'à voir la route."
+            },
+            {
+              "name": "to-spec",
+              "desc": "Transforme la conversation en cours en spec publiée sur le tracker. Pas d'interview, juste la synthèse."
+            },
+            {
+              "name": "to-tickets",
+              "desc": "Découpe un plan en tickets tracer-bullet, chacun déclarant ses dépendances bloquantes."
+            },
+            {
+              "name": "triage",
+              "desc": "Machine à états pour issues et PRs externes : catégoriser, vérifier, griller si besoin, écrire un brief prêt pour un agent."
+            },
+            {
+              "name": "implement",
+              "desc": "Exécute un travail à partir d'une spec ou d'un jeu de tickets déjà cadrés."
+            },
+            {
+              "name": "tdd",
+              "desc": "Développement test-first, cycle red-green-refactor, orienté tests d'intégration."
+            },
+            {
+              "name": "diagnosing-bugs",
+              "desc": "Boucle de diagnostic pour les bugs durs et les régressions de performance."
+            },
+            {
+              "name": "resolving-merge-conflicts",
+              "desc": "Résolution méthodique d'un merge ou rebase git déjà en cours."
+            },
+            {
+              "name": "code-review",
+              "desc": "Revue depuis un point fixe sur deux axes en parallèle : standards du repo, et conformité à l'issue d'origine."
+            },
+            {
+              "name": "codebase-design",
+              "desc": "Le vocabulaire des deep modules : interfaces, opportunités d'approfondissement, où placer une couture."
+            },
+            {
+              "name": "improve-codebase-architecture",
+              "desc": "Scanne le repo, sort un rapport HTML des opportunités, puis te grille sur celle que tu choisis."
+            },
+            {
+              "name": "domain-modeling",
+              "desc": "Construit et affine le modèle de domaine du projet : terminologie, ADR, glossaire."
+            },
+            {
+              "name": "research",
+              "desc": "Enquête sur sources primaires de confiance, findings capturés en Markdown dans le repo."
+            },
+            {
+              "name": "prototype",
+              "desc": "Prototype jetable pour trancher une question de design : un state model tient-il, à quoi ressemble cet écran."
+            },
+            {
+              "name": "grill-with-docs",
+              "desc": "Interview impitoyable qui produit ADR et glossaire au fil de l'eau, plutôt qu'après coup."
+            }
+          ]
+        },
+        {
+          "label": "productivity",
+          "items": [
+            {
+              "name": "grill-me",
+              "desc": "Interview sans complaisance pour durcir un plan ou un design avant de construire."
+            },
+            {
+              "name": "grilling",
+              "desc": "Stress-test de ta pensée sur un plan, une décision ou une idée. Déclenché par tout terme « grill »."
+            },
+            {
+              "name": "handoff",
+              "desc": "Compacte la conversation en cours en document de passation pour un autre agent."
+            },
+            {
+              "name": "teach",
+              "desc": "T'enseigne une compétence ou un concept, ancré dans ce workspace."
+            },
+            {
+              "name": "writing-great-skills",
+              "desc": "Référence pour écrire et éditer des skills : le vocabulaire et les principes qui les rendent prévisibles."
+            }
+          ]
+        },
+        {
+          "label": "misc",
+          "items": [
+            {
+              "name": "git-guardrails-claude-code",
+              "desc": "Installe des hooks qui bloquent les commandes git destructives — push, reset --hard, clean, branch -D — avant exécution."
+            },
+            {
+              "name": "setup-pre-commit",
+              "desc": "Husky et lint-staged : formatage, typecheck et tests déclenchés au commit."
+            },
+            {
+              "name": "migrate-to-shoehorn",
+              "desc": "Remplace les assertions `as` des fichiers de test par @total-typescript/shoehorn."
+            },
+            {
+              "name": "scaffold-exercises",
+              "desc": "Génère l'arborescence d'exercices — sections, problems, solutions, explainers — qui passe le lint."
+            }
+          ]
+        },
+        {
+          "label": "personal",
+          "items": [
+            {
+              "name": "edit-article",
+              "desc": "Restructure les sections d'un brouillon d'article, clarifie et resserre la prose."
+            },
+            {
+              "name": "obsidian-vault",
+              "desc": "Recherche, crée et organise des notes dans le vault Obsidian, avec wikilinks et notes d'index."
+            }
+          ]
+        },
+        {
+          "label": "in-progress",
+          "items": [
+            {
+              "name": "batch-grill-me",
+              "state": "nouveau",
+              "desc": "Grilling qui pose toutes les questions frontières d'un coup, round par round, au lieu d'une par une."
+            },
+            {
+              "name": "claude-handoff",
+              "desc": "Passe la conversation à un agent de fond frais qui reprend le travail immédiatement."
+            },
+            {
+              "name": "loop-me",
+              "desc": "Te grille sur les specs des workflows que tu veux construire dans ce workspace."
+            },
+            {
+              "name": "setup-ts-deep-modules",
+              "state": "nouveau",
+              "desc": "Câble dependency-cruiser pour que chaque package soit un deep module : implémentation cachée, atteignable seulement par son entry point."
+            },
+            {
+              "name": "to-questionnaire",
+              "state": "nouveau",
+              "desc": "Transforme une décision que tu ne peux pas trancher seul en questionnaire à faire remplir par quelqu'un d'autre."
+            },
+            {
+              "name": "wizard",
+              "desc": "Génère un assistant bash interactif pour une procédure manuelle : setup tiers, migration one-shot, écriture de .env et de secrets GitHub Actions."
+            },
+            {
+              "name": "writing-fragments",
+              "desc": "Écriture, phase explore : miner la matière brute, sans structure imposée."
+            },
+            {
+              "name": "writing-beats",
+              "desc": "Écriture, phase exploit : assembler la matière en beats, chaque terme fondé avant qu'un beat s'appuie dessus."
+            },
+            {
+              "name": "writing-shape",
+              "desc": "Écriture, phase exploit : mettre la matière en forme d'article, paragraphe par paragraphe."
+            }
+          ]
+        },
+        {
+          "label": "deprecated — encore livrées, mais dépréciées en amont",
+          "items": [
+            {
+              "name": "qa",
+              "state": "deprecated",
+              "desc": "Session QA conversationnelle : tu signales les bugs, l'agent explore le repo et dépose les issues GitHub."
+            },
+            {
+              "name": "request-refactor-plan",
+              "state": "deprecated",
+              "desc": "Plan de refactor en tout petits commits, construit par interview puis déposé en issue."
+            },
+            {
+              "name": "design-an-interface",
+              "state": "deprecated",
+              "desc": "Génère plusieurs designs d'API radicalement différents via des sous-agents parallèles."
+            },
+            {
+              "name": "ubiquitous-language",
+              "state": "deprecated",
+              "desc": "Extrait un glossaire DDD de la conversation vers UBIQUITOUS_LANGUAGE.md, en signalant les ambiguïtés."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

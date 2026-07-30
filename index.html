@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ressources</title>
+    <meta name="description" content="Index personnel des skills, sites d'inspiration et outils." />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0b0d10" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+
+  <body>
+    <main class="shell">
+      <header class="masthead">
+        <p class="masthead__eyebrow">Index personnel</p>
+        <h1 class="masthead__title">RESSOURCES</h1>
+        <p class="masthead__lede">
+          Les skills installées, les sites que je consulte pour l'inspiration front-end, et les
+          outils du quotidien. Une seule page, filtrable.
+        </p>
+      </header>
+
+      <div class="console surface">
+        <label class="field">
+          <svg class="field__glyph" viewBox="0 0 16 16" aria-hidden="true">
+            <path
+              d="M7 1a6 6 0 1 0 3.65 10.76l3.29 3.3a1 1 0 0 0 1.42-1.42l-3.3-3.29A6 6 0 0 0 7 1Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"
+            />
+          </svg>
+          <input
+            id="search"
+            type="search"
+            placeholder="Filtrer…"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Filtrer les ressources"
+          />
+          <kbd>/</kbd>
+        </label>
+
+        <div class="segmented" id="filters" role="group" aria-label="Collections"></div>
+
+        <output class="console__count data" id="count" aria-live="polite"></output>
+      </div>
+
+      <div class="collections" id="collections"></div>
+
+      <p class="empty" id="empty" hidden>Aucune ressource ne correspond.</p>
+
+      <footer class="colophon">
+        <p>
+          Langage graphite repris de
+          <code>nav_builder_dcs/docs/REDESIGN_SYSTEM.md</code> — Orbitron en display, Barlow en
+          chrome, JetBrains Mono pour la donnée. Pas d'accent de marque&nbsp;: l'actif se lit en
+          raise et promotion du texte.
+        </p>
+        <p>
+          Ajouter une ressource&nbsp;: une entrée dans <code>data/*.json</code>, commit, poussé.
+        </p>
+      </footer>
+    </main>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>
