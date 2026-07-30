@@ -37,6 +37,9 @@
   --leading-tight: 1.2;
   --leading-body: 1.5;
   --tracking-label: 0.06em;
+
+  /* Mesure de lecture — ~70 caractères à 13px */
+  --prose: 28rem;
 }
 
 *,
@@ -60,6 +63,13 @@ body {
   /* garde-fou §2 : jamais antialiased/grayscale — fûts fragiles en 1× */
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
+}
+
+/* Chrome non sélectionnable (§0 principe 1) — le contenu, lui, se recopie */
+.masthead,
+.console,
+.group__label,
+.section__count {
   user-select: none;
 }
 
@@ -144,7 +154,7 @@ input {
 .masthead__lede {
   font-size: 13px;
   color: var(--n-t2);
-  max-width: 46rem;
+  max-width: var(--prose);
   margin: 0;
 }
 
@@ -341,10 +351,17 @@ input {
   color: var(--n-t3);
 }
 
+/* Statut d'avancement — voix distincte du namespace mono (.section__meta) */
+.section__status {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--n-t3);
+}
+
 .section__note {
   font-size: 12px;
   color: var(--n-t2);
-  max-width: 46rem;
+  max-width: calc(var(--prose) * 0.92);
   margin: 0;
 }
 
@@ -354,12 +371,19 @@ input {
   flex-direction: column;
 }
 
+.group__list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
 .group__label {
   display: flex;
   align-items: center;
   gap: 0.6rem;
   font-family: var(--n-data);
   font-size: 10px;
+  font-weight: 400;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--n-t3);
@@ -420,10 +444,20 @@ input {
   border-bottom-color: var(--n-t1);
 }
 
+.row__name a svg {
+  width: 9px;
+  height: 9px;
+  fill: var(--n-t3);
+  margin-left: 0.25rem;
+  vertical-align: 0.05em;
+}
+
 .row__desc {
   font-family: var(--n-ui);
   font-size: 13px;
   color: var(--n-t2);
+  max-width: var(--prose);
+  margin: 0;
 }
 
 .row__host {
@@ -467,9 +501,51 @@ input {
 
 .empty {
   padding: 2.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
   text-align: center;
   color: var(--n-t3);
   font-size: 13px;
+}
+
+.empty p {
+  margin: 0;
+}
+
+.empty strong {
+  color: var(--n-t2);
+  font-weight: 500;
+}
+
+/* Ghost button — §4 : neutre levé, press à .96 */
+.ghost {
+  height: 28px;
+  padding: 0 0.7rem;
+  border-radius: var(--n-r);
+  border: 1px solid var(--n-line);
+  background: var(--n-raise);
+  color: var(--n-t2);
+  font-family: var(--n-ui);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 140ms var(--n-ease),
+    border-color 140ms var(--n-ease),
+    color 140ms var(--n-ease);
+}
+
+.ghost:hover {
+  background: var(--n-raise-2);
+  border-color: var(--n-line-2);
+  color: var(--n-t1);
+}
+
+.ghost:active {
+  transform: scale(0.96);
+  transition-duration: 90ms;
 }
 
 .empty[hidden] {
@@ -517,7 +593,8 @@ input {
     animation: none !important;
   }
 
-  .segmented button:active {
+  .segmented button:active,
+  .ghost:active {
     transform: none;
   }
 }

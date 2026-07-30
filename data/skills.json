@@ -44,7 +44,7 @@
     },
     {
       "title": "Emil Kowalski",
-      "meta": "skills locales",
+      "status": "skills locales, sans namespace",
       "note": "L'école du motion et du détail. Le cycle naturel : find pour explorer, improve pour planifier, implémenter, puis review pour valider.",
       "groups": [
         {

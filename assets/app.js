@@ -1,4 +1,5 @@
 const COLLECTIONS = ["skills", "inspiration", "tools"];
+const ANNOUNCE_DELAY = 500;
 
 const els = {
   search: document.getElementById("search"),
@@ -6,9 +7,13 @@ const els = {
   count: document.getElementById("count"),
   collections: document.getElementById("collections"),
   empty: document.getElementById("empty"),
+  emptyText: document.getElementById("empty-text"),
+  emptyReset: document.getElementById("empty-reset"),
 };
 
+const labels = {};
 let active = "all";
+let announceTimer;
 
 function hostOf(url) {
   try {
@@ -18,19 +23,29 @@ function hostOf(url) {
   }
 }
 
+function externalGlyph() {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", "0 0 16 16");
+  svg.setAttribute("aria-hidden", "true");
+  svg.innerHTML =
+    '<path d="M6 1h9v9h-2V4.4L4.4 13 3 11.6 11.6 3H6V1Z"/><path d="M1 5h3v2H3v6h6v-1h2v3H1V5Z"/>';
+  return svg;
+}
+
 function renderRow(item) {
   const row = document.createElement("div");
   row.className = "row";
 
-  const name = document.createElement("div");
+  const name = document.createElement("dt");
   name.className = "row__name";
 
   if (item.url) {
     const link = document.createElement("a");
     link.href = item.url;
-    link.textContent = item.name;
     link.rel = "noopener noreferrer";
     link.target = "_blank";
+    link.append(item.name, externalGlyph());
+    link.setAttribute("aria-label", `${item.name} — ouvre un nouvel onglet`);
     name.append(link);
   } else {
     name.append(item.name);
@@ -43,7 +58,7 @@ function renderRow(item) {
     name.append(chip);
   }
 
-  const desc = document.createElement("div");
+  const desc = document.createElement("dd");
   desc.className = "row__desc";
   desc.textContent = item.desc;
 
@@ -83,6 +98,13 @@ function renderSection(section, collectionId) {
     head.append(meta);
   }
 
+  if (section.status) {
+    const status = document.createElement("span");
+    status.className = "section__status";
+    status.textContent = section.status;
+    head.append(status);
+  }
+
   const count = document.createElement("span");
   count.className = "section__count";
   head.append(count);
@@ -102,22 +124,60 @@ function renderSection(section, collectionId) {
     groupEl.className = "group";
 
     if (group.label) {
-      const label = document.createElement("p");
+      const label = document.createElement("h3");
       label.className = "group__label";
       label.textContent = group.label;
       groupEl.append(label);
     }
 
+    const list = document.createElement("dl");
+    list.className = "group__list";
+
     for (const item of group.items) {
-      groupEl.append(renderRow(item));
+      list.append(renderRow(item));
       total += 1;
     }
 
+    groupEl.append(list);
     el.append(groupEl);
   }
 
   el.dataset.total = String(total);
   return el;
+}
+
+function describeFilter(query) {
+  const scope = active === "all" ? null : labels[active];
+
+  if (query && scope) return `Aucun résultat pour « ${query} » dans ${scope}.`;
+  if (query) return `Aucun résultat pour « ${query} ».`;
+  if (scope) return `Aucune ressource dans ${scope}.`;
+  return "Aucune ressource à afficher.";
+}
+
+function renderEmpty(query) {
+  els.emptyText.textContent = "";
+
+  const message = describeFilter(query);
+  const quoted = query ? `« ${query} »` : null;
+
+  if (quoted && message.includes(quoted)) {
+    const [head, tail] = message.split(quoted);
+    const strong = document.createElement("strong");
+    strong.textContent = quoted;
+    els.emptyText.append(head, strong, tail);
+  } else {
+    els.emptyText.textContent = message;
+  }
+
+  els.emptyReset.hidden = !query && active === "all";
+}
+
+function announceCount(visible) {
+  clearTimeout(announceTimer);
+  announceTimer = setTimeout(() => {
+    els.count.textContent = `${visible} résultat${visible > 1 ? "s" : ""}`;
+  }, ANNOUNCE_DELAY);
 }
 
 function applyFilter() {
@@ -151,11 +211,20 @@ function applyFilter() {
     visible += sectionVisible;
   }
 
-  els.count.textContent = `${visible} résultat${visible > 1 ? "s" : ""}`;
+  announceCount(visible);
   els.empty.hidden = visible > 0;
+  if (visible === 0) renderEmpty(els.search.value.trim());
 }
 
-function renderFilters(labels) {
+function setCollection(id, button) {
+  active = id;
+  for (const sibling of els.filters.children) {
+    sibling.setAttribute("aria-pressed", String(sibling === button));
+  }
+  applyFilter();
+}
+
+function renderFilters() {
   const entries = [["all", "Tout"], ...COLLECTIONS.map((id) => [id, labels[id]])];
 
   for (const [id, label] of entries) {
@@ -163,25 +232,21 @@ function renderFilters(labels) {
     button.type = "button";
     button.textContent = label;
     button.setAttribute("aria-pressed", String(id === active));
-
-    button.addEventListener("click", () => {
-      active = id;
-      for (const sibling of els.filters.children) {
-        sibling.setAttribute("aria-pressed", String(sibling === button));
-      }
-      applyFilter();
-    });
-
+    button.addEventListener("click", () => setCollection(id, button));
     els.filters.append(button);
   }
+}
+
+function reset() {
+  els.search.value = "";
+  setCollection("all", els.filters.firstElementChild);
+  els.search.focus();
 }
 
 async function boot() {
   const loaded = await Promise.all(
     COLLECTIONS.map((id) => fetch(`data/${id}.json`).then((res) => res.json())),
   );
-
-  const labels = {};
 
   for (const collection of loaded) {
     labels[collection.id] = collection.label;
@@ -190,11 +255,12 @@ async function boot() {
     }
   }
 
-  renderFilters(labels);
+  renderFilters();
   applyFilter();
 }
 
 els.search.addEventListener("input", applyFilter);
+els.emptyReset.addEventListener("click", reset);
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "/" && document.activeElement !== els.search) {
@@ -202,14 +268,14 @@ document.addEventListener("keydown", (event) => {
     els.search.focus();
   }
   if (event.key === "Escape" && document.activeElement === els.search) {
-    els.search.value = "";
-    applyFilter();
+    reset();
   }
 });
 
 boot().catch((error) => {
   els.empty.hidden = false;
-  els.empty.textContent =
+  els.emptyReset.hidden = true;
+  els.emptyText.textContent =
     "Impossible de charger les données. En local, servir le dossier : python3 -m http.server";
   console.error(error);
 });
