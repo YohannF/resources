@@ -133,6 +133,24 @@
                 "improve-animations",
                 "review-animations"
               ],
+              "prompts": [
+                {
+                  "label": "Vue ciblée + contexte",
+                  "text": "Find animation opportunities in the checkout flow. It’s used a few times per session by each customer, factor this in."
+                },
+                {
+                  "label": "Avec improve-animations",
+                  "text": "Look through the dashboard UI for places that would benefit from motion, tell me what you'd skip and why, then turn the top suggestion into an improve-animations plan."
+                },
+                {
+                  "label": "Question garde-fou",
+                  "text": "Before we add any motion to this dashboard, is there anything here that should animate at all?"
+                },
+                {
+                  "label": "Après génération d’UI",
+                  "text": "I just generated this settings page and it has zero motion. What should animate and what shouldn’t?"
+                }
+              ],
               "cat": "animation"
             },
             {

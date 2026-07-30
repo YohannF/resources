@@ -41,6 +41,96 @@ function externalGlyph() {
   return svg;
 }
 
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.append(textarea);
+  textarea.select();
+  const copied = document.execCommand("copy");
+  textarea.remove();
+
+  if (!copied) throw new Error("La copie a échoué");
+}
+
+function renderPrompts(prompts, skillName) {
+  const details = document.createElement("details");
+  details.className = "prompts";
+
+  const summary = document.createElement("summary");
+  const label = document.createElement("span");
+  label.textContent = "Prompts associés";
+
+  const count = document.createElement("span");
+  count.className = "prompts__count";
+  count.textContent = String(prompts.length);
+  summary.append(label, count);
+  details.append(summary);
+
+  const list = document.createElement("div");
+  list.className = "prompts__list";
+
+  prompts.forEach((prompt, index) => {
+    const card = document.createElement("article");
+    card.className = "prompt";
+
+    const head = document.createElement("div");
+    head.className = "prompt__head";
+
+    const title = document.createElement("h4");
+    title.className = "prompt__title";
+    title.textContent = prompt.label;
+
+    const copy = document.createElement("button");
+    copy.type = "button";
+    copy.className = "ghost prompt__copy";
+    copy.textContent = "Copier";
+    const copyLabel = `Copier le prompt ${index + 1} associé à ${skillName}`;
+    copy.setAttribute("aria-label", copyLabel);
+
+    let resetTimer;
+    copy.addEventListener("click", async () => {
+      clearTimeout(resetTimer);
+
+      try {
+        await copyText(prompt.text);
+        copy.textContent = "Copié";
+        copy.dataset.copied = "true";
+        copy.setAttribute("aria-label", `Prompt ${index + 1} copié`);
+      } catch {
+        copy.textContent = "Échec";
+        copy.dataset.error = "true";
+        copy.setAttribute("aria-label", `Échec de la copie du prompt ${index + 1}`);
+      }
+
+      resetTimer = setTimeout(() => {
+        copy.textContent = "Copier";
+        copy.setAttribute("aria-label", copyLabel);
+        delete copy.dataset.copied;
+        delete copy.dataset.error;
+      }, 1600);
+    });
+
+    const text = document.createElement("p");
+    text.className = "prompt__text";
+    text.textContent = prompt.text;
+
+    head.append(title, copy);
+    card.append(head, text);
+    list.append(card);
+  });
+
+  details.append(list);
+  return details;
+}
+
 function renderRow({ item, collection }) {
   const row = document.createElement("div");
   row.className = "row";
@@ -98,6 +188,11 @@ function renderRow({ item, collection }) {
     desc.append(host);
   }
 
+  if (item.prompts?.length) {
+    row.classList.add("row--has-prompts");
+    desc.append(renderPrompts(item.prompts, item.name));
+  }
+
   row.append(name, desc);
   row.dataset.haystack = [
     item.name,
@@ -107,6 +202,7 @@ function renderRow({ item, collection }) {
     item.invokable === false ? "manuel" : "auto",
     ...(item.tags || []),
     ...(item.invokes || []),
+    ...(item.prompts || []).flatMap((prompt) => [prompt.label, prompt.text]),
   ]
     .filter(Boolean)
     .join(" ")

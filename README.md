@@ -20,6 +20,23 @@ Une entrée dans le bon fichier de `data/`, puis commit.
 `url`, `tags` et `state` sont optionnels. `state` accepte `deprecated` (chip caution) ou n'importe
 quel autre libellé court (chip neutre). `tags` n'est pas affiché mais alimente la recherche.
 
+Une skill peut aussi proposer des prompts prêts à copier :
+
+```json
+{
+  "name": "find-animation-opportunities",
+  "prompts": [
+    {
+      "label": "Vue ciblée + contexte",
+      "text": "Find animation opportunities in the checkout flow."
+    }
+  ]
+}
+```
+
+`label` décrit le cas d'usage dans l'interface ; `text` est copié tel quel. Le libellé et le
+contenu alimentent aussi la recherche.
+
 La structure d'un fichier est `collection → sections → groups → items`. Un nouveau groupe se crée
 en ajoutant un objet `{ "label": "...", "items": [] }`.
 
