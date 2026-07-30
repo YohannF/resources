@@ -4,6 +4,8 @@ const ANNOUNCE_DELAY = 500;
 const els = {
   search: document.getElementById("search"),
   filters: document.getElementById("filters"),
+  views: document.getElementById("views"),
+  cats: document.getElementById("cats"),
   count: document.getElementById("count"),
   collections: document.getElementById("collections"),
   empty: document.getElementById("empty"),
@@ -12,8 +14,15 @@ const els = {
 };
 
 const labels = {};
-let active = "all";
+const sourceSections = [];
+const catalogue = [];
+
+let activeCollection = "all";
+let activeCat = "all";
+let view = "source";
 let announceTimer;
+
+/* ------------------------------------------------------------------ rendu */
 
 function hostOf(url) {
   try {
@@ -32,9 +41,11 @@ function externalGlyph() {
   return svg;
 }
 
-function renderRow(item) {
+function renderRow({ item, collection }) {
   const row = document.createElement("div");
   row.className = "row";
+  row.dataset.collection = collection;
+  row.dataset.cat = item.cat ?? "";
 
   const name = document.createElement("dt");
   name.className = "row__name";
@@ -92,6 +103,7 @@ function renderRow(item) {
     item.name,
     item.desc,
     item.url,
+    item.cat,
     item.invokable === false ? "manuel" : "auto",
     ...(item.tags || []),
     ...(item.invokes || []),
@@ -103,30 +115,29 @@ function renderRow(item) {
   return row;
 }
 
-function renderSection(section, collectionId) {
+function renderSection(model) {
   const el = document.createElement("section");
   el.className = "section surface";
-  el.dataset.collection = collectionId;
 
   const head = document.createElement("div");
   head.className = "section__head";
 
   const title = document.createElement("h2");
   title.className = "section__title";
-  title.textContent = section.title;
+  title.textContent = model.title;
   head.append(title);
 
-  if (section.meta) {
+  if (model.meta) {
     const meta = document.createElement("span");
     meta.className = "section__meta";
-    meta.textContent = section.meta;
+    meta.textContent = model.meta;
     head.append(meta);
   }
 
-  if (section.status) {
+  if (model.status) {
     const status = document.createElement("span");
     status.className = "section__status";
-    status.textContent = section.status;
+    status.textContent = model.status;
     head.append(status);
   }
 
@@ -135,51 +146,53 @@ function renderSection(section, collectionId) {
   head.append(count);
   el.append(head);
 
-  if (section.note) {
+  if (model.note) {
     const note = document.createElement("p");
     note.className = "section__note";
-    note.textContent = section.note;
+    note.textContent = model.note;
     el.append(note);
   }
 
-  const graph = window.buildFamilyGraph?.(section);
-  if (graph) {
-    const panel = document.createElement("div");
-    panel.className = "graph-panel";
-    panel.id = `graph-${section.family ?? collectionId}`;
-    panel.hidden = true;
-    panel.append(graph.figure);
+  if (model.graphSource) {
+    const graph = window.buildFamilyGraph?.(model.graphSource);
+    if (graph) {
+      const panel = document.createElement("div");
+      panel.className = "graph-panel";
+      panel.id = `graph-${model.graphSource.family}`;
+      panel.hidden = true;
+      panel.append(graph.figure);
 
-    const toggle = document.createElement("button");
-    toggle.type = "button";
-    toggle.className = "ghost ghost--toggle";
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-controls", panel.id);
-    toggle.append(`Graphe · ${graph.edges}`);
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "ghost ghost--toggle";
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-controls", panel.id);
+      toggle.append(`Graphe · ${graph.edges}`);
 
-    const syncLabel = () => {
-      const open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute(
-        "aria-label",
-        `${open ? "Masquer" : "Afficher"} le graphe des dépendances de ${section.title}`,
-      );
-    };
+      const syncLabel = () => {
+        const open = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute(
+          "aria-label",
+          `${open ? "Masquer" : "Afficher"} le graphe des dépendances de ${model.title}`,
+        );
+      };
 
-    toggle.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!open));
-      panel.hidden = open;
+      toggle.addEventListener("click", () => {
+        const open = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!open));
+        panel.hidden = open;
+        syncLabel();
+      });
+
       syncLabel();
-    });
-
-    syncLabel();
-    head.insertBefore(toggle, count);
-    el.append(panel);
+      head.insertBefore(toggle, count);
+      el.append(panel);
+    }
   }
 
   let total = 0;
 
-  for (const group of section.groups) {
+  for (const group of model.groups) {
     const groupEl = document.createElement("div");
     groupEl.className = "group";
 
@@ -193,8 +206,8 @@ function renderSection(section, collectionId) {
     const list = document.createElement("dl");
     list.className = "group__list";
 
-    for (const item of group.items) {
-      list.append(renderRow(item));
+    for (const entry of group.entries) {
+      list.append(renderRow(entry));
       total += 1;
     }
 
@@ -206,18 +219,57 @@ function renderSection(section, collectionId) {
   return el;
 }
 
-function describeFilter(query) {
-  const scope = active === "all" ? null : labels[active];
+/* ------------------------------------------------------------------ vues */
 
-  if (query && scope) return `Aucun résultat pour « ${query} » dans ${scope}.`;
-  if (query) return `Aucun résultat pour « ${query} ».`;
-  if (scope) return `Aucune ressource dans ${scope}.`;
+function bySource() {
+  return sourceSections.map((s) => ({ ...s, graphSource: s.family ? s.raw : null }));
+}
+
+function byCategory() {
+  const cats = new Map();
+
+  for (const entry of catalogue) {
+    const cat = entry.item.cat ?? "sans catégorie";
+    if (!cats.has(cat)) cats.set(cat, new Map());
+    const groups = cats.get(cat);
+    if (!groups.has(entry.source)) groups.set(entry.source, []);
+    groups.get(entry.source).push(entry);
+  }
+
+  return [...cats.entries()]
+    .sort((a, b) => countOf(b[1]) - countOf(a[1]) || a[0].localeCompare(b[0]))
+    .map(([cat, groups]) => ({
+      title: cat,
+      groups: [...groups.entries()].map(([label, entries]) => ({ label, entries })),
+    }));
+}
+
+function countOf(groups) {
+  return [...groups.values()].reduce((n, list) => n + list.length, 0);
+}
+
+function renderCollections() {
+  els.collections.textContent = "";
+  const models = view === "source" ? bySource() : byCategory();
+  for (const model of models) els.collections.append(renderSection(model));
+  applyFilter();
+}
+
+/* ------------------------------------------------------------------ filtres */
+
+function describeFilter(query) {
+  const parts = [];
+  if (activeCollection !== "all") parts.push(labels[activeCollection]);
+  if (activeCat !== "all") parts.push(`catégorie ${activeCat}`);
+  const scope = parts.length ? ` dans ${parts.join(" · ")}` : "";
+
+  if (query) return `Aucun résultat pour « ${query} »${scope}.`;
+  if (scope) return `Aucune ressource${scope}.`;
   return "Aucune ressource à afficher.";
 }
 
 function renderEmpty(query) {
   els.emptyText.textContent = "";
-
   const message = describeFilter(query);
   const quoted = query ? `« ${query} »` : null;
 
@@ -230,7 +282,7 @@ function renderEmpty(query) {
     els.emptyText.textContent = message;
   }
 
-  els.emptyReset.hidden = !query && active === "all";
+  els.emptyReset.hidden = !query && activeCollection === "all" && activeCat === "all";
 }
 
 function announceCount(visible) {
@@ -245,14 +297,16 @@ function applyFilter() {
   let visible = 0;
 
   for (const section of els.collections.children) {
-    const inCollection = active === "all" || section.dataset.collection === active;
     let sectionVisible = 0;
 
     for (const group of section.querySelectorAll(".group")) {
       let groupVisible = 0;
 
       for (const row of group.querySelectorAll(".row")) {
-        const match = inCollection && (!query || row.dataset.haystack.includes(query));
+        const match =
+          (activeCollection === "all" || row.dataset.collection === activeCollection) &&
+          (activeCat === "all" || row.dataset.cat === activeCat) &&
+          (!query || row.dataset.haystack.includes(query));
         row.hidden = !match;
         if (match) groupVisible += 1;
       }
@@ -276,32 +330,50 @@ function applyFilter() {
   if (visible === 0) renderEmpty(els.search.value.trim());
 }
 
-function setCollection(id, button) {
-  active = id;
-  for (const sibling of els.filters.children) {
-    sibling.setAttribute("aria-pressed", String(sibling === button));
-  }
-  applyFilter();
-}
+/* ------------------------------------------------------------------ contrôles */
 
-function renderFilters() {
-  const entries = [["all", "Tout"], ...COLLECTIONS.map((id) => [id, labels[id]])];
-
+function buildToggleGroup(mount, entries, isActive, onPick, className = "") {
+  mount.textContent = "";
   for (const [id, label] of entries) {
     const button = document.createElement("button");
     button.type = "button";
+    if (className) button.className = className;
     button.textContent = label;
-    button.setAttribute("aria-pressed", String(id === active));
-    button.addEventListener("click", () => setCollection(id, button));
-    els.filters.append(button);
+    button.setAttribute("aria-pressed", String(isActive(id)));
+    button.addEventListener("click", () => {
+      for (const sibling of mount.children) {
+        sibling.setAttribute("aria-pressed", String(sibling === button));
+      }
+      onPick(id);
+    });
+    mount.append(button);
   }
+}
+
+function catEntries() {
+  const counts = new Map();
+  for (const { item } of catalogue) {
+    const cat = item.cat ?? "sans catégorie";
+    counts.set(cat, (counts.get(cat) ?? 0) + 1);
+  }
+  const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  return [["all", "Toutes"], ...sorted.map(([cat, n]) => [cat, `${cat} ${n}`])];
 }
 
 function reset() {
   els.search.value = "";
-  setCollection("all", els.filters.firstElementChild);
+  activeCollection = "all";
+  activeCat = "all";
+  for (const mount of [els.filters, els.cats]) {
+    for (const [i, button] of [...mount.children].entries()) {
+      button.setAttribute("aria-pressed", String(i === 0));
+    }
+  }
+  applyFilter();
   els.search.focus();
 }
+
+/* ------------------------------------------------------------------ boot */
 
 async function boot() {
   const loaded = await Promise.all(
@@ -310,13 +382,66 @@ async function boot() {
 
   for (const collection of loaded) {
     labels[collection.id] = collection.label;
+
     for (const section of collection.sections) {
-      els.collections.append(renderSection(section, collection.id));
+      const groups = section.groups.map((group) => ({
+        label: group.label,
+        entries: group.items.map((item) => ({ item, collection: collection.id })),
+      }));
+
+      for (const group of groups) {
+        for (const entry of group.entries) {
+          catalogue.push({ ...entry, source: section.title, group: group.label });
+        }
+      }
+
+      sourceSections.push({
+        title: section.title,
+        meta: section.meta,
+        status: section.status,
+        note: section.note,
+        family: section.family,
+        raw: section,
+        groups,
+      });
     }
   }
 
-  renderFilters();
-  applyFilter();
+  buildToggleGroup(
+    els.filters,
+    [["all", "Tout"], ...COLLECTIONS.map((id) => [id, labels[id]])],
+    (id) => id === activeCollection,
+    (id) => {
+      activeCollection = id;
+      applyFilter();
+    },
+  );
+
+  buildToggleGroup(
+    els.views,
+    [
+      ["source", "Par source"],
+      ["cat", "Par catégorie"],
+    ],
+    (id) => id === view,
+    (id) => {
+      view = id;
+      renderCollections();
+    },
+  );
+
+  buildToggleGroup(
+    els.cats,
+    catEntries(),
+    (id) => id === activeCat,
+    (id) => {
+      activeCat = id;
+      applyFilter();
+    },
+    "cat-chip",
+  );
+
+  renderCollections();
 }
 
 els.search.addEventListener("input", applyFilter);

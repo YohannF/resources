@@ -13,38 +13,61 @@
             {
               "name": "Godly",
               "url": "https://godly.website",
-              "tags": ["gallerie", "web design"],
-              "desc": "Sélection resserrée de sites au design remarquable, filtrable par style et par industrie."
+              "tags": [
+                "gallerie",
+                "web design"
+              ],
+              "desc": "Sélection resserrée de sites au design remarquable, filtrable par style et par industrie.",
+              "cat": "inspiration"
             },
             {
               "name": "Awwwards",
               "url": "https://www.awwwards.com",
-              "tags": ["gallerie", "awards"],
-              "desc": "La référence historique. Beaucoup de démonstration technique, à trier."
+              "tags": [
+                "gallerie",
+                "awards"
+              ],
+              "desc": "La référence historique. Beaucoup de démonstration technique, à trier.",
+              "cat": "inspiration"
             },
             {
               "name": "Land-book",
               "url": "https://land-book.com",
-              "tags": ["gallerie", "landing"],
-              "desc": "Landing pages uniquement, avec un filtre par catégorie et par style efficace."
+              "tags": [
+                "gallerie",
+                "landing"
+              ],
+              "desc": "Landing pages uniquement, avec un filtre par catégorie et par style efficace.",
+              "cat": "inspiration"
             },
             {
               "name": "Minimal Gallery",
               "url": "https://minimal.gallery",
-              "tags": ["gallerie", "minimal"],
-              "desc": "Sites minimalistes. Utile quand tu cherches la retenue plutôt que l'effet."
+              "tags": [
+                "gallerie",
+                "minimal"
+              ],
+              "desc": "Sites minimalistes. Utile quand tu cherches la retenue plutôt que l'effet.",
+              "cat": "inspiration"
             },
             {
               "name": "SaaS Landing Page",
               "url": "https://saaslandingpage.com",
-              "tags": ["gallerie", "saas"],
-              "desc": "Landing pages SaaS classées par section — hero, pricing, testimonials."
+              "tags": [
+                "gallerie",
+                "saas"
+              ],
+              "desc": "Landing pages SaaS classées par section — hero, pricing, testimonials.",
+              "cat": "inspiration"
             },
             {
               "name": "Curated.design",
               "url": "https://curated.design",
-              "tags": ["gallerie"],
-              "desc": "Curation par catégories visuelles : typographie, couleur, layout, motion."
+              "tags": [
+                "gallerie"
+              ],
+              "desc": "Curation par catégories visuelles : typographie, couleur, layout, motion.",
+              "cat": "inspiration"
             }
           ]
         },
@@ -54,26 +77,41 @@
             {
               "name": "Mobbin",
               "url": "https://mobbin.com",
-              "tags": ["patterns", "app"],
-              "desc": "Captures d'apps réelles classées par flow — onboarding, paywall, settings. Le meilleur pour les patterns."
+              "tags": [
+                "patterns",
+                "app"
+              ],
+              "desc": "Captures d'apps réelles classées par flow — onboarding, paywall, settings. Le meilleur pour les patterns.",
+              "cat": "interface"
             },
             {
               "name": "Refero",
               "url": "https://refero.design",
-              "tags": ["patterns", "web app"],
-              "desc": "Même idée mais côté web app, avec la recherche par composant."
+              "tags": [
+                "patterns",
+                "web app"
+              ],
+              "desc": "Même idée mais côté web app, avec la recherche par composant.",
+              "cat": "interface"
             },
             {
               "name": "Apple HIG",
               "url": "https://developer.apple.com/design/human-interface-guidelines",
-              "tags": ["guidelines", "apple"],
-              "desc": "Les Human Interface Guidelines. Le raisonnement compte plus que les specs."
+              "tags": [
+                "guidelines",
+                "apple"
+              ],
+              "desc": "Les Human Interface Guidelines. Le raisonnement compte plus que les specs.",
+              "cat": "interface"
             },
             {
               "name": "Vercel Design",
               "url": "https://vercel.com/design",
-              "tags": ["design system"],
-              "desc": "Geist : un design system public complet, tokens et composants documentés."
+              "tags": [
+                "design system"
+              ],
+              "desc": "Geist : un design system public complet, tokens et composants documentés.",
+              "cat": "interface"
             }
           ]
         },
@@ -83,32 +121,52 @@
             {
               "name": "Animations on the Web",
               "url": "https://animations.dev",
-              "tags": ["motion", "cours"],
-              "desc": "Le cours d'Emil Kowalski. La source derrière les skills motion installées."
+              "tags": [
+                "motion",
+                "cours"
+              ],
+              "desc": "Le cours d'Emil Kowalski. La source derrière les skills motion installées.",
+              "cat": "animation"
             },
             {
               "name": "Codrops",
               "url": "https://tympanus.net/codrops",
-              "tags": ["motion", "demos"],
-              "desc": "Démos et tutoriels d'effets. Pour piocher une technique, pas une direction."
+              "tags": [
+                "motion",
+                "demos"
+              ],
+              "desc": "Démos et tutoriels d'effets. Pour piocher une technique, pas une direction.",
+              "cat": "animation"
             },
             {
               "name": "Easings",
               "url": "https://easings.net",
-              "tags": ["motion", "outil"],
-              "desc": "Catalogue de courbes d'easing avec aperçu animé et équivalent CSS."
+              "tags": [
+                "motion",
+                "outil"
+              ],
+              "desc": "Catalogue de courbes d'easing avec aperçu animé et équivalent CSS.",
+              "cat": "animation"
             },
             {
               "name": "rauno.me",
               "url": "https://rauno.me",
-              "tags": ["motion", "craft"],
-              "desc": "Notes d'interface de Rauno Freiberg. Le détail au niveau du pixel et du geste."
+              "tags": [
+                "motion",
+                "craft"
+              ],
+              "desc": "Notes d'interface de Rauno Freiberg. Le détail au niveau du pixel et du geste.",
+              "cat": "interface"
             },
             {
               "name": "Josh Comeau",
               "url": "https://www.joshwcomeau.com",
-              "tags": ["css", "articles"],
-              "desc": "Articles CSS interactifs. Les explications les plus claires sur le layout et les ombres."
+              "tags": [
+                "css",
+                "articles"
+              ],
+              "desc": "Articles CSS interactifs. Les explications les plus claires sur le layout et les ombres.",
+              "cat": "interface"
             }
           ]
         },
@@ -118,20 +176,31 @@
             {
               "name": "Fonts In Use",
               "url": "https://fontsinuse.com",
-              "tags": ["typo"],
-              "desc": "Archive de typographies dans leur contexte réel. Pour voir une fonte travailler avant de la choisir."
+              "tags": [
+                "typo"
+              ],
+              "desc": "Archive de typographies dans leur contexte réel. Pour voir une fonte travailler avant de la choisir.",
+              "cat": "typographie"
             },
             {
               "name": "OKLCH Color Picker",
               "url": "https://oklch.com",
-              "tags": ["couleur", "outil"],
-              "desc": "Sélecteur OKLCH avec visualisation du gamut. Indispensable avec Tailwind v4."
+              "tags": [
+                "couleur",
+                "outil"
+              ],
+              "desc": "Sélecteur OKLCH avec visualisation du gamut. Indispensable avec Tailwind v4.",
+              "cat": "couleur"
             },
             {
               "name": "Realtime Colors",
               "url": "https://www.realtimecolors.com",
-              "tags": ["couleur", "outil"],
-              "desc": "Teste une palette sur une vraie maquette de site plutôt que sur des swatches."
+              "tags": [
+                "couleur",
+                "outil"
+              ],
+              "desc": "Teste une palette sur une vraie maquette de site plutôt que sur des swatches.",
+              "cat": "couleur"
             }
           ]
         }

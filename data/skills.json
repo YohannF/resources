@@ -21,7 +21,8 @@
                 "better-typography",
                 "better-ui",
                 "better-writing"
-              ]
+              ],
+              "cat": "interface"
             },
             {
               "name": "better-layout",
@@ -32,7 +33,8 @@
                 "better-interface",
                 "better-typography",
                 "better-ui"
-              ]
+              ],
+              "cat": "interface"
             },
             {
               "name": "better-typography",
@@ -44,7 +46,8 @@
                 "better-interface",
                 "better-layout",
                 "better-writing"
-              ]
+              ],
+              "cat": "typographie"
             },
             {
               "name": "better-colors",
@@ -52,7 +55,8 @@
               "invokable": true,
               "invokes": [
                 "better-interface"
-              ]
+              ],
+              "cat": "couleur"
             },
             {
               "name": "better-ui",
@@ -63,7 +67,8 @@
                 "better-interface",
                 "better-layout",
                 "better-typography"
-              ]
+              ],
+              "cat": "interface"
             },
             {
               "name": "better-accessibility",
@@ -74,7 +79,8 @@
                 "better-interface",
                 "better-layout",
                 "better-typography"
-              ]
+              ],
+              "cat": "accessibilité"
             },
             {
               "name": "better-writing",
@@ -85,7 +91,8 @@
                 "better-interface",
                 "better-layout",
                 "better-typography"
-              ]
+              ],
+              "cat": "écriture"
             }
           ]
         }
@@ -103,17 +110,20 @@
             {
               "name": "emil-design-eng",
               "desc": "La philosophie de fond : quand animer, quand s'abstenir, et les détails invisibles qui font qu'un logiciel semble juste.",
-              "invokable": true
+              "invokable": true,
+              "cat": "interface"
             },
             {
               "name": "apple-design",
               "desc": "Motion physique façon Apple traduite pour le web : springs, gestes, momentum, transitions interruptibles, matériaux translucides.",
-              "invokable": true
+              "invokable": true,
+              "cat": "animation"
             },
             {
               "name": "animation-vocabulary",
               "desc": "Glossaire inversé : tu décris l'effet en mots vagues, il te rend son nom exact. Pour nommer, pas pour construire.",
-              "invokable": true
+              "invokable": true,
+              "cat": "animation"
             },
             {
               "name": "find-animation-opportunities",
@@ -122,7 +132,8 @@
               "invokes": [
                 "improve-animations",
                 "review-animations"
-              ]
+              ],
+              "cat": "animation"
             },
             {
               "name": "improve-animations",
@@ -130,17 +141,20 @@
               "invokable": true,
               "invokes": [
                 "review-animations"
-              ]
+              ],
+              "cat": "animation"
             },
             {
               "name": "review-animations",
               "desc": "Revue de diff contre la barre de craft d'Emil. Par défaut ça flague ; l'approbation se mérite.",
-              "invokable": false
+              "invokable": false,
+              "cat": "animation"
             },
             {
               "name": "pick-ui-library",
               "desc": "Liste curatée et assumée, par besoin : nombres, OTP, charts, command menu, virtualisation, drag and drop, toasts.",
-              "invokable": false
+              "invokable": false,
+              "cat": "outillage"
             },
             {
               "name": "prototype",
@@ -155,7 +169,8 @@
                 "variantes",
                 "picker",
                 "exploration"
-              ]
+              ],
+              "cat": "interface"
             }
           ]
         }
@@ -195,7 +210,8 @@
                 "triage",
                 "wayfinder",
                 "writing-great-skills"
-              ]
+              ],
+              "cat": "workflow"
             },
             {
               "name": "setup-matt-pocock-skills",
@@ -206,7 +222,8 @@
                 "to-spec",
                 "to-tickets",
                 "triage"
-              ]
+              ],
+              "cat": "outillage"
             },
             {
               "name": "wayfinder",
@@ -218,7 +235,8 @@
                 "prototype",
                 "research",
                 "setup-matt-pocock-skills"
-              ]
+              ],
+              "cat": "workflow"
             },
             {
               "name": "to-spec",
@@ -226,7 +244,8 @@
               "invokable": false,
               "invokes": [
                 "setup-matt-pocock-skills"
-              ]
+              ],
+              "cat": "workflow"
             },
             {
               "name": "to-tickets",
@@ -234,7 +253,8 @@
               "invokable": false,
               "invokes": [
                 "setup-matt-pocock-skills"
-              ]
+              ],
+              "cat": "workflow"
             },
             {
               "name": "triage",
@@ -244,7 +264,8 @@
                 "domain-modeling",
                 "grilling",
                 "setup-matt-pocock-skills"
-              ]
+              ],
+              "cat": "workflow"
             },
             {
               "name": "implement",
@@ -253,7 +274,8 @@
               "invokes": [
                 "code-review",
                 "tdd"
-              ]
+              ],
+              "cat": "workflow"
             },
             {
               "name": "tdd",
@@ -261,7 +283,8 @@
               "invokable": true,
               "invokes": [
                 "code-review"
-              ]
+              ],
+              "cat": "qualité"
             },
             {
               "name": "diagnosing-bugs",
@@ -269,12 +292,14 @@
               "invokable": true,
               "invokes": [
                 "improve-codebase-architecture"
-              ]
+              ],
+              "cat": "qualité"
             },
             {
               "name": "resolving-merge-conflicts",
               "desc": "Résolution méthodique d'un merge ou rebase git déjà en cours.",
-              "invokable": true
+              "invokable": true,
+              "cat": "outillage"
             },
             {
               "name": "code-review",
@@ -282,12 +307,14 @@
               "invokable": true,
               "invokes": [
                 "setup-matt-pocock-skills"
-              ]
+              ],
+              "cat": "qualité"
             },
             {
               "name": "codebase-design",
               "desc": "Le vocabulaire des deep modules : interfaces, opportunités d'approfondissement, où placer une couture.",
-              "invokable": true
+              "invokable": true,
+              "cat": "architecture"
             },
             {
               "name": "improve-codebase-architecture",
@@ -297,22 +324,26 @@
                 "codebase-design",
                 "domain-modeling",
                 "grilling"
-              ]
+              ],
+              "cat": "architecture"
             },
             {
               "name": "domain-modeling",
               "desc": "Construit et affine le modèle de domaine du projet : terminologie, ADR, glossaire.",
-              "invokable": true
+              "invokable": true,
+              "cat": "architecture"
             },
             {
               "name": "research",
               "desc": "Enquête sur sources primaires de confiance, findings capturés en Markdown dans le repo.",
-              "invokable": true
+              "invokable": true,
+              "cat": "workflow"
             },
             {
               "name": "prototype",
               "desc": "Prototype jetable pour trancher une question de design : un state model tient-il, à quoi ressemble cet écran.",
-              "invokable": true
+              "invokable": true,
+              "cat": "workflow"
             },
             {
               "name": "grill-with-docs",
@@ -321,7 +352,8 @@
               "invokes": [
                 "domain-modeling",
                 "grilling"
-              ]
+              ],
+              "cat": "workflow"
             }
           ]
         },
@@ -334,27 +366,32 @@
               "invokable": false,
               "invokes": [
                 "grilling"
-              ]
+              ],
+              "cat": "workflow"
             },
             {
               "name": "grilling",
               "desc": "Stress-test de ta pensée sur un plan, une décision ou une idée. Déclenché par tout terme « grill ».",
-              "invokable": true
+              "invokable": true,
+              "cat": "workflow"
             },
             {
               "name": "handoff",
               "desc": "Compacte la conversation en cours en document de passation pour un autre agent.",
-              "invokable": false
+              "invokable": false,
+              "cat": "workflow"
             },
             {
               "name": "teach",
               "desc": "T'enseigne une compétence ou un concept, ancré dans ce workspace.",
-              "invokable": false
+              "invokable": false,
+              "cat": "workflow"
             },
             {
               "name": "writing-great-skills",
               "desc": "Référence pour écrire et éditer des skills : le vocabulaire et les principes qui les rendent prévisibles.",
-              "invokable": false
+              "invokable": false,
+              "cat": "écriture"
             }
           ]
         },
@@ -364,22 +401,26 @@
             {
               "name": "git-guardrails-claude-code",
               "desc": "Installe des hooks qui bloquent les commandes git destructives — push, reset --hard, clean, branch -D — avant exécution.",
-              "invokable": true
+              "invokable": true,
+              "cat": "outillage"
             },
             {
               "name": "setup-pre-commit",
               "desc": "Husky et lint-staged : formatage, typecheck et tests déclenchés au commit.",
-              "invokable": true
+              "invokable": true,
+              "cat": "outillage"
             },
             {
               "name": "migrate-to-shoehorn",
               "desc": "Remplace les assertions `as` des fichiers de test par @total-typescript/shoehorn.",
-              "invokable": true
+              "invokable": true,
+              "cat": "outillage"
             },
             {
               "name": "scaffold-exercises",
               "desc": "Génère l'arborescence d'exercices — sections, problems, solutions, explainers — qui passe le lint.",
-              "invokable": true
+              "invokable": true,
+              "cat": "outillage"
             }
           ]
         },
@@ -389,12 +430,14 @@
             {
               "name": "edit-article",
               "desc": "Restructure les sections d'un brouillon d'article, clarifie et resserre la prose.",
-              "invokable": false
+              "invokable": false,
+              "cat": "écriture"
             },
             {
               "name": "obsidian-vault",
               "desc": "Recherche, crée et organise des notes dans le vault Obsidian, avec wikilinks et notes d'index.",
-              "invokable": true
+              "invokable": true,
+              "cat": "écriture"
             }
           ]
         },
@@ -405,12 +448,14 @@
               "name": "batch-grill-me",
               "state": "nouveau",
               "desc": "Grilling qui pose toutes les questions frontières d'un coup, round par round, au lieu d'une par une.",
-              "invokable": false
+              "invokable": false,
+              "cat": "workflow"
             },
             {
               "name": "claude-handoff",
               "desc": "Passe la conversation à un agent de fond frais qui reprend le travail immédiatement.",
-              "invokable": false
+              "invokable": false,
+              "cat": "workflow"
             },
             {
               "name": "loop-me",
@@ -418,7 +463,8 @@
               "invokable": false,
               "invokes": [
                 "grilling"
-              ]
+              ],
+              "cat": "workflow"
             },
             {
               "name": "setup-ts-deep-modules",
@@ -427,33 +473,39 @@
               "invokable": false,
               "invokes": [
                 "codebase-design"
-              ]
+              ],
+              "cat": "architecture"
             },
             {
               "name": "to-questionnaire",
               "state": "nouveau",
               "desc": "Transforme une décision que tu ne peux pas trancher seul en questionnaire à faire remplir par quelqu'un d'autre.",
-              "invokable": false
+              "invokable": false,
+              "cat": "workflow"
             },
             {
               "name": "wizard",
               "desc": "Génère un assistant bash interactif pour une procédure manuelle : setup tiers, migration one-shot, écriture de .env et de secrets GitHub Actions.",
-              "invokable": false
+              "invokable": false,
+              "cat": "outillage"
             },
             {
               "name": "writing-fragments",
               "desc": "Écriture, phase explore : miner la matière brute, sans structure imposée.",
-              "invokable": false
+              "invokable": false,
+              "cat": "écriture"
             },
             {
               "name": "writing-beats",
               "desc": "Écriture, phase exploit : assembler la matière en beats, chaque terme fondé avant qu'un beat s'appuie dessus.",
-              "invokable": false
+              "invokable": false,
+              "cat": "écriture"
             },
             {
               "name": "writing-shape",
               "desc": "Écriture, phase exploit : mettre la matière en forme d'article, paragraphe par paragraphe.",
-              "invokable": false
+              "invokable": false,
+              "cat": "écriture"
             }
           ]
         },
@@ -464,25 +516,29 @@
               "name": "qa",
               "state": "deprecated",
               "desc": "Session QA conversationnelle : tu signales les bugs, l'agent explore le repo et dépose les issues GitHub.",
-              "invokable": true
+              "invokable": true,
+              "cat": "qualité"
             },
             {
               "name": "request-refactor-plan",
               "state": "deprecated",
               "desc": "Plan de refactor en tout petits commits, construit par interview puis déposé en issue.",
-              "invokable": true
+              "invokable": true,
+              "cat": "architecture"
             },
             {
               "name": "design-an-interface",
               "state": "deprecated",
               "desc": "Génère plusieurs designs d'API radicalement différents via des sous-agents parallèles.",
-              "invokable": true
+              "invokable": true,
+              "cat": "architecture"
             },
             {
               "name": "ubiquitous-language",
               "state": "deprecated",
               "desc": "Extrait un glossaire DDD de la conversation vers UBIQUITOUS_LANGUAGE.md, en signalant les ambiguïtés.",
-              "invokable": false
+              "invokable": false,
+              "cat": "architecture"
             }
           ]
         }

@@ -178,9 +178,62 @@ input {
   z-index: 10;
   padding: 0.75rem;
   display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.console__row {
+  display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   align-items: center;
+}
+
+/* Second axe : plus discret que le premier, il ne doit pas le concurrencer */
+.console__row--sub {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--n-line);
+}
+
+.cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.cat-chip {
+  height: 22px;
+  padding: 0 0.5rem;
+  border: 0;
+  border-radius: var(--n-r-sm);
+  background: transparent;
+  color: var(--n-t3);
+  font-family: var(--n-data);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 140ms var(--n-ease),
+    color 140ms var(--n-ease);
+}
+
+.cat-chip:hover {
+  color: var(--n-t2);
+  background: var(--n-raise);
+}
+
+.cat-chip[aria-pressed="true"] {
+  color: var(--n-t1);
+  background: var(--n-raise-2);
+}
+
+.cat-chip:active {
+  transform: scale(0.96);
+  transition-duration: 90ms;
 }
 
 .field {
@@ -782,7 +835,8 @@ input {
   }
 
   .segmented button:active,
-  .ghost:active {
+  .ghost:active,
+  .cat-chip:active {
     transform: none;
   }
 
