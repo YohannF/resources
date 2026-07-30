@@ -32,6 +32,17 @@ function hostOf(url) {
   }
 }
 
+function normalizeSearch(value) {
+  return String(value ?? "")
+    .normalize("NFKD")
+    .toLowerCase()
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/œ/g, "oe")
+    .replace(/æ/g, "ae")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
+}
+
 function externalGlyph() {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("viewBox", "0 0 16 16");
@@ -131,7 +142,7 @@ function renderPrompts(prompts, skillName) {
   return details;
 }
 
-function renderRow({ item, collection }) {
+function renderRow({ item, collection, source, group }) {
   const row = document.createElement("div");
   row.className = "row";
   row.dataset.collection = collection;
@@ -194,19 +205,24 @@ function renderRow({ item, collection }) {
   }
 
   row.append(name, desc);
-  row.dataset.haystack = [
-    item.name,
-    item.desc,
-    item.url,
-    item.cat,
-    item.invokable === false ? "manuel" : "auto",
-    ...(item.tags || []),
-    ...(item.invokes || []),
-    ...(item.prompts || []).flatMap((prompt) => [prompt.label, prompt.text]),
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
+  row.dataset.haystack = normalizeSearch(
+    [
+      item.name,
+      item.desc,
+      item.url,
+      item.cat,
+      source,
+      group,
+      labels[collection],
+      item.invokable === false ? "manuel" : "auto",
+      item.prompts?.length ? "prompts associés" : "",
+      ...(item.tags || []),
+      ...(item.invokes || []),
+      ...(item.prompts || []).flatMap((prompt) => [prompt.label, prompt.text]),
+    ]
+      .filter(Boolean)
+      .join(" "),
+  );
 
   return row;
 }
@@ -389,7 +405,7 @@ function announceCount(visible) {
 }
 
 function applyFilter() {
-  const query = els.search.value.trim().toLowerCase();
+  const queryTerms = normalizeSearch(els.search.value).split(" ").filter(Boolean);
   let visible = 0;
 
   for (const section of els.collections.children) {
@@ -402,7 +418,7 @@ function applyFilter() {
         const match =
           (activeCollection === "all" || row.dataset.collection === activeCollection) &&
           (activeCat === "all" || row.dataset.cat === activeCat) &&
-          (!query || row.dataset.haystack.includes(query));
+          queryTerms.every((term) => row.dataset.haystack.includes(term));
         row.hidden = !match;
         if (match) groupVisible += 1;
       }
@@ -482,7 +498,12 @@ async function boot() {
     for (const section of collection.sections) {
       const groups = section.groups.map((group) => ({
         label: group.label,
-        entries: group.items.map((item) => ({ item, collection: collection.id })),
+        entries: group.items.map((item) => ({
+          item,
+          collection: collection.id,
+          source: section.title,
+          group: group.label,
+        })),
       }));
 
       for (const group of groups) {

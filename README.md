@@ -37,6 +37,10 @@ Une skill peut aussi proposer des prompts prêts à copier :
 `label` décrit le cas d'usage dans l'interface ; `text` est copié tel quel. Le libellé et le
 contenu alimentent aussi la recherche.
 
+La recherche couvre le nom, la description, la source, le groupe, la catégorie et les prompts.
+Elle ignore la casse, les accents et la ponctuation : `/find-animation-opportunities` et
+`find animation opportunities` produisent le même résultat.
+
 La structure d'un fichier est `collection → sections → groups → items`. Un nouveau groupe se crée
 en ajoutant un objet `{ "label": "...", "items": [] }`.
 
