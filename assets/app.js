@@ -9,6 +9,9 @@ const els = {
   empty: document.getElementById("empty"),
   emptyText: document.getElementById("empty-text"),
   emptyReset: document.getElementById("empty-reset"),
+  graphsWrap: document.getElementById("graphs"),
+  graphsSummary: document.getElementById("graphs-summary"),
+  graphs: document.getElementById("graphs-mount"),
 };
 
 const labels = {};
@@ -58,9 +61,27 @@ function renderRow(item) {
     name.append(chip);
   }
 
+  if (item.invokable !== undefined) {
+    const flag = document.createElement("span");
+    flag.className = `flag flag--${item.invokable ? "auto" : "manual"}`;
+    flag.textContent = item.invokable ? "auto" : "manuel";
+    flag.title = item.invokable
+      ? "Le modèle peut la déclencher seul"
+      : "Uniquement sur invocation explicite (disable-model-invocation)";
+    name.append(flag);
+  }
+
   const desc = document.createElement("dd");
   desc.className = "row__desc";
-  desc.textContent = item.desc;
+  desc.append(item.desc);
+
+  if (item.invokes?.length) {
+    const deps = document.createElement("span");
+    deps.className = "row__deps";
+    deps.append(`invoque ${item.invokes.length} skill${item.invokes.length > 1 ? "s" : ""} : `);
+    deps.append(item.invokes.join(" · "));
+    desc.append(deps);
+  }
 
   if (item.url) {
     const host = document.createElement("span");
@@ -70,7 +91,14 @@ function renderRow(item) {
   }
 
   row.append(name, desc);
-  row.dataset.haystack = [item.name, item.desc, item.url, ...(item.tags || [])]
+  row.dataset.haystack = [
+    item.name,
+    item.desc,
+    item.url,
+    item.invokable === false ? "manuel" : "auto",
+    ...(item.tags || []),
+    ...(item.invokes || []),
+  ]
     .filter(Boolean)
     .join(" ")
     .toLowerCase();
@@ -253,6 +281,13 @@ async function boot() {
     for (const section of collection.sections) {
       els.collections.append(renderSection(section, collection.id));
     }
+  }
+
+  const skills = loaded.find((c) => c.id === "skills");
+  if (skills && window.renderGraphs) {
+    const edges = window.renderGraphs(skills.sections, els.graphs);
+    els.graphsSummary.textContent = `Dépendances entre skills — ${edges} liens`;
+    els.graphsWrap.hidden = false;
   }
 
   renderFilters();

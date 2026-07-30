@@ -51,6 +51,15 @@
         <output class="console__count data" id="count" aria-live="polite"></output>
       </div>
 
+      <details class="graphs surface" id="graphs" hidden>
+        <summary class="graphs__summary" id="graphs-summary">Dépendances entre skills</summary>
+        <p class="graphs__note">
+          Chaque lien est une skill qui en cite explicitement une autre dans ses instructions.
+          Survole un nœud pour isoler ses liens ; les skills sans lien ne sont pas dessinées.
+        </p>
+        <div class="graphs__mount" id="graphs-mount"></div>
+      </details>
+
       <div class="collections" id="collections"></div>
 
       <div class="empty" id="empty" hidden>
@@ -71,6 +80,7 @@
       </footer>
     </main>
 
+    <script src="assets/graph.js"></script>
     <script src="assets/app.js"></script>
   </body>
 </html>

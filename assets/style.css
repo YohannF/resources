@@ -299,6 +299,183 @@ input {
   white-space: nowrap;
 }
 
+/* ---------------------------------------------------------------- graphe */
+
+.graphs {
+  padding: 0.9rem 1rem;
+}
+
+.graphs__summary {
+  font-family: var(--n-ui);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--n-t2);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  user-select: none;
+  transition: color 140ms var(--n-ease);
+}
+
+.graphs__summary:hover {
+  color: var(--n-t1);
+}
+
+.graphs__summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron — §4 : 7px, deux bordures, rotate 45° → 225° */
+.graphs__summary::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 200ms var(--n-ease);
+  margin-left: 0.15rem;
+}
+
+.graphs[open] .graphs__summary::before {
+  transform: rotate(45deg);
+}
+
+.graphs__note {
+  font-size: 12px;
+  color: var(--n-t3);
+  max-width: calc(var(--prose) * 0.92);
+  margin: 0.75rem 0 0;
+}
+
+.graphs__mount {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.graph {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.85rem;
+  border-radius: var(--n-r);
+  background: var(--n-raise);
+  box-shadow: inset 0 0 0 1px var(--n-line);
+  min-width: 0;
+}
+
+.graph__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.graph__title {
+  font-family: var(--n-ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--n-t1);
+  margin: 0;
+}
+
+.graph__meta {
+  font-family: var(--n-data);
+  font-size: 10px;
+  color: var(--n-t3);
+  margin: 0;
+}
+
+.graph__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.graph__edge {
+  fill: none;
+  stroke: var(--n-line-2);
+  stroke-width: 1;
+  transition:
+    stroke 140ms var(--n-ease),
+    opacity 140ms var(--n-ease);
+}
+
+.graph__dot {
+  fill: var(--n-t3);
+  transition:
+    fill 140ms var(--n-ease),
+    opacity 140ms var(--n-ease);
+}
+
+.graph--wide {
+  grid-column: 1 / -1;
+}
+
+.graph--wide .graph__svg {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.graph__label {
+  font-family: var(--n-data);
+  font-size: 10px;
+  fill: var(--n-t3);
+  transition:
+    fill 140ms var(--n-ease),
+    opacity 140ms var(--n-ease);
+}
+
+.graph__hit {
+  fill: transparent;
+}
+
+.graph__node {
+  cursor: default;
+}
+
+.graph__node[data-hub] .graph__dot {
+  fill: var(--n-t1);
+}
+
+.graph__node[data-hub] .graph__label {
+  fill: var(--n-t1);
+  font-size: 10px;
+}
+
+.graph__node:focus-visible {
+  outline: none;
+}
+
+.graph__node:focus-visible .graph__dot {
+  stroke: var(--n-t1);
+  stroke-width: 2;
+}
+
+/* Isoler = éteindre le reste, jamais colorer l'actif (§4) */
+.graph__svg[data-focused] .graph__edge,
+.graph__svg[data-focused] .graph__node {
+  opacity: 0.18;
+}
+
+.graph__svg[data-focused] .graph__edge.is-on {
+  opacity: 1;
+  stroke: var(--n-t1);
+}
+
+.graph__svg[data-focused] .graph__node.is-on {
+  opacity: 1;
+}
+
+.graph__svg[data-focused] .graph__node.is-on .graph__dot,
+.graph__svg[data-focused] .graph__node.is-on .graph__label {
+  fill: var(--n-t1);
+}
+
 /* ---------------------------------------------------------------- sections */
 
 .collections {
@@ -466,6 +643,35 @@ input {
   font-size: 10px;
   color: var(--n-t3);
   margin-top: 0.15rem;
+}
+
+/* Invocabilité — l'actif se lit par promotion, l'inactif s'éteint (§4) */
+.flag {
+  font-family: var(--n-data);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.flag--auto {
+  color: var(--n-t3);
+  opacity: 0.75;
+}
+
+.flag--manual {
+  color: var(--n-t2);
+  background: var(--n-raise-2);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+.row__deps {
+  display: block;
+  font-family: var(--n-data);
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--n-t3);
+  margin-top: 0.2rem;
 }
 
 /* Chip d'état — seule couleur admise (sémantique, §3) */
