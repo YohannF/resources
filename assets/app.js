@@ -116,7 +116,7 @@ function renderSection(section, collectionId) {
     el.append(groupEl);
   }
 
-  count.textContent = `${total} entrée${total > 1 ? "s" : ""}`;
+  el.dataset.total = String(total);
   return el;
 }
 
@@ -140,6 +140,12 @@ function applyFilter() {
       group.hidden = groupVisible === 0;
       sectionVisible += groupVisible;
     }
+
+    const total = Number(section.dataset.total);
+    section.querySelector(".section__count").textContent =
+      sectionVisible === total
+        ? `${total} entrée${total > 1 ? "s" : ""}`
+        : `${sectionVisible} sur ${total}`;
 
     section.hidden = sectionVisible === 0;
     visible += sectionVisible;
