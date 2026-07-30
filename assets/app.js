@@ -9,9 +9,6 @@ const els = {
   empty: document.getElementById("empty"),
   emptyText: document.getElementById("empty-text"),
   emptyReset: document.getElementById("empty-reset"),
-  graphsWrap: document.getElementById("graphs"),
-  graphsSummary: document.getElementById("graphs-summary"),
-  graphs: document.getElementById("graphs-mount"),
 };
 
 const labels = {};
@@ -143,6 +140,41 @@ function renderSection(section, collectionId) {
     note.className = "section__note";
     note.textContent = section.note;
     el.append(note);
+  }
+
+  const graph = window.buildFamilyGraph?.(section);
+  if (graph) {
+    const panel = document.createElement("div");
+    panel.className = "graph-panel";
+    panel.id = `graph-${section.family ?? collectionId}`;
+    panel.hidden = true;
+    panel.append(graph.figure);
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "ghost ghost--toggle";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", panel.id);
+    toggle.append(`Graphe · ${graph.edges}`);
+
+    const syncLabel = () => {
+      const open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute(
+        "aria-label",
+        `${open ? "Masquer" : "Afficher"} le graphe des dépendances de ${section.title}`,
+      );
+    };
+
+    toggle.addEventListener("click", () => {
+      const open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!open));
+      panel.hidden = open;
+      syncLabel();
+    });
+
+    syncLabel();
+    head.insertBefore(toggle, count);
+    el.append(panel);
   }
 
   let total = 0;
@@ -281,13 +313,6 @@ async function boot() {
     for (const section of collection.sections) {
       els.collections.append(renderSection(section, collection.id));
     }
-  }
-
-  const skills = loaded.find((c) => c.id === "skills");
-  if (skills && window.renderGraphs) {
-    const edges = window.renderGraphs(skills.sections, els.graphs);
-    els.graphsSummary.textContent = `Dépendances entre skills — ${edges} liens`;
-    els.graphsWrap.hidden = false;
   }
 
   renderFilters();

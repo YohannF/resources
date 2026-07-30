@@ -301,60 +301,48 @@ input {
 
 /* ---------------------------------------------------------------- graphe */
 
-.graphs {
-  padding: 0.9rem 1rem;
-}
-
-.graphs__summary {
-  font-family: var(--n-ui);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--n-t2);
-  cursor: pointer;
-  list-style: none;
-  display: flex;
+/* Bouton de bascule dans l'en-tête de section — chevron §4 */
+.ghost--toggle {
+  height: 24px;
+  padding: 0 0.5rem;
+  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  user-select: none;
-  transition: color 140ms var(--n-ease);
+  gap: 0.45rem;
+  font-family: var(--n-data);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
 }
 
-.graphs__summary:hover {
+.ghost--toggle::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-1px) rotate(45deg);
+  transition: transform 200ms var(--n-ease);
+}
+
+.ghost--toggle[aria-expanded="true"] {
+  background: var(--n-raise-2);
+  border-color: var(--n-line-2);
   color: var(--n-t1);
 }
 
-.graphs__summary::-webkit-details-marker {
-  display: none;
+.ghost--toggle[aria-expanded="true"]::after {
+  transform: translateY(1px) rotate(225deg);
 }
 
-/* Chevron — §4 : 7px, deux bordures, rotate 45° → 225° */
-.graphs__summary::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(-45deg);
-  transition: transform 200ms var(--n-ease);
-  margin-left: 0.15rem;
+/* Le compteur suit le bouton, il ne pousse plus seul vers la droite */
+.section__head .ghost--toggle ~ .section__count {
+  margin-left: 0;
 }
 
-.graphs[open] .graphs__summary::before {
-  transform: rotate(45deg);
-}
-
-.graphs__note {
-  font-size: 12px;
-  color: var(--n-t3);
-  max-width: calc(var(--prose) * 0.92);
-  margin: 0.75rem 0 0;
-}
-
-.graphs__mount {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
-  gap: 1rem;
-  margin-top: 0.75rem;
+.graph-panel {
+  padding-top: 0.5rem;
 }
 
 .graph {
@@ -367,19 +355,20 @@ input {
   background: var(--n-raise);
   box-shadow: inset 0 0 0 1px var(--n-line);
   min-width: 0;
+  animation: graph-in 200ms var(--n-ease);
 }
 
-.graph__caption {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
+@keyframes graph-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
 }
 
-.graph__title {
-  font-family: var(--n-ui);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--n-t1);
+.graph__hint {
+  font-size: 12px;
+  color: var(--n-t3);
+  max-width: calc(var(--prose) * 0.92);
   margin: 0;
 }
 
@@ -392,7 +381,9 @@ input {
 
 .graph__svg {
   width: 100%;
+  max-width: 42rem;
   height: auto;
+  margin: 0 auto;
   overflow: visible;
 }
 
@@ -410,15 +401,6 @@ input {
   transition:
     fill 140ms var(--n-ease),
     opacity 140ms var(--n-ease);
-}
-
-.graph--wide {
-  grid-column: 1 / -1;
-}
-
-.graph--wide .graph__svg {
-  max-width: 44rem;
-  margin: 0 auto;
 }
 
 .graph__label {
@@ -802,5 +784,9 @@ input {
   .segmented button:active,
   .ghost:active {
     transform: none;
+  }
+
+  .graph {
+    animation: none !important;
   }
 }

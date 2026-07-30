@@ -41,8 +41,10 @@ function buildDiagram(section) {
   const ring = radial ? nodes.filter((n) => n !== hub) : nodes;
 
   const radius = Math.max(96, ring.length * 9.5);
-  const pad = 150;
-  const size = (radius + pad) * 2;
+  // Les labels ne débordent qu'à l'horizontale : la boîte n'a aucune raison d'être carrée.
+  const longest = Math.max(...ring.map((n) => n.length));
+  const width = (radius + longest * 5.4 + 24) * 2;
+  const height = (radius + 30) * 2;
   const angle = (i) => (i / ring.length) * Math.PI * 2 - Math.PI / 2;
   const pos = {};
   ring.forEach((name, i) => {
@@ -52,7 +54,7 @@ function buildDiagram(section) {
   if (radial) pos[hub] = { x: 0, y: 0, a: 0 };
 
   const svg = el("svg", {
-    viewBox: `${-size / 2} ${-size / 2} ${size} ${size}`,
+    viewBox: `${-width / 2} ${-height / 2} ${width} ${height}`,
     class: "graph__svg",
     role: "img",
     "aria-label": `${nodes.length} skills liées, ${edges.length} dépendances`,
@@ -129,37 +131,28 @@ function wire(svg) {
   }
 }
 
-function renderGraphs(sections, mount) {
-  let totalEdges = 0;
+function buildFamilyGraph(section) {
+  const built = buildDiagram(section);
+  if (!built) return null;
 
-  for (const section of sections) {
-    const built = buildDiagram(section);
-    if (!built) continue;
-    totalEdges += built.edges.length;
+  const figure = document.createElement("figure");
+  figure.className = "graph";
 
-    const figure = document.createElement("figure");
-    figure.className = built.nodes.length > 12 ? "graph graph--wide" : "graph";
+  const caption = document.createElement("figcaption");
+  caption.className = "graph__meta";
+  caption.textContent = built.hub
+    ? `${built.edges.length} liens · ${built.hub} au centre · ${built.isolated} skills sans lien`
+    : `${built.edges.length} liens · ${built.isolated} skills sans lien`;
 
-    const caption = document.createElement("figcaption");
-    caption.className = "graph__caption";
+  const hint = document.createElement("p");
+  hint.className = "graph__hint";
+  hint.textContent =
+    "Un lien = une skill qui en cite explicitement une autre. Survole un nœud pour isoler ses liens.";
 
-    const title = document.createElement("h3");
-    title.className = "graph__title";
-    title.textContent = section.title;
+  figure.append(caption, built.svg, hint);
+  wire(built.svg);
 
-    const meta = document.createElement("p");
-    meta.className = "graph__meta";
-    meta.textContent = built.hub
-      ? `${built.edges.length} liens · ${built.hub} au centre · ${built.isolated} sans lien`
-      : `${built.edges.length} liens · ${built.isolated} sans lien`;
-
-    caption.append(title, meta);
-    figure.append(caption, built.svg);
-    mount.append(figure);
-    wire(built.svg);
-  }
-
-  return totalEdges;
+  return { figure, edges: built.edges.length, nodes: built.nodes.length };
 }
 
-window.renderGraphs = renderGraphs;
+window.buildFamilyGraph = buildFamilyGraph;
