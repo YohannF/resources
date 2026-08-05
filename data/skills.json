@@ -360,7 +360,7 @@
     {
       "title": "Emil Kowalski",
       "status": "skills locales, sans namespace",
-      "note": "L'école du motion et du détail. Le cycle naturel : find pour explorer, improve pour planifier, implémenter, puis review pour valider.",
+      "note": "L'école du motion et du détail. Le cycle naturel : find pour explorer, improve pour planifier, animate pour construire, puis review pour valider.",
       "groups": [
         {
           "label": "motion & design engineering",
@@ -417,6 +417,34 @@
               "invokable": true,
               "invokes": [
                 "review-animations"
+              ],
+              "cat": "animation"
+            },
+            {
+              "name": "animate",
+              "desc": "Construit l'animation, dans l'ordre qui décide du rendu : faut-il animer, quel but, quel outil, quelles propriétés, quelle courbe, quelle interruption, quelle sortie. Recettes prêtes pour dropdown, modal, drawer, toast, accordéon, stagger.",
+              "invokable": true,
+              "invokes": [
+                "pick-ui-library"
+              ],
+              "prompts": [
+                {
+                  "label": "Composant précis",
+                  "text": "Animate the opening and closing of this dropdown."
+                },
+                {
+                  "label": "Garde-fou d'abord",
+                  "text": "Should this settings panel animate at all? If yes, build it; if no, say so and stop."
+                },
+                {
+                  "label": "Depuis un plan improve-animations",
+                  "text": "Implement plan 1 from the improve-animations audit, then self-check it against review-animations."
+                }
+              ],
+              "tags": [
+                "implémentation",
+                "recettes",
+                "motion"
               ],
               "cat": "animation"
             },
