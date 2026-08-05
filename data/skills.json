@@ -454,6 +454,47 @@
       "family": "emil"
     },
     {
+      "title": "nextlevelbuilder",
+      "status": "skill locale, sans namespace",
+      "note": "Une base de données de décisions UI interrogeable hors ligne : styles, palettes, appairages de fontes, guidelines UX, presets GSAP, types de graphes, le tout décliné par stack. Rendu par un script Python, pas par le modèle.",
+      "groups": [
+        {
+          "label": "design intelligence",
+          "items": [
+            {
+              "name": "ui-ux-pro-max",
+              "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+              "desc": "Recherche locale dans 84 styles, 192 palettes, 74 appairages typo, 98 guidelines UX et 22 stacks. Sort un design system complet avec ses anti-patterns.",
+              "invokable": true,
+              "tags": [
+                "design system",
+                "palette",
+                "typographie",
+                "gsap",
+                "charts",
+                "stack"
+              ],
+              "cat": "interface",
+              "prompts": [
+                {
+                  "label": "Design system d'un nouveau projet",
+                  "text": "Use ui-ux-pro-max to generate a design system for this project, detect the stack from the repo first, and persist it at the project root."
+                },
+                {
+                  "label": "Réglage par dials",
+                  "text": "Run ui-ux-pro-max --design-system on \"internal analytics dashboard\" with --variance 8 --motion 7 --density 8, then tell me which recommendations conflict with our existing tokens."
+                },
+                {
+                  "label": "Deep-dive sur un axe",
+                  "text": "Search ui-ux-pro-max for color palettes and font pairings that fit a dark, data-dense cockpit UI, and give me the anti-patterns it flags."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "Matt Pocock",
       "meta": "mattpocock-skills:",
       "note": "La méthode de travail complète, de la planification au merge. Source de vérité : l'issue tracker du repo — jamais de STATE.md.",
