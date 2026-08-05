@@ -100,6 +100,264 @@
       "family": "jakub"
     },
     {
+      "title": "Impeccable",
+      "meta": "impeccable:",
+      "note": "Une direction artistique sous forme de commandes. Le socle est PRODUCT.md (vérité produit) puis DESIGN.md (monde visuel) ; chaque commande charge son playbook et, avant d'écrire de l'UI, le plancher de qualité craft-floor. Deux structures portent le graphe : critique et audit prescrivent depuis l'ensemble des commandes scoped, et presque toutes les commandes de raffinement passent la main à polish pour la passe finale.",
+      "groups": [
+        {
+          "label": "build — poser le socle",
+          "items": [
+            {
+              "name": "init",
+              "desc": "Capture la vérité produit durable dans PRODUCT.md : utilisateurs, job, contraintes, preuves. N'invente aucun monde visuel.",
+              "invokes": [
+                "shape",
+                "document",
+                "live"
+              ],
+              "cat": "workflow"
+            },
+            {
+              "name": "shape",
+              "desc": "Planifie l'UX/UI avant d'écrire du code. Mène l'interview de tâche, puis entre dans new-work pour les décisions de monde visuel.",
+              "cat": "workflow"
+            },
+            {
+              "name": "document",
+              "desc": "Dérive DESIGN.md du code existant : enregistre le système en place au lieu de le remplacer.",
+              "invokes": [
+                "init"
+              ],
+              "cat": "workflow"
+            },
+            {
+              "name": "extract",
+              "desc": "Remonte tokens et composants réutilisables d'une surface vers le design system.",
+              "cat": "architecture"
+            },
+            {
+              "name": "craft",
+              "state": "deprecated",
+              "desc": "Alias déprécié d'une demande new-work ordinaire. N'ajoute rien : formuler la demande directement.",
+              "invokes": [
+                "init"
+              ],
+              "cat": "workflow"
+            }
+          ]
+        },
+        {
+          "label": "evaluate — diagnostiquer",
+          "items": [
+            {
+              "name": "critique",
+              "desc": "Revue UX avec scoring heuristique et personas. Chaque défaut sort avec la commande scoped qui le répare.",
+              "invokes": [
+                "audit",
+                "adapt",
+                "animate",
+                "bolder",
+                "clarify",
+                "colorize",
+                "delight",
+                "distill",
+                "document",
+                "harden",
+                "layout",
+                "onboard",
+                "optimize",
+                "overdrive",
+                "polish",
+                "quieter",
+                "shape",
+                "typeset"
+              ],
+              "cat": "qualité"
+            },
+            {
+              "name": "audit",
+              "desc": "Contrôles techniques : accessibilité, performance, responsive. Variante native pour iOS/Android.",
+              "invokes": [
+                "critique",
+                "adapt",
+                "animate",
+                "bolder",
+                "clarify",
+                "colorize",
+                "delight",
+                "distill",
+                "document",
+                "harden",
+                "layout",
+                "onboard",
+                "optimize",
+                "overdrive",
+                "polish",
+                "quieter",
+                "shape",
+                "typeset"
+              ],
+              "cat": "qualité"
+            }
+          ]
+        },
+        {
+          "label": "refine — resserrer",
+          "items": [
+            {
+              "name": "polish",
+              "desc": "La passe finale avant livraison. Terminus de presque toutes les autres commandes ; ne renvoie vers rien.",
+              "cat": "qualité"
+            },
+            {
+              "name": "bolder",
+              "desc": "Amplifie un design timide ou générique jusqu'à ce qu'il tienne sans déchirer la page.",
+              "invokes": [
+                "polish"
+              ],
+              "cat": "interface"
+            },
+            {
+              "name": "quieter",
+              "desc": "Baisse le volume d'un design agressif ou surstimulant.",
+              "invokes": [
+                "polish"
+              ],
+              "cat": "interface"
+            },
+            {
+              "name": "distill",
+              "desc": "Retire jusqu'à l'essence : moins d'éléments, moins de complexité, même fonction.",
+              "invokes": [
+                "polish"
+              ],
+              "cat": "interface"
+            },
+            {
+              "name": "harden",
+              "desc": "Prêt pour la production : états d'erreur, i18n, cas limites, données absentes ou monstrueuses.",
+              "invokes": [
+                "polish"
+              ],
+              "cat": "qualité"
+            },
+            {
+              "name": "onboard",
+              "desc": "Premier lancement, empty states, activation — ce que voit quelqu'un qui n'a encore rien.",
+              "invokes": [
+                "polish"
+              ],
+              "cat": "interface"
+            }
+          ]
+        },
+        {
+          "label": "enhance — ajouter une dimension",
+          "items": [
+            {
+              "name": "animate",
+              "desc": "Ajoute du mouvement qui porte une intention, pas de la décoration animée.",
+              "invokes": [
+                "polish"
+              ],
+              "cat": "animation"
+            },
+            {
+              "name": "delight",
+              "desc": "Personnalité et détails mémorables. Passe par animate quand le détail est du mouvement.",
+              "invokes": [
+                "animate",
+                "polish"
+              ],
+              "cat": "animation"
+            },
+            {
+              "name": "colorize",
+              "desc": "Introduit de la couleur stratégique dans une UI monochrome — en gardant la couleur porteuse de sens.",
+              "invokes": [
+                "live",
+                "polish"
+              ],
+              "cat": "couleur"
+            },
+            {
+              "name": "typeset",
+              "desc": "Hiérarchie typographique, choix et réglage des fontes, échelle.",
+              "invokes": [
+                "live",
+                "polish"
+              ],
+              "cat": "typographie"
+            },
+            {
+              "name": "layout",
+              "desc": "Espacement, rythme vertical, hiérarchie visuelle, alignement.",
+              "invokes": [
+                "live",
+                "polish"
+              ],
+              "cat": "interface"
+            },
+            {
+              "name": "overdrive",
+              "desc": "Pousse au-delà des limites conventionnelles. Le cran au-dessus de bolder, réservé aux surfaces qui doivent impressionner.",
+              "cat": "interface"
+            }
+          ]
+        },
+        {
+          "label": "fix — corriger un axe précis",
+          "items": [
+            {
+              "name": "clarify",
+              "desc": "Copy d'interface : labels, messages d'erreur, microcopy, vocabulaire.",
+              "invokes": [
+                "polish"
+              ],
+              "cat": "écriture"
+            },
+            {
+              "name": "adapt",
+              "desc": "Adapte aux tailles d'écran et aux appareils. Variante native pour iOS/Android.",
+              "invokes": [
+                "polish"
+              ],
+              "cat": "interface"
+            },
+            {
+              "name": "optimize",
+              "desc": "Diagnostique et corrige les performances perçues de l'UI.",
+              "invokes": [
+                "polish"
+              ],
+              "cat": "qualité"
+            }
+          ]
+        },
+        {
+          "label": "iterate & maintenance",
+          "items": [
+            {
+              "name": "live",
+              "desc": "Mode variantes visuelles : on pointe un élément dans le navigateur, la commande génère des alternatives.",
+              "cat": "outillage"
+            },
+            {
+              "name": "hooks",
+              "desc": "Active le détecteur de design qui tourne après chaque édition d'UI. Sous-commandes : on, off, status, ignore-rule, ignore-file, ignore-value, reset.",
+              "cat": "outillage"
+            },
+            {
+              "name": "doctor",
+              "desc": "Signale et répare la dérive entre les artefacts du projet (PRODUCT.md, DESIGN.md, config, briefs, hook) et ce que la version installée lit.",
+              "cat": "outillage"
+            }
+          ]
+        }
+      ],
+      "family": "impeccable"
+    },
+    {
       "title": "Emil Kowalski",
       "status": "skills locales, sans namespace",
       "note": "L'école du motion et du détail. Le cycle naturel : find pour explorer, improve pour planifier, implémenter, puis review pour valider.",

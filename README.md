@@ -60,8 +60,8 @@ Aucune étape de build.
 
 ## Design
 
-Le langage visuel reprend `nav_builder_dcs/docs/REDESIGN_SYSTEM.md` : tokens `--n-*`, contrat
-`.surface`, Orbitron en display / Barlow en chrome / JetBrains Mono pour la donnée.
+Le langage visuel est le graphite : tokens `--n-*`, contrat `.surface`, Orbitron en display /
+Barlow en chrome / JetBrains Mono pour la donnée.
 
 Deux règles à ne pas casser :
 
