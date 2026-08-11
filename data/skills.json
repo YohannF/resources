@@ -5,7 +5,7 @@
     {
       "title": "Jakub Krehel",
       "meta": "interfaces:",
-      "note": "Un système découpé par couche d'interface. Chaque skill couvre une décision distincte ; better-interface sert de chapeau et renvoie vers la bonne.",
+      "note": "Un système découpé par couche d'interface. Chaque skill couvre une décision distincte ; better-interface sert de chapeau et renvoie vers la bonne, interface-review est l'entrée quand la cible est un diff plutôt qu'un écran.",
       "groups": [
         {
           "label": "interfaces",
@@ -20,9 +20,26 @@
                 "better-layout",
                 "better-typography",
                 "better-ui",
-                "better-writing"
+                "better-writing",
+                "interface-review"
               ],
               "cat": "interface"
+            },
+            {
+              "name": "interface-review",
+              "desc": "Revue d'un changement plutôt que d'un écran : résout la portée (working tree, branche, PR), lit les deux côtés du diff, et classe chaque finding en introduit / régression / préexistant avant de rendre la main à better-interface.",
+              "state": "nouveau",
+              "invokable": true,
+              "invokes": [
+                "better-accessibility",
+                "better-colors",
+                "better-interface",
+                "better-layout",
+                "better-typography",
+                "better-ui",
+                "better-writing"
+              ],
+              "cat": "qualité"
             },
             {
               "name": "better-layout",
