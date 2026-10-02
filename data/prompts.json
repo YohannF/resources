@@ -1,0 +1,21 @@
+{
+  "id": "prompts",
+  "label": "Prompts",
+  "sections": [
+    {
+      "title": "Prompts perso",
+      "groups": [
+        {
+          "label": "matt's prompt of the day",
+          "items": [
+            {
+              "name": "Repérer les modules à supprimer",
+              "cat": "matt's prompt of the day",
+              "text": "/codebase-design Take a look in the repo for shallow modules, applying the deletion test and look for candidates for deletion. "
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-const COLLECTIONS = ["skills", "inspiration", "tools"];
+const COLLECTIONS = ["skills", "prompts", "inspiration", "tools"];
 const ANNOUNCE_DELAY = 500;
 
 const els = {
@@ -18,7 +18,7 @@ const sourceSections = [];
 const catalogue = [];
 const graphSelections = new Set();
 
-let activeCollection = "all";
+let activeCollection = COLLECTIONS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "all";
 let activeCat = "all";
 let view = "source";
 let announceTimer;
@@ -100,53 +100,11 @@ function renderPrompts(prompts, skillName) {
   list.className = "prompts__list";
 
   prompts.forEach((prompt, index) => {
-    const card = document.createElement("article");
-    card.className = "prompt";
-
-    const head = document.createElement("div");
-    head.className = "prompt__head";
-
-    const title = document.createElement("h4");
-    title.className = "prompt__title";
-    title.textContent = prompt.label;
-
-    const copy = document.createElement("button");
-    copy.type = "button";
-    copy.className = "ghost prompt__copy";
-    copy.textContent = "Copier";
-    const copyLabel = `Copier le prompt ${index + 1} associé à ${skillName}`;
-    copy.setAttribute("aria-label", copyLabel);
-
-    let resetTimer;
-    copy.addEventListener("click", async () => {
-      clearTimeout(resetTimer);
-
-      try {
-        await copyText(prompt.text);
-        copy.textContent = "Copié";
-        copy.dataset.copied = "true";
-        copy.setAttribute("aria-label", `Prompt ${index + 1} copié`);
-      } catch {
-        copy.textContent = "Échec";
-        copy.dataset.error = "true";
-        copy.setAttribute("aria-label", `Échec de la copie du prompt ${index + 1}`);
-      }
-
-      resetTimer = setTimeout(() => {
-        copy.textContent = "Copier";
-        copy.setAttribute("aria-label", copyLabel);
-        delete copy.dataset.copied;
-        delete copy.dataset.error;
-      }, 1600);
-    });
-
-    const text = document.createElement("p");
-    text.className = "prompt__text";
-    text.textContent = prompt.text;
-
-    head.append(title, copy);
-    card.append(head, text);
-    list.append(card);
+    list.append(window.resourcePrompts.renderCard(
+      prompt,
+      `Copier le prompt ${index + 1} associé à ${skillName}`,
+      copyText,
+    ));
   });
 
   details.append(list);
@@ -195,7 +153,17 @@ function renderRow({ item, collection, source, group }) {
 
   const desc = document.createElement("dd");
   desc.className = "row__desc";
-  desc.append(item.desc);
+  if (item.text) {
+    row.classList.add("row--prompt");
+    desc.append(window.resourcePrompts.renderCard(
+      { label: item.name, text: item.text },
+      `Copier le prompt ${item.name}`,
+      copyText,
+      false,
+    ));
+  } else {
+    desc.append(item.desc);
+  }
 
   if (item.when) {
     const when = document.createElement("span");
@@ -242,6 +210,7 @@ function renderRow({ item, collection, source, group }) {
     [
       item.name,
       item.desc,
+      item.text,
       item.when,
       item.url,
       item.cat,
@@ -400,6 +369,7 @@ function countOf(groups) {
 }
 
 function renderCollections() {
+  window.resourcePrompts.hidePreview();
   graphSelections.clear();
   els.collections.textContent = "";
   const models = view === "source" ? bySource() : byCategory();
@@ -445,6 +415,7 @@ function announceCount(visible) {
 }
 
 function applyFilter() {
+  window.resourcePrompts.hidePreview();
   const queryTerms = normalizeSearch(els.search.value).split(" ").filter(Boolean);
   let visible = 0;
 
@@ -507,12 +478,30 @@ function buildToggleGroup(mount, entries, isActive, onPick, className = "") {
 
 function catEntries() {
   const counts = new Map();
-  for (const { item } of catalogue) {
+  for (const { item, collection } of catalogue) {
+    if (activeCollection !== "all" && collection !== activeCollection) continue;
     const cat = item.cat ?? "sans catégorie";
     counts.set(cat, (counts.get(cat) ?? 0) + 1);
   }
   const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
   return [["all", "Toutes"], ...sorted.map(([cat, n]) => [cat, `${cat} ${n}`])];
+}
+
+function renderCategories() {
+  els.cats.classList.toggle("cats--prompts", activeCollection === "prompts");
+  const entries = catEntries();
+  if (!entries.some(([id]) => id === activeCat)) activeCat = "all";
+  buildToggleGroup(
+    els.cats,
+    entries,
+    (id) => id === activeCat,
+    (id) => {
+      clearGraphSelections();
+      activeCat = id;
+      applyFilter();
+    },
+    "cat-chip",
+  );
 }
 
 function clearGraphSelections() {
@@ -523,7 +512,9 @@ function reset() {
   clearGraphSelections();
   els.search.value = "";
   activeCollection = "all";
+  history.replaceState(null, "", location.pathname);
   activeCat = "all";
+  renderCategories();
   for (const mount of [els.filters, els.cats]) {
     for (const [i, button] of [...mount.children].entries()) {
       button.setAttribute("aria-pressed", String(i === 0));
@@ -537,8 +528,40 @@ function reset() {
 
 async function boot() {
   const loaded = await Promise.all(
-    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261002-skill-guide`).then((res) => res.json())),
+    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261002-prompt-references`).then((res) => res.json())),
   );
+
+  const existingPrompts = loaded.find((collection) => collection.id === "skills").sections
+    .flatMap((section) => section.groups.flatMap((group) => group.items))
+    .filter((item) => item.prompts?.length)
+    .map((item) => ({
+      label: item.name,
+      items: item.prompts.map((prompt) => ({
+        name: prompt.label,
+        text: prompt.text,
+        cat: item.cat,
+        tags: [item.name],
+      })),
+    }));
+  const personalPrompts = loaded.find((collection) => collection.id === "prompts").sections
+    .flatMap((section) => section.groups.flatMap((group) => group.items));
+  loaded.find((collection) => collection.id === "prompts").sections.push({
+    title: "Prompts associés aux skills",
+    groups: existingPrompts,
+  });
+
+  const skillEntries = loaded.find((collection) => collection.id === "skills").sections
+    .flatMap((section) => section.groups.flatMap((group) =>
+      group.items.map((item) => ({ item, source: section.title })),
+    ));
+  window.resourcePrompts.indexSkills(skillEntries);
+  for (const prompt of personalPrompts) {
+    const referencedSkills = new Set(window.resourcePrompts.references(prompt.text)
+      .map((reference) => reference.entry.item));
+    for (const item of referencedSkills) {
+      item.prompts = [...(item.prompts || []), { label: prompt.name, text: prompt.text }];
+    }
+  }
 
   for (const collection of loaded) {
     labels[collection.id] = collection.label;
@@ -579,6 +602,8 @@ async function boot() {
     (id) => {
       clearGraphSelections();
       activeCollection = id;
+      history.replaceState(null, "", id === "all" ? location.pathname : `#${id}`);
+      renderCategories();
       applyFilter();
     },
   );
@@ -596,17 +621,7 @@ async function boot() {
     },
   );
 
-  buildToggleGroup(
-    els.cats,
-    catEntries(),
-    (id) => id === activeCat,
-    (id) => {
-      clearGraphSelections();
-      activeCat = id;
-      applyFilter();
-    },
-    "cat-chip",
-  );
+  renderCategories();
 
   renderCollections();
 }
