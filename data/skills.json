@@ -12,7 +12,7 @@
           "items": [
             {
               "name": "better-interface",
-              "desc": "Le chapeau du système : donne la direction générale et oriente vers la sous-skill pertinente.",
+              "desc": "Oriente le travail d’interface vers la bonne spécialité : structure, texte, couleur ou finition.",
               "invokable": true,
               "cat": "interface",
               "installations": [
@@ -44,11 +44,12 @@
                 "better-ui",
                 "better-writing",
                 "interface-review"
-              ]
+              ],
+              "when": "Tu veux améliorer un écran et ne sais pas par où commencer."
             },
             {
               "name": "interface-review",
-              "desc": "Revue d'un changement plutôt que d'un écran : résout la portée (working tree, branche, PR), lit les deux côtés du diff, et classe chaque finding en introduit / régression / préexistant avant de rendre la main à better-interface.",
+              "desc": "Relit un changement d’interface et distingue les nouveaux problèmes des défauts déjà présents.",
               "invokable": false,
               "cat": "qualité",
               "installations": [
@@ -74,11 +75,12 @@
               "url": "https://github.com/jakubkrehel/skills",
               "invokes": [
                 "better-interface"
-              ]
+              ],
+              "when": "Tu veux vérifier un diff ou une PR avant de livrer l’interface."
             },
             {
               "name": "better-layout",
-              "desc": "Structure de page : groupement, alignement, ordre de lecture, divulgation progressive, breakpoints, RTL.",
+              "desc": "Organise les blocs, les alignements et les espacements d’une page, y compris sur mobile.",
               "invokable": true,
               "cat": "interface",
               "installations": [
@@ -106,11 +108,12 @@
                 "better-accessibility",
                 "better-typography",
                 "better-ui"
-              ]
+              ],
+              "when": "La page paraît désordonnée ou sa hiérarchie est difficile à lire."
             },
             {
               "name": "better-typography",
-              "desc": "Choix et réglage des fontes : échelle typographique, variable fonts, OpenType, césures, longueur de ligne.",
+              "desc": "Règle les polices, tailles, interlignes et longueurs de ligne pour rendre le texte lisible.",
               "invokable": true,
               "cat": "typographie",
               "installations": [
@@ -139,11 +142,12 @@
                 "better-colors",
                 "better-layout",
                 "better-writing"
-              ]
+              ],
+              "when": "Tu choisis des fontes ou corriges un texte trop dense ou mal aligné."
             },
             {
               "name": "better-colors",
-              "desc": "Tout en OKLCH : conversion depuis hex/rgb, génération de palettes, contraste, limites de gamut P3, thèmes Tailwind v4.",
+              "desc": "Construit des palettes en OKLCH et vérifie leurs contrastes et leur adaptation au thème sombre.",
               "invokable": true,
               "cat": "couleur",
               "installations": [
@@ -170,11 +174,12 @@
               "invokes": [
                 "better-accessibility",
                 "better-ui"
-              ]
+              ],
+              "when": "Tu définis les couleurs d’un produit ou corriges un contraste insuffisant."
             },
             {
               "name": "better-ui",
-              "desc": "Le polish final : hover, ombres, bordures, micro-interactions, animations d'entrée/sortie, choix d'icônes.",
+              "desc": "Affine les détails visuels : ombres, bordures, icônes et états des composants.",
               "invokable": true,
               "cat": "interface",
               "installations": [
@@ -202,11 +207,12 @@
                 "better-accessibility",
                 "better-layout",
                 "better-typography"
-              ]
+              ],
+              "when": "La structure fonctionne, mais l’interface manque encore de finition."
             },
             {
               "name": "better-accessibility",
-              "desc": "États de focus, navigation clavier, ARIA, formulaires, widgets custom, lecteurs d'écran.",
+              "desc": "Vérifie le clavier, les lecteurs d’écran, les états de focus et les formulaires.",
               "invokable": true,
               "cat": "accessibilité",
               "installations": [
@@ -234,11 +240,12 @@
                 "better-colors",
                 "better-layout",
                 "better-typography"
-              ]
+              ],
+              "when": "Tu construis un composant interactif ou contrôles son accessibilité."
             },
             {
               "name": "better-writing",
-              "desc": "La copy comme matériau de design : labels, messages d'erreur, ton, vocabulaire côté utilisateur.",
+              "desc": "Clarifie les labels, instructions et messages d’erreur dans l’interface.",
               "invokable": true,
               "cat": "écriture",
               "installations": [
@@ -266,7 +273,8 @@
                 "better-accessibility",
                 "better-layout",
                 "better-typography"
-              ]
+              ],
+              "when": "Les utilisateurs hésitent sur une action ou comprennent mal un message."
             }
           ]
         },
@@ -275,7 +283,7 @@
           "items": [
             {
               "name": "break",
-              "desc": "Renders a component you choose in every state and scenario on a temporary page and stress tests it.",
+              "desc": "Affiche un composant dans de nombreux états sur une page temporaire pour le mettre à l’épreuve.",
               "cat": "qualité",
               "invokable": false,
               "installations": [
@@ -305,11 +313,12 @@
                 "better-writing",
                 "interface-review",
                 "variant"
-              ]
+              ],
+              "when": "Tu veux repérer les cas limites avant d’intégrer un composant."
             },
             {
               "name": "explain-interface",
-              "desc": "Helps you figure out how something was built on the web.",
+              "desc": "Explique les techniques qui produisent une interface ou un effet vu sur le web.",
               "cat": "interface",
               "invokable": false,
               "installations": [
@@ -337,11 +346,12 @@
                 "better-interface",
                 "interface-review",
                 "variant"
-              ]
+              ],
+              "when": "Tu as une référence visuelle et veux comprendre comment la reproduire."
             },
             {
               "name": "variant",
-              "desc": "Builds multiple variants of a component you're working on and helps you iterate and pick one.",
+              "desc": "Crée plusieurs versions d’un composant pour les comparer et affiner le choix.",
               "cat": "interface",
               "invokable": false,
               "installations": [
@@ -372,7 +382,8 @@
                 "better-typography",
                 "better-writing",
                 "interface-review"
-              ]
+              ],
+              "when": "Tu hésites entre plusieurs directions visuelles pour un même élément."
             }
           ]
         }
@@ -388,7 +399,7 @@
           "items": [
             {
               "name": "emil-design-eng",
-              "desc": "La philosophie de fond : quand animer, quand s'abstenir, et les détails invisibles qui font qu'un logiciel semble juste.",
+              "desc": "Applique les principes d’Emil Kowalski aux interactions, au mouvement et aux détails d’interface.",
               "invokable": true,
               "cat": "interface",
               "installations": [
@@ -410,11 +421,12 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/emilkowalski/skills"
+              "url": "https://github.com/emilkowalski/skills",
+              "when": "Tu construis une interface produit et veux des interactions précises et sobres."
             },
             {
               "name": "apple-design",
-              "desc": "Motion physique façon Apple traduite pour le web : springs, gestes, momentum, transitions interruptibles, matériaux translucides.",
+              "desc": "Transpose au web les interactions physiques d’Apple : ressorts, gestes et transitions interruptibles.",
               "invokable": true,
               "cat": "animation",
               "installations": [
@@ -436,11 +448,12 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/emilkowalski/skills"
+              "url": "https://github.com/emilkowalski/skills",
+              "when": "Tu veux un mouvement naturel ou une interaction guidée par le geste."
             },
             {
               "name": "animation-vocabulary",
-              "desc": "Glossaire inversé : tu décris l'effet en mots vagues, il te rend son nom exact. Pour nommer, pas pour construire.",
+              "desc": "Retrouve le nom précis d’un effet animé à partir d’une description en mots simples.",
               "invokable": true,
               "cat": "animation",
               "installations": [
@@ -462,11 +475,12 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/emilkowalski/skills"
+              "url": "https://github.com/emilkowalski/skills",
+              "when": "Tu sais quel mouvement tu veux, mais pas comment le nommer."
             },
             {
               "name": "find-animation-opportunities",
-              "desc": "Repère ce qui devrait bouger et ne bouge pas — et rejette tout le reste. Lecture seule, valeurs précises à l'appui.",
+              "desc": "Repère où une animation améliorerait l’interface et où elle serait superflue.",
               "invokable": true,
               "prompts": [
                 {
@@ -510,11 +524,12 @@
               "invokes": [
                 "improve-animations",
                 "review-animations"
-              ]
+              ],
+              "when": "Tu veux identifier les interactions à animer avant de modifier le code."
             },
             {
               "name": "improve-animations",
-              "desc": "Audit priorisé du motion existant, avec plans d'implémentation autonomes à confier à d'autres agents.",
+              "desc": "Audite les animations existantes et prépare des plans de correction prioritaires.",
               "invokable": true,
               "cat": "animation",
               "installations": [
@@ -540,11 +555,12 @@
               "invokes": [
                 "animate",
                 "review-animations"
-              ]
+              ],
+              "when": "Les mouvements semblent lents, incohérents ou saccadés."
             },
             {
               "name": "animate",
-              "desc": "Construit l'animation, dans l'ordre qui décide du rendu : faut-il animer, quel but, quel outil, quelles propriétés, quelle courbe, quelle interruption, quelle sortie. Recettes prêtes pour dropdown, modal, drawer, toast, accordéon, stagger.",
+              "desc": "Construit une animation en choisissant son rôle, sa durée, sa courbe et ses interruptions.",
               "invokable": true,
               "prompts": [
                 {
@@ -581,11 +597,12 @@
                 "improve-animations",
                 "pick-ui-library",
                 "review-animations"
-              ]
+              ],
+              "when": "Tu as décidé d’animer un élément et veux passer à l’implémentation."
             },
             {
               "name": "review-animations",
-              "desc": "Revue de diff contre la barre de craft d'Emil. Par défaut ça flague ; l'approbation se mérite.",
+              "desc": "Relit un changement d’animation pour vérifier sa qualité, son rythme et son comportement.",
               "invokable": false,
               "cat": "animation",
               "installations": [
@@ -607,11 +624,12 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/emilkowalski/skills"
+              "url": "https://github.com/emilkowalski/skills",
+              "when": "Tu veux contrôler une animation avant de la livrer."
             },
             {
               "name": "pick-ui-library",
-              "desc": "Liste curatée et assumée, par besoin : nombres, OTP, charts, command menu, virtualisation, drag and drop, toasts.",
+              "desc": "Propose une bibliothèque adaptée à un besoin d’interface précis.",
               "invokable": false,
               "cat": "outillage",
               "installations": [
@@ -633,11 +651,12 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/emilkowalski/skills"
+              "url": "https://github.com/emilkowalski/skills",
+              "when": "Tu cherches une solution pour un graphique, un menu, une liste ou du glisser-déposer."
             },
             {
               "name": "prototype",
-              "desc": "Construit plusieurs versions franchement différentes d'un bout d'UI, derrière un sélecteur visuel pour les feuilleter en direct et promouvoir la bonne.",
+              "desc": "Construit plusieurs versions d’une interface derrière un sélecteur pour les comparer en direct.",
               "invokable": false,
               "tags": [
                 "Claude Code",
@@ -667,7 +686,8 @@
                 "improve-animations",
                 "pick-ui-library",
                 "review-animations"
-              ]
+              ],
+              "when": "Tu veux trancher une direction visuelle avec des exemples utilisables."
             }
           ]
         },
@@ -676,7 +696,7 @@
           "items": [
             {
               "name": "emil-animations",
-              "desc": "emil-animations",
+              "desc": "Guide les animations d’interface : durée, courbe, ressorts et transitions d’entrée ou de sortie.",
               "cat": "animation",
               "invokable": true,
               "installations": [
@@ -721,11 +741,12 @@
               ],
               "invokes": [
                 "animate"
-              ]
+              ],
+              "when": "Tu ajoutes du mouvement ou corriges une animation qui paraît peu naturelle."
             },
             {
               "name": "emil-ask-emil",
-              "desc": "emil-ask-emil",
+              "desc": "Choisit la skill de design engineering adaptée au problème et l’ordre dans lequel l’utiliser.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -786,11 +807,12 @@
                 "emil-ui-polish",
                 "emil-ui-review",
                 "emil-writing-skills"
-              ]
+              ],
+              "when": "Tu hésites entre plusieurs skills Emil ou ne sais pas laquelle convient."
             },
             {
               "name": "emil-ask-lapse",
-              "desc": "Answer questions about Lapse — the drop-in animation inspector that slows time, records takes, scrubs frames, names moments, diffs motion, and exports animation state for agents — and wire it into a project.",
+              "desc": "Explique et intègre Lapse, un inspecteur permettant de ralentir et examiner les animations.",
               "cat": "animation",
               "invokable": true,
               "installations": [
@@ -835,11 +857,12 @@
               ],
               "invokes": [
                 "emil-animations"
-              ]
+              ],
+              "when": "Tu veux enregistrer, comparer ou diagnostiquer un mouvement dans ton projet."
             },
             {
               "name": "emil-build-a-tool",
-              "desc": "emil-build-a-tool",
+              "desc": "Construit un petit outil réglable pour produire un résultat que les prompts directs atteignent mal.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -884,11 +907,12 @@
               ],
               "invokes": [
                 "emil-get-creative"
-              ]
+              ],
+              "when": "Tu répètes les essais sans obtenir le rendu voulu et as besoin de réglages visuels."
             },
             {
               "name": "emil-color",
-              "desc": "emil-color",
+              "desc": "Travaille les couleurs CSS en OKLCH : palettes, thèmes sombres et réparation des contrastes.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -930,11 +954,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Tu définis des tokens couleur ou corriges la lisibilité d’une interface."
             },
             {
               "name": "emil-component-design",
-              "desc": "emil-component-design",
+              "desc": "Conçoit des composants React composables, avec des props et une gestion d’état prévisibles.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -976,11 +1001,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Tu crées un composant réutilisable ou simplifies une API devenue compliquée."
             },
             {
               "name": "emil-design-foundations",
-              "desc": "emil-design-foundations",
+              "desc": "Pose les bases visuelles d’une interface : hiérarchie, espacement, texte et organisation.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -1022,11 +1048,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Tu construis un écran ou cherches pourquoi son équilibre visuel ne fonctionne pas."
             },
             {
               "name": "emil-design-system-docs",
-              "desc": "emil-design-system-docs",
+              "desc": "Décrit les composants, variantes et tokens à partir du code du design system existant.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -1068,11 +1095,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Tu veux que les agents utilisent les bons composants sans inventer de nouveaux styles."
             },
             {
               "name": "emil-design-vocabulary",
-              "desc": "The precise design and UI vocabulary used on index.how/to/articulate — covering typography, color, iconography, layout, interaction, motion, accessibility, information architecture, copywriting, tools, analysis, and components.",
+              "desc": "Donne le vocabulaire précis du design : typographie, composition, interaction et accessibilité.",
               "cat": "animation",
               "invokable": true,
               "installations": [
@@ -1114,11 +1142,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Tu veux décrire clairement une référence ou formuler une demande de design."
             },
             {
               "name": "emil-engineering-vocabulary",
-              "desc": "Reverse-lookup glossary that turns a vague description of a frontend engineering concept into its exact term (\"the search waits until I stop typing\" → Debounce; \"the UI updates before the server confirms\" → Optimistic update). Use when the user asks \"what's it called when…\", or describes a behavior, pattern, or browser quirk without knowing its name and wants the right word to prompt an AI or engineer with.",
+              "desc": "Retrouve le terme technique d’un comportement frontend décrit en langage courant.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -1160,11 +1189,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Tu veux nommer un mécanisme comme le debounce ou la mise à jour optimiste."
             },
             {
               "name": "emil-forms-and-inputs",
-              "desc": "emil-forms-and-inputs",
+              "desc": "Construit des formulaires avec des labels, validations et états de boutons bien réglés.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -1206,11 +1236,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Tu ajoutes un champ, une recherche, une connexion ou un parcours de saisie."
             },
             {
               "name": "emil-get-creative",
-              "desc": "emil-get-creative",
+              "desc": "Transforme une ambiance visuelle en règles puis en générateur de variantes réglables.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -1256,11 +1287,12 @@
               "invokes": [
                 "emil-build-a-tool",
                 "emil-prototype"
-              ]
+              ],
+              "when": "Tu manques d’inspiration ou n’arrives pas encore à préciser le rendu recherché."
             },
             {
               "name": "emil-marketing-pages",
-              "desc": "emil-marketing-pages",
+              "desc": "Construit des pages marketing, blogs et sites de documentation avec attention au SEO et aux performances.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -1302,11 +1334,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Tu crées une landing page, une page de tarifs, un blog ou un changelog."
             },
             {
               "name": "emil-performance",
-              "desc": "emil-performance",
+              "desc": "Réduit les lenteurs d’interface : longues listes, chargements, rendus et animations coûteuses.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -1348,11 +1381,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Une page rame, saute pendant le chargement ou affiche trop d’éléments à la fois."
             },
             {
               "name": "emil-prototype",
-              "desc": "emil-prototype",
+              "desc": "Explore plusieurs directions d’interface avec un sélecteur et des réglages en direct.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -1408,11 +1442,12 @@
                 "emil-typography",
                 "emil-ui-polish",
                 "emil-ui-review"
-              ]
+              ],
+              "when": "Tu veux comparer des options avant de fixer le design ou le comportement."
             },
             {
               "name": "emil-surfaces",
-              "desc": "emil-surfaces",
+              "desc": "Règle les ombres, bordures et niveaux de profondeur des surfaces, y compris en thème sombre.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -1457,11 +1492,12 @@
               ],
               "invokes": [
                 "emil-ui-polish"
-              ]
+              ],
+              "when": "Tu styles une carte, un bouton ou une modale et dois clarifier sa place dans l’écran."
             },
             {
               "name": "emil-touch-and-accessibility",
-              "desc": "emil-touch-and-accessibility",
+              "desc": "Adapte les interactions au tactile, au clavier et aux lecteurs d’écran.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -1503,11 +1539,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Tu construis un contrôle interactif ou corriges son comportement sur mobile."
             },
             {
               "name": "emil-typography",
-              "desc": "emil-typography",
+              "desc": "Règle les fontes, échelles de texte, interlignes, retours à la ligne et détails typographiques.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -1549,11 +1586,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Le texte se lit mal, déborde ou nécessite une hiérarchie plus claire."
             },
             {
               "name": "emil-ui-polish",
-              "desc": "emil-ui-polish",
+              "desc": "Corrige les petits défauts de finition : focus, zones cliquables et déplacements involontaires.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -1598,11 +1636,12 @@
               ],
               "invokes": [
                 "emil-surfaces"
-              ]
+              ],
+              "when": "L’interface fonctionne, mais certains détails paraissent encore mal réglés."
             },
             {
               "name": "emil-ui-review",
-              "desc": "emil-ui-review",
+              "desc": "Relit l’interface pour repérer les erreurs d’espacement, d’animation et d’accessibilité.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -1656,11 +1695,12 @@
                 "emil-touch-and-accessibility",
                 "emil-typography",
                 "emil-ui-polish"
-              ]
+              ],
+              "when": "Tu veux une vérification de qualité après une modification UI."
             },
             {
               "name": "emil-unslop-code",
-              "desc": "emil-unslop-code",
+              "desc": "Retire le bruit du code généré : commentaires évidents, protections inutiles et structures mortes.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -1702,11 +1742,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Un diff semble artificiel ou trop compliqué pour ce qu’il fait."
             },
             {
               "name": "emil-unslop-design",
-              "desc": "emil-unslop-design",
+              "desc": "Repère et corrige les choix visuels génériques qui donnent une impression de template généré.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -1748,11 +1789,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Une interface manque de personnalité ou ressemble à toutes les autres."
             },
             {
               "name": "emil-unslop-writing",
-              "desc": "emil-unslop-writing",
+              "desc": "Rend un texte plus direct et naturel en retirant les formulations artificielles et le remplissage.",
               "cat": "écriture",
               "invokable": true,
               "installations": [
@@ -1794,11 +1836,12 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Une page, une documentation ou un message paraît écrit par une IA."
             },
             {
               "name": "emil-writing-skills",
-              "desc": "emil-writing-skills",
+              "desc": "Structure une skill autour d’un processus précis, de règles utiles et de vérifications concrètes.",
               "cat": "écriture",
               "invokable": true,
               "installations": [
@@ -1840,7 +1883,8 @@
                 "Gemini",
                 "Globale",
                 "OpenCode"
-              ]
+              ],
+              "when": "Tu crées une skill ou cherches pourquoi l’agent ne suit pas ses instructions."
             }
           ]
         }
@@ -1855,7 +1899,7 @@
           "items": [
             {
               "name": "ask-matt",
-              "desc": "Le routeur : quelle skill, quel flow, pour la situation où tu es. Point d'entrée par défaut.",
+              "desc": "Choisit la skill ou le workflow Matt Pocock adapté à la situation.",
               "invokable": false,
               "invokes": [
                 "code-review",
@@ -1905,11 +1949,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu ne sais pas quel processus suivre pour cadrer ou réaliser le travail."
             },
             {
               "name": "setup-matt-pocock-skills",
-              "desc": "Configuration unique par repo : tracker d'issues, vocabulaire de labels de triage, emplacement des docs domaine.",
+              "desc": "Configure les conventions du repo : tracker, labels de triage et documentation de domaine.",
               "invokable": false,
               "cat": "outillage",
               "installations": [
@@ -1941,11 +1986,12 @@
                 "to-spec",
                 "to-tickets",
                 "triage"
-              ]
+              ],
+              "when": "Tu installes ce workflow pour la première fois dans un projet."
             },
             {
               "name": "wayfinder",
-              "desc": "Planifie un chantier trop gros pour une session : une carte de tickets de décision, résolus un par un jusqu'à voir la route.",
+              "desc": "Découpe un gros chantier en décisions et tickets à résoudre progressivement.",
               "invokable": false,
               "invokes": [
                 "domain-modeling",
@@ -1975,11 +2021,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Le travail est trop large ou trop incertain pour une seule session."
             },
             {
               "name": "to-spec",
-              "desc": "Transforme la conversation en cours en spec publiée sur le tracker. Pas d'interview, juste la synthèse.",
+              "desc": "Transforme les décisions de la conversation en spécification publiée sur le tracker.",
               "invokable": false,
               "invokes": [
                 "setup-matt-pocock-skills"
@@ -2005,11 +2052,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Le besoin est assez clair pour être formalisé et confié à un agent."
             },
             {
               "name": "to-tickets",
-              "desc": "Découpe un plan en tickets tracer-bullet, chacun déclarant ses dépendances bloquantes.",
+              "desc": "Découpe une spécification en tickets réalisables, avec leurs dépendances.",
               "invokable": false,
               "invokes": [
                 "implement",
@@ -2036,11 +2084,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu as un plan et veux répartir sa réalisation en étapes concrètes."
             },
             {
               "name": "triage",
-              "desc": "Machine à états pour issues et PRs externes : catégoriser, vérifier, griller si besoin, écrire un brief prêt pour un agent.",
+              "desc": "Classe les issues et PR, clarifie les informations manquantes et prépare les travaux exploitables.",
               "invokable": false,
               "invokes": [
                 "domain-modeling",
@@ -2068,11 +2117,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Le tracker contient des demandes qui doivent être qualifiées avant traitement."
             },
             {
               "name": "implement",
-              "desc": "Exécute un travail à partir d'une spec ou d'un jeu de tickets déjà cadrés.",
+              "desc": "Réalise un travail à partir d’une spécification ou de tickets déjà cadrés.",
               "invokable": false,
               "cat": "workflow",
               "installations": [
@@ -2095,11 +2145,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Le besoin et les critères de réussite sont définis et tu veux coder."
             },
             {
               "name": "tdd",
-              "desc": "Développement test-first, cycle red-green-refactor, orienté tests d'intégration.",
+              "desc": "Développe par cycles test qui échoue, correction minimale puis amélioration du code.",
               "invokable": true,
               "cat": "qualité",
               "installations": [
@@ -2126,11 +2177,12 @@
               "invokes": [
                 "code-review",
                 "codebase-design"
-              ]
+              ],
+              "when": "Tu veux sécuriser un comportement par un test avant de l’implémenter."
             },
             {
               "name": "diagnosing-bugs",
-              "desc": "Boucle de diagnostic pour les bugs durs et les régressions de performance.",
+              "desc": "Mène une enquête structurée pour trouver la cause d’un bug ou d’une régression de performance.",
               "invokable": true,
               "invokes": [
                 "improve-codebase-architecture"
@@ -2156,11 +2208,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Le problème persiste et les corrections au hasard ne donnent rien."
             },
             {
               "name": "resolving-merge-conflicts",
-              "desc": "Résolution méthodique d'un merge ou rebase git déjà en cours.",
+              "desc": "Résout méthodiquement les conflits d’un merge ou d’un rebase en cours.",
               "invokable": true,
               "cat": "outillage",
               "installations": [
@@ -2183,11 +2236,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Git s’arrête sur des fichiers en conflit."
             },
             {
               "name": "code-review",
-              "desc": "Revue depuis un point fixe sur deux axes en parallèle : standards du repo, et conformité à l'issue d'origine.",
+              "desc": "Vérifie un changement par rapport aux conventions du repo et à l’issue d’origine.",
               "invokable": true,
               "invokes": [
                 "setup-matt-pocock-skills"
@@ -2213,11 +2267,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux relire une branche ou une PR avant de l’intégrer."
             },
             {
               "name": "codebase-design",
-              "desc": "Le vocabulaire des deep modules : interfaces, opportunités d'approfondissement, où placer une couture.",
+              "desc": "Aide à concevoir des modules dont les interfaces sont simples et les détails bien encapsulés.",
               "invokable": true,
               "cat": "architecture",
               "installations": [
@@ -2240,11 +2295,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu réfléchis à une frontière de module ou à la structure du code."
             },
             {
               "name": "improve-codebase-architecture",
-              "desc": "Scanne le repo, sort un rapport HTML des opportunités, puis te grille sur celle que tu choisis.",
+              "desc": "Repère les possibilités de simplifier l’architecture et aide à choisir un refactor utile.",
               "invokable": false,
               "invokes": [
                 "codebase-design",
@@ -2272,11 +2328,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux réduire la complexité sans lancer une réécriture générale."
             },
             {
               "name": "domain-modeling",
-              "desc": "Construit et affine le modèle de domaine du projet : terminologie, ADR, glossaire.",
+              "desc": "Clarifie les concepts métier, leur vocabulaire et les décisions du modèle de domaine.",
               "invokable": true,
               "cat": "architecture",
               "installations": [
@@ -2299,11 +2356,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Les termes du projet sont ambigus ou le code reflète mal le métier."
             },
             {
               "name": "research",
-              "desc": "Enquête sur sources primaires de confiance, findings capturés en Markdown dans le repo.",
+              "desc": "Enquête sur des sources primaires et conserve les résultats dans le projet.",
               "invokable": true,
               "cat": "workflow",
               "installations": [
@@ -2326,11 +2384,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Une décision demande des faits vérifiés avant de passer à l’implémentation."
             },
             {
               "name": "prototype",
-              "desc": "Prototype jetable pour trancher une question de design : un state model tient-il, à quoi ressemble cet écran.",
+              "desc": "Construit un prototype jetable pour tester une hypothèse de fonctionnement ou de design.",
               "invokable": true,
               "cat": "workflow",
               "installations": [
@@ -2344,11 +2403,12 @@
               "tags": [
                 "Claude Code",
                 "Plugin"
-              ]
+              ],
+              "when": "Tu veux vérifier un modèle d’état ou un parcours avant de l’implémenter durablement."
             },
             {
               "name": "grill-with-docs",
-              "desc": "Interview impitoyable qui produit ADR et glossaire au fil de l'eau, plutôt qu'après coup.",
+              "desc": "Met un plan à l’épreuve et consigne les décisions et le vocabulaire au fil de l’entretien.",
               "invokable": false,
               "invokes": [
                 "domain-modeling",
@@ -2375,7 +2435,8 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux clarifier un choix important tout en gardant une trace exploitable."
             }
           ]
         },
@@ -2384,7 +2445,7 @@
           "items": [
             {
               "name": "grill-me",
-              "desc": "Interview sans complaisance pour durcir un plan ou un design avant de construire.",
+              "desc": "Pose des questions exigeantes pour rendre un plan plus clair et plus solide.",
               "invokable": false,
               "invokes": [
                 "grilling"
@@ -2410,11 +2471,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux tester une idée ou un design avant de construire."
             },
             {
               "name": "grilling",
-              "desc": "Stress-test de ta pensée sur un plan, une décision ou une idée. Déclenché par tout terme « grill ».",
+              "desc": "Cherche les hypothèses fragiles et les zones floues d’une idée, d’un plan ou d’une décision.",
               "invokable": true,
               "cat": "workflow",
               "installations": [
@@ -2437,11 +2499,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux être challengé sur le raisonnement plutôt que passer directement à l’exécution."
             },
             {
               "name": "handoff",
-              "desc": "Compacte la conversation en cours en document de passation pour un autre agent.",
+              "desc": "Prépare une passation concise de la conversation et du travail restant.",
               "invokable": false,
               "cat": "workflow",
               "installations": [
@@ -2464,11 +2527,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu changes d’agent ou de session et veux éviter de perdre le contexte."
             },
             {
               "name": "teach",
-              "desc": "T'enseigne une compétence ou un concept, ancré dans ce workspace.",
+              "desc": "Explique une compétence ou un concept avec des exemples liés au projet.",
               "invokable": false,
               "cat": "workflow",
               "installations": [
@@ -2491,11 +2555,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux comprendre une technique pendant que tu travailles dessus."
             },
             {
               "name": "writing-great-skills",
-              "desc": "Référence pour écrire et éditer des skills : le vocabulaire et les principes qui les rendent prévisibles.",
+              "desc": "Aide à écrire des skills ciblées, prévisibles et faciles à suivre.",
               "invokable": false,
               "cat": "écriture",
               "installations": [
@@ -2510,7 +2575,8 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu crées ou révises un fichier SKILL.md."
             }
           ]
         },
@@ -2519,7 +2585,7 @@
           "items": [
             {
               "name": "git-guardrails-claude-code",
-              "desc": "Installe des hooks qui bloquent les commandes git destructives — push, reset --hard, clean, branch -D — avant exécution.",
+              "desc": "Installe des hooks Claude Code qui bloquent certaines commandes Git destructives.",
               "invokable": true,
               "cat": "outillage",
               "installations": [
@@ -2542,11 +2608,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux ajouter des garde-fous aux opérations Git lancées par l’agent."
             },
             {
               "name": "setup-pre-commit",
-              "desc": "Husky et lint-staged : formatage, typecheck et tests déclenchés au commit.",
+              "desc": "Configure des vérifications automatiques au commit avec Husky et lint-staged.",
               "invokable": true,
               "cat": "outillage",
               "installations": [
@@ -2569,11 +2636,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux contrôler le formatage, les types ou les tests avant chaque commit."
             },
             {
               "name": "migrate-to-shoehorn",
-              "desc": "Remplace les assertions `as` des fichiers de test par @total-typescript/shoehorn.",
+              "desc": "Remplace les assertions de types dans les tests par les helpers de ShoeHorn.",
               "invokable": true,
               "cat": "outillage",
               "installations": [
@@ -2596,11 +2664,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Des tests TypeScript dépendent de casts qui masquent des erreurs de types."
             },
             {
               "name": "scaffold-exercises",
-              "desc": "Génère l'arborescence d'exercices — sections, problems, solutions, explainers — qui passe le lint.",
+              "desc": "Génère une structure cohérente de sections, problèmes et solutions pour des exercices.",
               "invokable": true,
               "cat": "outillage",
               "installations": [
@@ -2623,7 +2692,8 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu prépares un cours ou un atelier de programmation."
             }
           ]
         },
@@ -2632,7 +2702,7 @@
           "items": [
             {
               "name": "edit-article",
-              "desc": "Restructure les sections d'un brouillon d'article, clarifie et resserre la prose.",
+              "desc": "Restructure un brouillon et clarifie ses phrases et son fil conducteur.",
               "invokable": false,
               "cat": "écriture",
               "installations": [
@@ -2647,11 +2717,12 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu as déjà un article et veux améliorer sa lecture."
             },
             {
               "name": "obsidian-vault",
-              "desc": "Recherche, crée et organise des notes dans le vault Obsidian, avec wikilinks et notes d'index.",
+              "desc": "Recherche, crée et organise des notes reliées dans un vault Obsidian.",
               "invokable": true,
               "cat": "écriture",
               "installations": [
@@ -2666,7 +2737,8 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux retrouver une information ou enrichir ta base de notes."
             }
           ]
         },
@@ -2675,7 +2747,7 @@
           "items": [
             {
               "name": "claude-handoff",
-              "desc": "Passe la conversation à un agent de fond frais qui reprend le travail immédiatement.",
+              "desc": "Transmet le travail à un agent Claude frais qui reprend avec le contexte utile.",
               "invokable": false,
               "cat": "workflow",
               "installations": [
@@ -2698,11 +2770,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "La session devient trop longue ou tu veux poursuivre avec un nouvel agent."
             },
             {
               "name": "loop-me",
-              "desc": "Te grille sur les specs des workflows que tu veux construire dans ce workspace.",
+              "desc": "Clarifie les spécifications d’un workflow par une série de questions ciblées.",
               "invokable": false,
               "invokes": [
                 "grilling"
@@ -2728,11 +2801,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu définis un processus de travail et veux vérifier ses étapes et ses limites."
             },
             {
               "name": "setup-ts-deep-modules",
-              "desc": "Câble dependency-cruiser pour que chaque package soit un deep module : implémentation cachée, atteignable seulement par son entry point.",
+              "desc": "Configure dependency-cruiser pour rendre chaque package accessible par son point d’entrée.",
               "invokable": false,
               "invokes": [
                 "codebase-design"
@@ -2749,11 +2823,12 @@
               "tags": [
                 "Claude Code",
                 "Plugin"
-              ]
+              ],
+              "when": "Tu veux empêcher les imports qui traversent les frontières des modules TypeScript."
             },
             {
               "name": "to-questionnaire",
-              "desc": "Transforme une décision que tu ne peux pas trancher seul en questionnaire à faire remplir par quelqu'un d'autre.",
+              "desc": "Prépare un questionnaire pour faire trancher les décisions encore ouvertes par une autre personne.",
               "invokable": false,
               "cat": "workflow",
               "installations": [
@@ -2767,11 +2842,12 @@
               "tags": [
                 "Claude Code",
                 "Plugin"
-              ]
+              ],
+              "when": "Le projet dépend de réponses que tu ne peux pas donner toi-même."
             },
             {
               "name": "wizard",
-              "desc": "Génère un assistant bash interactif pour une procédure manuelle : setup tiers, migration one-shot, écriture de .env et de secrets GitHub Actions.",
+              "desc": "Crée un assistant Bash interactif pour guider une procédure manuelle.",
               "invokable": true,
               "cat": "outillage",
               "installations": [
@@ -2794,11 +2870,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux rendre reproductible un setup, une migration ou une configuration."
             },
             {
               "name": "writing-fragments",
-              "desc": "Écriture, phase explore : miner la matière brute, sans structure imposée.",
+              "desc": "Explore la matière brute d’un texte sans lui imposer tout de suite un plan.",
               "invokable": false,
               "cat": "écriture",
               "installations": [
@@ -2821,11 +2898,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu rassembles des idées, notes ou arguments avant d’écrire."
             },
             {
               "name": "writing-beats",
-              "desc": "Écriture, phase exploit : assembler la matière en beats, chaque terme fondé avant qu'un beat s'appuie dessus.",
+              "desc": "Assemble les idées en étapes de raisonnement qui s’enchaînent clairement.",
               "invokable": false,
               "cat": "écriture",
               "installations": [
@@ -2848,11 +2926,12 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu as la matière et veux organiser le fil d’un texte."
             },
             {
               "name": "writing-shape",
-              "desc": "Écriture, phase exploit : mettre la matière en forme d'article, paragraphe par paragraphe.",
+              "desc": "Met un raisonnement structuré en forme d’article, paragraphe par paragraphe.",
               "invokable": false,
               "cat": "écriture",
               "installations": [
@@ -2875,7 +2954,8 @@
                 "Globale",
                 "Plugin"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Les idées et leur ordre sont prêts et tu veux rédiger."
             }
           ]
         },
@@ -2885,7 +2965,7 @@
             {
               "name": "qa",
               "state": "deprecated",
-              "desc": "Session QA conversationnelle : tu signales les bugs, l'agent explore le repo et dépose les issues GitHub.",
+              "desc": "Explore les bugs signalés pendant une session QA et les dépose sur le tracker.",
               "invokable": true,
               "cat": "qualité",
               "installations": [
@@ -2900,12 +2980,13 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux documenter des problèmes observés ; cette skill est dépréciée en amont."
             },
             {
               "name": "request-refactor-plan",
               "state": "deprecated",
-              "desc": "Plan de refactor en tout petits commits, construit par interview puis déposé en issue.",
+              "desc": "Prépare un plan de refactor progressif après avoir clarifié les besoins.",
               "invokable": true,
               "cat": "architecture",
               "installations": [
@@ -2920,12 +3001,13 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu veux cadrer un refactor ; cette skill est dépréciée en amont."
             },
             {
               "name": "design-an-interface",
               "state": "deprecated",
-              "desc": "Génère plusieurs designs d'API radicalement différents via des sous-agents parallèles.",
+              "desc": "Compare plusieurs conceptions d’une API pour identifier la meilleure frontière.",
               "invokable": true,
               "cat": "architecture",
               "installations": [
@@ -2940,12 +3022,13 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Tu hésites sur une interface de code ; cette skill est dépréciée en amont."
             },
             {
               "name": "ubiquitous-language",
               "state": "deprecated",
-              "desc": "Extrait un glossaire DDD de la conversation vers UBIQUITOUS_LANGUAGE.md, en signalant les ambiguïtés.",
+              "desc": "Extrait un vocabulaire métier partagé et signale les ambiguïtés entre les termes.",
               "invokable": false,
               "cat": "architecture",
               "installations": [
@@ -2960,7 +3043,8 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/mattpocock/skills"
+              "url": "https://github.com/mattpocock/skills",
+              "when": "Les mêmes concepts portent plusieurs noms ; cette skill est dépréciée en amont."
             }
           ]
         },
@@ -2969,7 +3053,7 @@
           "items": [
             {
               "name": "wait-what",
-              "desc": "Stop. That last message did not land — re-pitch it.",
+              "desc": "Reformule une explication ou une proposition qui n’a pas été comprise.",
               "cat": "outillage",
               "invokable": false,
               "installations": [
@@ -2983,11 +3067,12 @@
               "tags": [
                 "Claude Code",
                 "Plugin"
-              ]
+              ],
+              "when": "La dernière réponse est confuse et tu veux qu’elle soit présentée autrement."
             },
             {
               "name": "writing-for-agents",
-              "desc": "Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",
+              "desc": "Rédige des instructions et documents utilisables par des agents.",
               "cat": "documents",
               "invokable": true,
               "installations": [
@@ -3001,7 +3086,8 @@
               "tags": [
                 "Claude Code",
                 "Plugin"
-              ]
+              ],
+              "when": "Tu modifies une skill, un AGENTS.md ou un CLAUDE.md."
             }
           ]
         }
@@ -3018,7 +3104,7 @@
             {
               "name": "ui-ux-pro-max",
               "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
-              "desc": "Recherche locale dans 84 styles, 192 palettes, 74 appairages typo, 98 guidelines UX et 22 stacks. Sort un design system complet avec ses anti-patterns.",
+              "desc": "Recherche des styles, palettes, typographies et règles UX pour proposer un design system.",
               "invokable": true,
               "tags": [
                 "Claude Code",
@@ -3052,7 +3138,8 @@
                   "invokable": true,
                   "command": "/ui-ux-pro-max"
                 }
-              ]
+              ],
+              "when": "Tu démarres une interface et veux une direction visuelle adaptée à son usage."
             }
           ]
         }
@@ -3066,7 +3153,7 @@
           "items": [
             {
               "name": "layers-conceptual-model",
-              "desc": "Techniques for defining the product's objects, relationships, states, and vocabulary independently of any interface — the most load-bearing layer",
+              "desc": "Définit les objets, relations et états d’un produit avant de dessiner ses écrans.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -3092,11 +3179,12 @@
                 "layers-interaction-flow",
                 "layers-intro"
               ],
-              "url": "https://github.com/jamiemill/layers-skills"
+              "url": "https://github.com/jamiemill/layers-skills",
+              "when": "Le fonctionnement du produit doit être clarifié avant de choisir une interface."
             },
             {
               "name": "layers-domain",
-              "desc": "Techniques for mapping a domain's concepts, terminology conflicts, and bounded contexts — the raw material the conceptual model is built from",
+              "desc": "Cartographie les concepts métier, leurs limites et les conflits de vocabulaire.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -3122,11 +3210,12 @@
                 "layers-conceptual-model",
                 "layers-intro"
               ],
-              "url": "https://github.com/jamiemill/layers-skills"
+              "url": "https://github.com/jamiemill/layers-skills",
+              "when": "Tu découvres un domaine ou dois harmoniser ses termes."
             },
             {
               "name": "layers-interaction-flow",
-              "desc": "Techniques for mapping interaction structure and flow — places, affordances, edge cases, and failure paths — without committing to visual form",
+              "desc": "Organise les parcours, actions, retours d’état et cas limites du produit.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3151,11 +3240,12 @@
               "invokes": [
                 "layers-intro"
               ],
-              "url": "https://github.com/jamiemill/layers-skills"
+              "url": "https://github.com/jamiemill/layers-skills",
+              "when": "Tu conçois un flow et veux vérifier comment l’utilisateur passe d’une étape à l’autre."
             },
             {
               "name": "layers-intro",
-              "desc": "Framework orientation for Layers of Product Design — load this first; provides the context all other skills depend on",
+              "desc": "Explique les sept couches de la méthode Layers et leur rôle dans la conception produit.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -3187,11 +3277,12 @@
                 "layers-surface",
                 "layers-user-needs"
               ],
-              "url": "https://github.com/jamiemill/layers-skills"
+              "url": "https://github.com/jamiemill/layers-skills",
+              "when": "Tu découvres la méthode ou veux comprendre quel niveau traiter."
             },
             {
               "name": "layers-observed-behaviour",
-              "desc": "Techniques for planning user research and synthesising it into grounded, confidence-rated findings about what users actually do",
+              "desc": "Prépare la recherche utilisateur et transforme les observations en constats étayés.",
               "cat": "recherche",
               "invokable": true,
               "installations": [
@@ -3217,11 +3308,12 @@
                 "layers-intro",
                 "layers-user-needs"
               ],
-              "url": "https://github.com/jamiemill/layers-skills"
+              "url": "https://github.com/jamiemill/layers-skills",
+              "when": "Tu veux comprendre ce que les utilisateurs font réellement."
             },
             {
               "name": "layers-orient",
-              "desc": "Diagnostic audit across all seven layers — identifies the bottleneck layer and recommends where to focus",
+              "desc": "Diagnostique les sept couches du produit pour trouver celle qui bloque le progrès.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3252,11 +3344,12 @@
                 "layers-product-strategy",
                 "layers-user-needs"
               ],
-              "url": "https://github.com/jamiemill/layers-skills"
+              "url": "https://github.com/jamiemill/layers-skills",
+              "when": "Tu sens un problème produit sans savoir s’il vient du besoin, du modèle ou de l’interface."
             },
             {
               "name": "layers-product-strategy",
-              "desc": "Techniques for connecting user opportunities to business outcomes and solution bets, and testing the riskiest assumptions cheaply",
+              "desc": "Relie les besoins utilisateurs aux objectifs du produit et aux hypothèses à tester.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -3282,11 +3375,12 @@
                 "layers-conceptual-model",
                 "layers-intro"
               ],
-              "url": "https://github.com/jamiemill/layers-skills"
+              "url": "https://github.com/jamiemill/layers-skills",
+              "when": "Tu dois choisir quelles opportunités poursuivre et comment valider les plus risquées."
             },
             {
               "name": "layers-surface",
-              "desc": "Techniques for auditing and deciding the surface against the layers below — vocabulary, object consistency, completeness, feedback, hierarchy, accessibility",
+              "desc": "Vérifie si l’interface traduit correctement le modèle, les parcours et les besoins du produit.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3312,11 +3406,12 @@
                 "layers-interaction-flow",
                 "layers-intro"
               ],
-              "url": "https://github.com/jamiemill/layers-skills"
+              "url": "https://github.com/jamiemill/layers-skills",
+              "when": "Tu veux contrôler un écran au-delà de son apparence."
             },
             {
               "name": "layers-user-needs",
-              "desc": "Techniques for eliciting and prioritising user needs, pains, and desires — the opportunities that feed product strategy",
+              "desc": "Identifie et priorise les besoins, difficultés et résultats recherchés par les utilisateurs.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3343,7 +3438,8 @@
                 "layers-observed-behaviour",
                 "layers-product-strategy"
               ],
-              "url": "https://github.com/jamiemill/layers-skills"
+              "url": "https://github.com/jamiemill/layers-skills",
+              "when": "Tu dois choisir le problème à résoudre avant d’imaginer une solution."
             }
           ]
         }
@@ -3357,7 +3453,7 @@
           "items": [
             {
               "name": "computer-use",
-              "desc": "OS/window-level inspection and input in visible local app windows through `orca computer`: native apps, external browser windows (Chrome, Edge, Safari), and app webviews. Not for Orca's embedded browser (use `orca-cli`) or page-only automation (use Playwright or CDP).",
+              "desc": "Pilote les fenêtres d’applications locales via les outils de contrôle de l’ordinateur d’Orca.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3379,11 +3475,12 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/stablyai/orca"
+              "url": "https://github.com/stablyai/orca",
+              "when": "Tu dois agir dans une application native ou un navigateur externe depuis Orca."
             },
             {
               "name": "orca-cli",
-              "desc": "Use the public `orca` CLI to operate Orca-managed worktrees, folder contexts, terminals, repos, automations, artifacts, skill sharing, worktree comments, and the browser embedded inside the Orca app.",
+              "desc": "Pilote les projets, chats, terminaux et le navigateur intégré gérés par Orca.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3405,11 +3502,12 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/stablyai/orca"
+              "url": "https://github.com/stablyai/orca",
+              "when": "Tu travailles dans Orca et veux agir sur ses fonctionnalités natives."
             },
             {
               "name": "orchestration",
-              "desc": "Coordinate supervised Orca workers: threaded messages, blocking ask/reply, task dispatch, worker_done/escalation waits, task DAGs, decision gates, coordinator loops, and decomposing work across agents.",
+              "desc": "Coordonne les agents Orca, leurs tâches, dépendances et échanges supervisés.",
               "cat": "workflow",
               "invokable": true,
               "installations": [
@@ -3431,7 +3529,8 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/stablyai/orca"
+              "url": "https://github.com/stablyai/orca",
+              "when": "Tu répartis un chantier entre plusieurs agents dans Orca."
             }
           ]
         }
@@ -3445,7 +3544,7 @@
           "items": [
             {
               "name": "airbnb-monthly-report",
-              "desc": "Prepare Airbnb monthly owner or property-management reports from Airbnb host multicalendar/reservation detail pages into Google Sheets or spreadsheet templates. Use when Codex needs to produce, update, audit, or automate Airbnb monthly reports, reservation revenue rows, owner statements, guest stay summaries, or Airbnb-to-Sheets reconciliation workflows.",
+              "desc": "Prépare un rapport mensuel Airbnb avec les séjours et les revenus dans un tableur.",
               "cat": "données",
               "invokable": true,
               "installations": [
@@ -3459,11 +3558,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu établis un bilan de location ou un relevé destiné au propriétaire."
             },
             {
               "name": "awwwards-web-taste",
-              "desc": "Design, audit, or refactor websites with high-end UI/UX taste inspired by Awwwards Sites of the Month and Sites of the Year.",
+              "desc": "Guide le design d’un site à partir de références visuelles exigeantes issues d’Awwwards.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -3477,11 +3577,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux concevoir ou améliorer un site avec une direction visuelle affirmée."
             },
             {
               "name": "better-ui",
-              "desc": "Design engineering principles for making interfaces feel polished. Use when building UI components, reviewing frontend code, implementing animations, hover states, shadows, borders, micro-interactions, enter/exit animations, or any visual detail work. Triggers on UI polish, design details, \"make it feel better\", \"feels off\", stagger animations, border radius, optical alignment, image outlines, box shadows.",
+              "desc": "Applique des principes de design engineering aux états, animations et détails des composants.",
               "cat": "animation",
               "invokable": true,
               "installations": [
@@ -3495,11 +3596,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu construis un composant ou affines les interactions et le rendu d’une interface."
             },
             {
               "name": "brandkit",
-              "desc": "Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations. Trained for minimalist, cinematic, editorial, dark-tech, luxury, cultural, security, gaming, developer-tool, and consumer-app brand systems.",
+              "desc": "Génère des planches d’identité visuelle, logos et présentations de marque.",
               "cat": "sécurité",
               "invokable": true,
               "installations": [
@@ -3513,11 +3615,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu définis l’univers graphique d’une marque ou prépares un brand book."
             },
             {
               "name": "codex-app-threads",
-              "desc": "Create, list, read, message, wait on, fork, rename, archive, and pin Codex threads (sidebar tasks), plus automations and app navigation, using the app-native codex_app tools.",
+              "desc": "Gère les chats Codex, leurs noms, leur organisation et les automatisations via les outils natifs.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3531,11 +3634,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux créer, retrouver, poursuivre ou organiser des chats dans Codex."
             },
             {
               "name": "codex-computer-use",
-              "desc": "Control local apps through Computer Use (the @oai/sky runtime) inside the Codex app. Use when the session uses a custom (non-OpenAI) model, for example deepseek-v4-flash or mimo-v2.5, and the user asks to control the computer, operate a desktop app's UI, use Safari or Chrome through computer use, click or type in an app, or take a screenshot of an app. Prefer purpose-built connectors, APIs, or CLIs when they exist.",
+              "desc": "Permet à un modèle personnalisé dans Codex de piloter les applications locales.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3549,11 +3653,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu utilises un modèle routé et dois cliquer ou saisir du texte dans une application."
             },
             {
               "name": "codex-in-app-browser",
-              "desc": "Drive the Codex in-app browser (open, navigate, click, type, screenshot, read page state) through the app's own node_repl runtime. Use when the session uses a custom (non-OpenAI) model, for example deepseek-v4-flash or mimo-v2.5, and the user asks to use the in-app browser, open or navigate a page in it, test a local app in a browser, or click, type, or take a screenshot in the Codex browser panel.",
+              "desc": "Permet à un modèle personnalisé de naviguer et tester des pages dans le navigateur intégré Codex.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3567,11 +3672,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu utilises un modèle routé et veux vérifier une page sans ouvrir Chrome."
             },
             {
               "name": "codex-router",
-              "desc": "Orientation for custom (non-OpenAI) models running in the Codex app through the codex-router proxy. Explains that the app's native tools arrive as flattened codex_app__ and mcp__ names, that the router restores them so the app executes them, which companion skills to read before threads, browser, or computer-use work, and that a turn with no tool call ends the task.",
+              "desc": "Explique le routage des modèles personnalisés et les outils disponibles dans Codex.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3590,11 +3696,12 @@
                 "codex-app-threads",
                 "codex-computer-use",
                 "codex-in-app-browser"
-              ]
+              ],
+              "when": "Tu configures un modèle externe ou cherches le bon outil avec un modèle routé."
             },
             {
               "name": "codex-router-media",
-              "desc": "Generate video, music, speech, or images with the operator's MiniMax Token Plan subscription through the codex-router media CLI. Use when the session runs a MiniMax custom (non-OpenAI) model (for example minimax-m3) with the MiniMax Token Plan provider connected, and the user explicitly asks to create a video, a song or music track, spoken audio, or an image. Do not use for reading or analyzing existing media.",
+              "desc": "Génère image, vidéo, musique ou voix via le fournisseur MiniMax connecté au routeur.",
               "cat": "génération",
               "invokable": true,
               "installations": [
@@ -3608,11 +3715,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu utilises le modèle MiniMax configuré et demandes explicitement un média."
             },
             {
               "name": "explain-visually-crt-style",
-              "desc": "Generate offline single-file HTML reports in a CRT tactical / military dashboard style: dark phosphor/navy UI, square corners, scanlines, semantic badges, and localStorage-powered interactivity. Trigger only for explicit CRT/tactical style requests or supported formats: interactive checklist, project tracker, multi-expert audit, technical deep-dive, or catalog/explorer. Do not trigger for generic visual explanations.",
+              "desc": "Crée un rapport HTML autonome au style CRT tactique, avec tableaux de bord et contrôles.",
               "cat": "données",
               "invokable": true,
               "installations": [
@@ -3626,11 +3734,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu demandes explicitement un rapport, une checklist ou un explorateur dans ce style."
             },
             {
               "name": "full-output-enforcement",
-              "desc": "Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output.",
+              "desc": "Impose des sorties complètes sans placeholders ni morceaux de code omis.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -3644,11 +3753,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu as besoin d’un fichier ou d’un résultat exhaustif, même s’il doit être fourni en plusieurs parties."
             },
             {
               "name": "gh-address-comments",
-              "desc": "Help address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to authenticate if not logged in.",
+              "desc": "Traite les commentaires de review et les retours sur une PR GitHub.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3662,11 +3772,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Une PR ouverte contient des demandes de correction à prendre en compte."
             },
             {
               "name": "gh-fix-ci",
-              "desc": "Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope and report only the details URL.",
+              "desc": "Diagnostique les checks GitHub Actions qui échouent et prépare leur correction.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -3680,11 +3791,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Une PR est bloquée par la CI et tu veux comprendre la cause."
             },
             {
               "name": "gpt-taste",
-              "desc": "Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing), inline micro-images, and massive section spacing.",
+              "desc": "Guide des interfaces visuelles marquées avec une composition précise et des animations GSAP.",
               "cat": "animation",
               "invokable": true,
               "installations": [
@@ -3698,11 +3810,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux une page ou une interface au parti pris visuel fort."
             },
             {
               "name": "grill-me",
-              "desc": "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions \"grill me\".",
+              "desc": "Pose des questions exigeantes pour rendre un plan plus clair et plus solide.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -3716,11 +3829,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux tester une idée ou un design avant de construire."
             },
             {
               "name": "hatch-pet",
-              "desc": "Create, repair, validate, preview, and package Codex-compatible animated pet spritesheets from character art, screenshots, generated images, or visual references. Use when a user wants to hatch a Codex pet, create a custom animated pet, or build a built-in pet asset with an 8x9 atlas, transparent unused cells, row-by-row animation prompts, QA contact sheets, preview videos, and pet.json packaging.",
+              "desc": "Crée, vérifie et prépare les sprites animés d’un animal ou personnage pour Codex.",
               "cat": "animation",
               "invokable": true,
               "installations": [
@@ -3734,11 +3848,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux transformer une image ou une idée de personnage en pet animé."
             },
             {
               "name": "high-end-visual-design",
-              "desc": "Teaches the AI to design like a high-end agency. Defines the exact fonts, spacing, shadows, card structures, and animations that make a website feel expensive. Blocks all the common defaults that make AI designs look cheap or generic.",
+              "desc": "Définit les polices, espacements, surfaces et compositions d’un site au rendu soigné.",
               "cat": "animation",
               "invokable": true,
               "installations": [
@@ -3752,11 +3867,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu vises une direction visuelle proche d’un site d’agence haut de gamme."
             },
             {
               "name": "image-to-code",
-              "desc": "Elite website image-to-code skill for Codex. For visually important web tasks, it must first generate the design image(s) itself, deeply analyze them, then implement the website to match them as closely as possible.",
+              "desc": "Génère une référence visuelle puis construit le site pour en reproduire le rendu.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -3770,11 +3886,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux partir d’une image de design précise avant de coder la page."
             },
             {
               "name": "imagegen-frontend-mobile",
-              "desc": "Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows. Designed for iOS, Android, and cross-platform mobile products. Prioritizes clean hierarchy, comfortably readable text, strong multi-screen consistency, controlled color palettes, non-generic creative direction, textured surfaces, image-led composition, tasteful custom iconography, and clean phone mockup framing.",
+              "desc": "Génère des concepts visuels cohérents pour des interfaces mobiles.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -3788,11 +3905,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu explores les écrans et la direction graphique d’une application mobile."
             },
             {
               "name": "imagegen-frontend-web",
-              "desc": "Elite frontend image-direction skill for generating premium, artistic, implementation-friendly website design references. Uses combinatorial variation to avoid repetitive AI aesthetics, enforces cinematic hero minimalism, strong hierarchy, generous spacing, image-led composition, and anti-slop visual discipline.",
+              "desc": "Génère des références visuelles pour des interfaces et pages web.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -3806,11 +3924,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux explorer un rendu de site avant son implémentation."
             },
             {
               "name": "industrial-brutalist-ui",
-              "desc": "Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics. Rigid grids, extreme type scale contrast, utilitarian color, analog degradation effects. For data-heavy dashboards, portfolios, or editorial sites that need to feel like declassified blueprints.",
+              "desc": "Conçoit des interfaces brutes inspirées des systèmes industriels et des terminaux militaires.",
               "cat": "données",
               "invokable": true,
               "installations": [
@@ -3824,11 +3943,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu demandes ce style pour un dashboard, un portfolio ou une page éditoriale."
             },
             {
               "name": "jupyter-notebook",
-              "desc": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.",
+              "desc": "Crée et organise des notebooks Jupyter pour l’exploration, l’analyse ou l’enseignement.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3842,11 +3962,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux mener une expérience Python ou présenter une analyse pas à pas."
             },
             {
               "name": "minimalist-ui",
-              "desc": "Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels. No gradients, no heavy shadows.",
+              "desc": "Guide des interfaces éditoriales sobres, avec peu de couleurs et une typographie structurante.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3860,11 +3981,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux un site minimaliste avec une hiérarchie claire."
             },
             {
               "name": "pdf",
-              "desc": "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.",
+              "desc": "Lit, crée et vérifie des PDF, en contrôlant aussi leur rendu visuel.",
               "cat": "documents",
               "invokable": true,
               "installations": [
@@ -3878,11 +4000,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu travailles sur un document PDF dont le contenu et la mise en page comptent."
             },
             {
               "name": "playwright",
-              "desc": "Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script.",
+              "desc": "Automatise un navigateur pour parcourir une page, saisir des données ou reproduire un scénario.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3896,11 +4019,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux exécuter un parcours navigateur reproductible depuis le terminal."
             },
             {
               "name": "playwright-interactive",
-              "desc": "Persistent browser and Electron interaction through `js_repl` for fast iterative UI debugging.",
+              "desc": "Garde une session navigateur ou Electron ouverte pour tester et diagnostiquer l’interface.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3914,11 +4038,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu fais plusieurs essais successifs sur une UI et veux conserver son état."
             },
             {
               "name": "redesign-existing-projects",
-              "desc": "Audits and upgrades existing websites and apps to premium quality. Diagnoses generic AI design patterns, weak states, and sloppy code, then applies targeted fixes without breaking functionality. Use this skill whenever the user wants to improve, polish, upgrade, refine, audit, fix, or redesign an EXISTING site, page, app, or component, even when they only say it looks bad, cheap, generic, or AI made.",
+              "desc": "Audite une interface existante et propose des améliorations adaptées au projet.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -3940,11 +4065,12 @@
                 "Codex",
                 "Globale",
                 "Synchronisée"
-              ]
+              ],
+              "when": "Tu veux revoir un site ou une application déjà construite."
             },
             {
               "name": "retro",
-              "desc": "Conduct a retrospective on a coding session.",
+              "desc": "Fait le bilan d’une session de développement et en tire des améliorations concrètes.",
               "cat": "outillage",
               "invokable": false,
               "installations": [
@@ -3958,11 +4084,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux comprendre ce qui a bien fonctionné ou ralenti le travail."
             },
             {
               "name": "screenshot",
-              "desc": "Use when the user explicitly asks for a desktop or system screenshot (full screen, specific app or window, or a pixel region), or when tool-specific capture capabilities are unavailable and an OS-level capture is needed.",
+              "desc": "Capture un écran, une fenêtre ou une zone précise du bureau.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -3976,11 +4103,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu demandes une capture système ou l’outil de l’application ne peut pas la fournir."
             },
             {
               "name": "security-best-practices",
-              "desc": "Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks.",
+              "desc": "Examine les pratiques de sécurité du code dans les langages pris en charge.",
               "cat": "sécurité",
               "invokable": true,
               "installations": [
@@ -3994,11 +4122,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu demandes explicitement une revue sécurité ou une implémentation plus sûre."
             },
             {
               "name": "security-ownership-map",
-              "desc": "Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization.",
+              "desc": "Cartographie les responsables du code et repère les zones sensibles dépendant de peu de personnes.",
               "cat": "sécurité",
               "invokable": true,
               "installations": [
@@ -4012,11 +4141,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu analyses la répartition de la maintenance et les risques de perte de connaissance."
             },
             {
               "name": "security-threat-model",
-              "desc": "Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work.",
+              "desc": "Modélise les menaces, frontières de confiance et scénarios d’abus d’un projet.",
               "cat": "sécurité",
               "invokable": true,
               "installations": [
@@ -4030,11 +4160,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux anticiper les risques de sécurité avant de concevoir ou modifier un système."
             },
             {
               "name": "stitch-design-taste",
-              "desc": "Semantic Design System Skill for Google Stitch. Generates agent-friendly DESIGN.md files that enforce premium, anti-generic UI standards — strict typography, calibrated color, asymmetric layouts, perpetual micro-motion, and hardware-accelerated performance.",
+              "desc": "Transforme le design en règles que les agents peuvent appliquer sans inventer de nouveaux styles.",
               "cat": "animation",
               "invokable": true,
               "installations": [
@@ -4048,11 +4179,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux formaliser une direction graphique ou garder la cohérence d’un projet Stitch."
             },
             {
               "name": "thermo-nuclear-code-quality-review",
-              "desc": "Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. Use for a thermo-nuclear code quality review, thermonuclear review, deep code quality audit, or especially harsh maintainability review.",
+              "desc": "Mène une revue stricte de la maintenabilité, des abstractions et des fichiers trop complexes.",
               "cat": "qualité",
               "invokable": false,
               "installations": [
@@ -4066,11 +4198,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux une évaluation approfondie de la qualité d’un changement de code."
             },
             {
               "name": "vercel-deploy",
-              "desc": "Deploy applications and websites to Vercel. Use when the user requests deployment actions like \"deploy my app\", \"deploy and give me the link\", \"push this live\", or \"create a preview deployment\".",
+              "desc": "Déploie une application ou un site sur Vercel et fournit son URL.",
               "cat": "infrastructure",
               "invokable": true,
               "installations": [
@@ -4084,11 +4217,12 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux publier une preview ou mettre une version du site en ligne."
             },
             {
               "name": "yeet",
-              "desc": "Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`).",
+              "desc": "Enchaîne le staging, le commit, le push et la création d’une PR avec GitHub CLI.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -4102,7 +4236,8 @@
               "tags": [
                 "Codex",
                 "Globale"
-              ]
+              ],
+              "when": "Tu demandes explicitement de publier les changements et d’ouvrir une PR en une seule opération."
             }
           ]
         }
@@ -4116,7 +4251,7 @@
           "items": [
             {
               "name": "catalogue-add",
-              "desc": "Add a new ready-to-use component to the local design catalogue at ~/Documents/sites_web/catalogue from a live website the user liked. Use when the user gives a URL (optionally a screenshot) and says to \"add this hero / button / effect to the catalogue\", \"save this component\", or asks to fix / refine an existing catalogue entry.",
+              "desc": "Ajoute un composant repéré sur un site au catalogue de design local.",
               "cat": "documents",
               "invokable": true,
               "installations": [
@@ -4133,11 +4268,12 @@
               ],
               "invokes": [
                 "nucleo-icons"
-              ]
+              ],
+              "when": "Tu veux conserver un hero, un bouton ou un effet pour le réutiliser plus tard."
             },
             {
               "name": "catalogue-browse",
-              "desc": "Pick a ready-to-use UI component (React + Tailwind v4) from the local design catalogue at ~/Documents/sites_web/catalogue and export it into the current project. Use when building or restyling a page section (hero, pricing, footer, navigation…), a UI element (button, card, badge…) or a motion effect and the user wants something \"from the catalogue\", \"like the ones I liked\", or a distinctive non-template look.",
+              "desc": "Retrouve un composant du catalogue local et l’intègre dans le projet.",
               "cat": "animation",
               "invokable": true,
               "installations": [
@@ -4154,11 +4290,12 @@
               ],
               "invokes": [
                 "catalogue-add"
-              ]
+              ],
+              "when": "Tu construis une section ou un effet à partir d’une référence déjà enregistrée."
             },
             {
               "name": "code-review-matt",
-              "desc": "Spec-conformance review — checks whether a branch's changes since a fixed point (commit/branch/tag/merge-base) faithfully implement the originating issue or PRD, alongside the repo's documented coding standards, via parallel Standards + Spec sub-agents. Use ONLY when conformance to a ticket/PRD is the point (e.g. \"does this match issue",
+              "desc": "Vérifie qu’une branche respecte la spécification et les conventions du repo.",
               "cat": "documents",
               "invokable": true,
               "installations": [
@@ -4172,11 +4309,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux savoir si le code livré correspond réellement au ticket ou au PRD."
             },
             {
               "name": "dcs-export-validation",
-              "desc": "Workflow for validating DCS World export/import code changes. Use whenever modifying export.ts, miz-generator/, lotatc-export.ts, lua-import.ts, dtc-import.ts, miz-parser*.ts, lotatc-parser.ts, or any types that feed into exports (miz-types.ts, drawings.ts, units.ts). Also trigger when the user mentions \"export\", \"DTC\", \".dtc\", \".miz\", \"import\", \"LotAtc\", or is adding a new aircraft or export format.",
+              "desc": "Vérifie les changements liés aux exports et imports DCS : MIZ, DTC ou LotAtc.",
               "cat": "workflow",
               "invokable": true,
               "installations": [
@@ -4190,11 +4328,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu modifies un format, un générateur ou les données utilisées par un export DCS."
             },
             {
               "name": "google-slides",
-              "desc": "Create and edit Google Slides presentations programmatically using the gws CLI — build charts, diagrams, shapes, text, and full slide decks with native editable elements. Use this skill whenever the user wants to create, modify, or automate Google Slides content: bar charts, org charts, flowcharts, wireframes, infographics, pitch decks, or any visual built from shapes.",
+              "desc": "Crée et modifie des présentations Google Slides avec des éléments éditables.",
               "cat": "données",
               "invokable": true,
               "installations": [
@@ -4208,11 +4347,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux produire des slides, graphiques ou schémas directement dans Google Slides."
             },
             {
               "name": "interview",
-              "desc": "Interview to flesh out a plan/spec",
+              "desc": "Clarifie un plan ou une spécification par un entretien ciblé.",
               "cat": "workflow",
               "invokable": true,
               "installations": [
@@ -4226,11 +4366,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu as une idée mais les besoins et les critères de réussite restent flous."
             },
             {
               "name": "logo-to-svg",
-              "desc": "Convert a raster logo/mark/icon (PNG/JPG, ideally a flat single color on transparency) into a clean, faithful, recolorable inline SVG by TRACING the actual pixels — not redrawing from a description.",
+              "desc": "Trace les pixels d’un logo pour le convertir en SVG fidèle et recolorable.",
               "cat": "génération",
               "invokable": true,
               "installations": [
@@ -4244,11 +4385,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu as un logo PNG ou JPG à utiliser comme vectoriel."
             },
             {
               "name": "nucleo-customize",
-              "desc": "Customize Nucleo icons when inserting or editing them: primary color via currentColor, secondary color via data-color=\"color-2\", stroke width for core/ui outline and free arcade, duo soft opacity for ui outline-duo/glyph-duo, and corners for core outline and arcade. Works for React, Vue, and vanilla.",
+              "desc": "Règle les couleurs, traits, opacités et coins des icônes Nucleo selon leur famille.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -4265,11 +4407,12 @@
               ],
               "invokes": [
                 "nucleo-icons"
-              ]
+              ],
+              "when": "Tu as choisi une icône Nucleo et veux l’adapter à ton interface."
             },
             {
               "name": "nucleo-icons",
-              "desc": "Find and insert Nucleo icons using the nucleo-icons MCP server. Works with any installed families (core, ui, sharp, micro, pixel, free families like social-media / isometric / flags, or any subset). Expands abstract requests into concrete search terms and ranks results by confidence. Use when the user asks for Nucleo icons, icon search, SVG icons, or mentions nucleo.",
+              "desc": "Recherche et insère les icônes des familles Nucleo installées.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -4283,11 +4426,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu cherches une icône précise pour illustrer une action ou un état."
             },
             {
               "name": "property-walkthrough",
-              "desc": "Generate a coherent, animated real-estate walkthrough — a sequence of interior/exterior keyframe images that stay visually consistent (same property, furniture, materials, light), then animate them into a smooth video tour.",
+              "desc": "Crée une visite immobilière animée à partir de vues cohérentes d’un même bien.",
               "cat": "génération",
               "invokable": true,
               "installations": [
@@ -4301,11 +4445,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux une vidéo de présentation dont les pièces, meubles et matériaux restent cohérents."
             },
             {
               "name": "prototype-variants",
-              "desc": "Build multiple genuinely different versions of a UI piece you describe, rendered behind a visual picker so you can flip through them live and promote the one that feels right. Only runs when explicitly invoked; it does not trigger on its own.",
+              "desc": "Construit plusieurs variantes d’interface derrière un sélecteur pour les comparer.",
               "cat": "interface",
               "invokable": false,
               "installations": [
@@ -4319,11 +4464,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu demandes explicitement d’explorer plusieurs versions d’un écran ou d’un composant."
             },
             {
               "name": "scholar-evaluation",
-              "desc": "Systematic framework for evaluating scholarly and research work based on the ScholarEval methodology. This skill should be used when assessing research papers, evaluating literature reviews, scoring research methodologies, analyzing scientific writing quality, or applying structured evaluation criteria to academic work.",
+              "desc": "Évalue un travail scientifique avec une grille structurée couvrant méthode, résultats et rédaction.",
               "cat": "recherche",
               "invokable": true,
               "installations": [
@@ -4337,11 +4483,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux examiner un article ou apprécier la qualité d’un travail de recherche."
             },
             {
               "name": "thermo-nuclear-code-quality-review",
-              "desc": "Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. Use for a thermo-nuclear code quality review, thermonuclear review, deep code quality audit, or especially harsh maintainability review.",
+              "desc": "Mène une revue stricte de la maintenabilité, des abstractions et des fichiers trop complexes.",
               "cat": "qualité",
               "invokable": false,
               "installations": [
@@ -4355,11 +4502,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux une évaluation approfondie de la qualité d’un changement de code."
             },
             {
               "name": "thermo-nuclear-review",
-              "desc": "Run a comprehensive security and correctness audit of a branch's changes. Use for a thermo-nuclear review, thermonuclear review, deep security/correctness review, or branch/PR diff audit focused on bugs, breaking changes, security issues, devex regressions, and feature-gate leaks.",
+              "desc": "Mène un audit approfondi des bugs, risques de sécurité et changements de comportement d’une branche.",
               "cat": "sécurité",
               "invokable": false,
               "installations": [
@@ -4373,11 +4521,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux une revue sévère de la fiabilité d’un changement avant intégration."
             },
             {
               "name": "thermos",
-              "desc": "Launch both thermo-nuclear review subagents (security/correctness + code quality) in parallel, then synthesize their findings into one verdict. Use for thermos, a double thermo review, or a combined bug/security and maintainability branch audit.",
+              "desc": "Combine une revue sécurité et fiabilité avec une revue de maintenabilité.",
               "cat": "sécurité",
               "invokable": false,
               "installations": [
@@ -4395,11 +4544,12 @@
               "invokes": [
                 "thermo-nuclear-code-quality-review",
                 "thermo-nuclear-review"
-              ]
+              ],
+              "when": "Tu demandes une double revue approfondie d’une branche ou d’une PR."
             },
             {
               "name": "to-issues",
-              "desc": "Break a plan, spec, or PRD into independently-grabbable issues on the project issue tracker using tracer-bullet vertical slices.",
+              "desc": "Découpe un plan ou un PRD en issues indépendantes réalisables de bout en bout.",
               "cat": "workflow",
               "invokable": false,
               "installations": [
@@ -4413,11 +4563,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu as un besoin cadré et veux organiser son exécution sur le tracker."
             },
             {
               "name": "to-prd",
-              "desc": "Turn the current conversation into a PRD and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.",
+              "desc": "Transforme la conversation en document de besoins produit publié sur le tracker.",
               "cat": "outillage",
               "invokable": false,
               "installations": [
@@ -4431,11 +4582,12 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux formaliser les objectifs et exigences déjà discutés."
             },
             {
               "name": "visual-explainer",
-              "desc": "Generate beautiful, self-contained HTML pages that visually explain systems, code changes, plans, and data. Use ONLY when the user explicitly asks for a visual explanation, diagram, or uses a visual-explainer slash command (/diff-review, /plan-review, /project-recap, /generate-web-diagram, /fact-check). Never trigger proactively — markdown tables and text output remain the default for all other responses.",
+              "desc": "Crée une page HTML autonome pour expliquer visuellement un système ou un changement.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -4449,7 +4601,8 @@
               "tags": [
                 "Claude Code",
                 "Globale"
-              ]
+              ],
+              "when": "Tu demandes explicitement une explication visuelle, un diagramme ou une synthèse illustrée."
             }
           ]
         }
@@ -4463,7 +4616,7 @@
           "items": [
             {
               "name": "arxiv",
-              "desc": "Search arXiv papers by keyword, author, category, or ID.",
+              "desc": "Recherche des articles sur arXiv par sujet, auteur, catégorie ou identifiant.",
               "cat": "recherche",
               "invokable": true,
               "installations": [
@@ -4477,11 +4630,12 @@
               "tags": [
                 "Codex / agents",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux retrouver une publication ou explorer la recherche sur un thème."
             },
             {
               "name": "blocked-page-recovery",
-              "desc": "Recover blocked/paywalled/WAF'd pages via fallbacks.",
+              "desc": "Essaie des voies alternatives pour lire une page bloquée ou inaccessible.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -4495,11 +4649,12 @@
               "tags": [
                 "Codex / agents",
                 "Globale"
-              ]
+              ],
+              "when": "Une source nécessaire à une recherche ne peut pas être consultée normalement."
             },
             {
               "name": "blogwatcher",
-              "desc": "Monitor blogs and RSS/Atom feeds via blogwatcher-cli tool.",
+              "desc": "Suit les nouvelles publications de blogs et de flux RSS ou Atom.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -4513,11 +4668,12 @@
               "tags": [
                 "Codex / agents",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux surveiller des sources et repérer les nouveaux articles."
             },
             {
               "name": "competitor-news-monitor",
-              "desc": "Watch named companies for material news; cited digests.",
+              "desc": "Surveille des entreprises et résume leurs actualités significatives avec des sources.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -4534,11 +4690,12 @@
               ],
               "invokes": [
                 "blogwatcher"
-              ]
+              ],
+              "when": "Tu veux suivre des concurrents ou des acteurs précis dans le temps."
             },
             {
               "name": "grounded-citations",
-              "desc": "Ground answers and documents in cited, verifiable sources.",
+              "desc": "Ancre les affirmations d’un texte dans des sources vérifiables.",
               "cat": "documents",
               "invokable": true,
               "installations": [
@@ -4555,11 +4712,12 @@
               ],
               "invokes": [
                 "research-paper-writing"
-              ]
+              ],
+              "when": "Tu rédiges une réponse ou un rapport qui doit justifier ses faits."
             },
             {
               "name": "llm-wiki",
-              "desc": "Karpathy's LLM Wiki: build/query interlinked markdown KB.",
+              "desc": "Construit et interroge une base de connaissances Markdown composée de notes reliées.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -4573,11 +4731,12 @@
               "tags": [
                 "Codex / agents",
                 "Globale"
-              ]
+              ],
+              "when": "Tu veux organiser des sources et retrouver les connaissances qu’elles contiennent."
             },
             {
               "name": "research-paper-writing",
-              "desc": "Write ML papers for NeurIPS/ICML/ICLR: design→submit.",
+              "desc": "Accompagne la rédaction d’un article de recherche en machine learning.",
               "cat": "recherche",
               "invokable": true,
               "installations": [
@@ -4594,7 +4753,8 @@
               ],
               "invokes": [
                 "arxiv"
-              ]
+              ],
+              "when": "Tu prépares un papier scientifique, de sa structure à la soumission."
             }
           ]
         }
@@ -4608,7 +4768,7 @@
           "items": [
             {
               "name": "block-diagram",
-              "desc": "Generate professional control system block diagrams as SVG files. Use this skill whenever the user asks for a block diagram, signal flow diagram, Simulink-style schematic, control loop diagram, transfer function diagram, or any visual representation of a dynamic system with blocks and arrows.",
+              "desc": "Génère des schémas fonctionnels SVG avec blocs, flèches et boucles de contrôle.",
               "cat": "documents",
               "invokable": true,
               "installations": [
@@ -4622,11 +4782,12 @@
               "tags": [
                 "Claude Code",
                 "Synchronisée"
-              ]
+              ],
+              "when": "Tu veux représenter un système dynamique, une chaîne de signaux ou une fonction de transfert."
             },
             {
               "name": "grilling",
-              "desc": "Interview the user relentlessly about a plan or design. Use when the user wants to stress-test a plan before building, or uses any 'grill' trigger phrases.",
+              "desc": "Cherche les hypothèses fragiles et les zones floues d’une idée, d’un plan ou d’une décision.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -4640,11 +4801,12 @@
               "tags": [
                 "Claude Code",
                 "Synchronisée"
-              ]
+              ],
+              "when": "Tu veux être challengé sur le raisonnement plutôt que passer directement à l’exécution."
             },
             {
               "name": "humanizer",
-              "desc": "Remove signs of AI-generated writing from text. Use when editing or reviewing text to make it sound more natural and human-written. Based on Wikipedia's comprehensive \"Signs of AI writing\" guide.",
+              "desc": "Réécrit un texte pour retirer les formulations artificielles caractéristiques des textes générés.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -4658,11 +4820,12 @@
               "tags": [
                 "Claude Code",
                 "Synchronisée"
-              ]
+              ],
+              "when": "Tu veux rendre un article ou un message plus naturel."
             },
             {
               "name": "property-walkthrough",
-              "desc": "Generate a coherent animated real-estate walkthrough: consistent interior/exterior keyframes of one property, then animate them into a video tour via Higgsfield MCP.",
+              "desc": "Crée une visite immobilière animée à partir de vues cohérentes d’un même bien.",
               "cat": "génération",
               "invokable": true,
               "installations": [
@@ -4676,7 +4839,8 @@
               "tags": [
                 "Claude Code",
                 "Synchronisée"
-              ]
+              ],
+              "when": "Tu veux une vidéo de présentation dont les pièces, meubles et matériaux restent cohérents."
             }
           ]
         }
@@ -4690,7 +4854,7 @@
           "items": [
             {
               "name": "dcs-aircraft-mesh-extraction",
-              "desc": "Extract and qualify a DCS aircraft EDM as a loadout-ready GLB, including its metadata, station catalog, stores, and visual review. Use for a new aircraft or when an existing 3D loadout model needs correction.",
+              "desc": "Extrait un avion DCS en GLB et prépare ses stations, charges et métadonnées pour le loadout.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -4704,11 +4868,12 @@
               "tags": [
                 "Projet",
                 "nav_builder_dcs"
-              ]
+              ],
+              "when": "Tu ajoutes un avion ou corriges son modèle 3D dans le loadout."
             },
             {
               "name": "graphite-ui",
-              "desc": "NavBuilder Graphite craft router. Read only when editing src/ui, src/components/Shell, src/app/styles, or docs/redesign. Not a general UI skill.",
+              "desc": "Oriente les changements d’interface NavBuilder vers les règles et composants Graphite.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -4725,11 +4890,12 @@
               ],
               "invokes": [
                 "verify-nav-builder"
-              ]
+              ],
+              "when": "Tu modifies les surfaces Graphite ou leur design system dans NavBuilder."
             },
             {
               "name": "ip-as-logo",
-              "desc": "Generate extremely simple, cute, personified square character images with rounded heavy forms, two purposeful character colors, one solid background color, and a dominant lower-corner composition. Use when creating an animal, creature, robot, ghost, plant, object, or other character image, including when the agent should infer three product-relevant directions and propose six independent candidates for approval.",
+              "desc": "Génère de petits personnages carrés, simples et expressifs pour une identité visuelle.",
               "cat": "génération",
               "invokable": true,
               "installations": [
@@ -4743,11 +4909,12 @@
               "tags": [
                 "Projet",
                 "nav_builder_dcs"
-              ]
+              ],
+              "when": "Tu veux une mascotte ou un logo-personnage avec une silhouette très lisible."
             },
             {
               "name": "miz-debug",
-              "desc": "Debug DCS .miz files that fail to load in DCS World. Use when a .miz export causes DCS to hang or crash during loading (terrain init, mission load). Performs systematic binary search by creating hybrid .miz files to isolate the exact field causing the issue.",
+              "desc": "Isole le champ qui empêche une mission MIZ de se charger dans DCS.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -4761,11 +4928,12 @@
               "tags": [
                 "Projet",
                 "nav_builder_dcs"
-              ]
+              ],
+              "when": "Une mission exportée fait planter ou bloquer DCS au chargement."
             },
             {
               "name": "nav-builder-context",
-              "desc": "Route NavBuilder code changes to the smallest relevant architecture capsule, entrypoints, invariants, and targeted validations. Use before exploring or modifying production code in this repository.",
+              "desc": "Trouve la capsule d’architecture, les règles et les validations du domaine NavBuilder concerné.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -4779,11 +4947,12 @@
               "tags": [
                 "Projet",
                 "nav_builder_dcs"
-              ]
+              ],
+              "when": "Tu vas explorer ou modifier du code de production dans NavBuilder."
             },
             {
               "name": "no-mistakes",
-              "desc": "Validate your code changes through the no-mistakes pipeline - automated code review, tests, lint, docs, push, PR, and CI - before they reach upstream. Use when the user asks to run no-mistakes, gate or ship or validate their changes, push safely, or invokes /no-mistakes.",
+              "desc": "Vérifie un changement avec des revues, tests et contrôles avant sa publication.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -4797,11 +4966,12 @@
               "tags": [
                 "Projet",
                 "nav_builder_dcs"
-              ]
+              ],
+              "when": "Tu demandes explicitement de valider ou livrer les changements avec ce pipeline."
             },
             {
               "name": "tile-qa",
-              "desc": "DCS map tile quality assurance pipeline — flag bad tiles, retake screenshots from DCS, transfer fixes to VPS, and verify. Use this skill whenever the user mentions bad tiles, tile errors, tile misalignment, tile QA, retaking screenshots, fixing map tiles, or wants to correct visual issues on the DCS map.",
+              "desc": "Repère et corrige les tuiles de cartes DCS défectueuses avec des captures et vérifications.",
               "cat": "qualité",
               "invokable": true,
               "installations": [
@@ -4815,11 +4985,12 @@
               "tags": [
                 "Projet",
                 "nav_builder_dcs"
-              ]
+              ],
+              "when": "Une tuile est mal alignée, abîmée ou doit être recapturée."
             },
             {
               "name": "verify-nav-builder",
-              "desc": "Verify visible NavBuilder changes with interactive clicks and screenshots in the current host's available integrated browser (T3, Codex, Cursor or Orca). Record the tested checkout and URL; report blocked proof honestly when no browser or matching version is available.",
+              "desc": "Vérifie les changements visibles de NavBuilder avec des interactions et captures dans le navigateur intégré.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -4833,7 +5004,8 @@
               "tags": [
                 "Projet",
                 "nav_builder_dcs"
-              ]
+              ],
+              "when": "Tu modifies une interface NavBuilder et dois confirmer le résultat à l’écran."
             }
           ]
         }
@@ -4847,7 +5019,7 @@
           "items": [
             {
               "name": "lieflat-charts",
-              "desc": "一套模板驱动的数据可视化与报告生成 skill，既能严格从 Lupi、Basics、Glance、Maps 与 Interactive gallery 的真实实现生成 HTML 图表，也能从 12 套中英文整页报告模板生成可发布的 HTML 报告；以 Mono 为保底，能按数据语义自动选择内置彩色预设，也支持用户明确提供的自定义色板。地图仅在用户明确要求时启用，同一交付禁止混用色系。",
+              "desc": "Crée des graphiques et rapports HTML à partir de modèles de visualisation existants.",
               "cat": "données",
               "invokable": true,
               "installations": [
@@ -4862,7 +5034,8 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/larashero3-dotcom/lieflat-charts"
+              "url": "https://github.com/larashero3-dotcom/lieflat-charts",
+              "when": "Tu veux présenter des données dans un rapport visuel cohérent et partageable."
             }
           ]
         }
@@ -4876,7 +5049,7 @@
           "items": [
             {
               "name": "design-taste-frontend",
-              "desc": "Anti-slop frontend skill for landing pages, portfolios, and redesigns. The agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. Real design systems when applicable, audit-first on redesigns, strict pre-flight check.",
+              "desc": "Définit une direction visuelle adaptée au brief puis construit une interface moins générique.",
               "cat": "interface",
               "invokable": true,
               "installations": [
@@ -4905,7 +5078,8 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/Leonxlnx/taste-skill"
+              "url": "https://github.com/Leonxlnx/taste-skill",
+              "when": "Tu crées ou refais une landing page ou un portfolio avec une identité distincte."
             }
           ]
         }
@@ -4919,7 +5093,7 @@
           "items": [
             {
               "name": "improve",
-              "desc": "Survey any codebase as a senior advisor and produce prioritized, self-contained implementation plans for OTHER models/agents to execute. Strictly read-only on source code — never implements, fixes, or refactors anything itself.",
+              "desc": "Audite le code et produit des plans d’amélioration prioritaires sans modifier les sources.",
               "cat": "workflow",
               "invokable": true,
               "installations": [
@@ -4941,7 +5115,8 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/shadcn/improve"
+              "url": "https://github.com/shadcn/improve",
+              "when": "Tu veux choisir des améliorations à confier ensuite à un agent d’implémentation."
             }
           ]
         }
@@ -4955,7 +5130,7 @@
           "items": [
             {
               "name": "find-skills",
-              "desc": "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.",
+              "desc": "Recherche des skills disponibles et aide à installer celle qui couvre un besoin.",
               "cat": "outillage",
               "invokable": true,
               "installations": [
@@ -4970,7 +5145,8 @@
                 "Codex / agents",
                 "Globale"
               ],
-              "url": "https://github.com/vercel-labs/skills"
+              "url": "https://github.com/vercel-labs/skills",
+              "when": "Tu te demandes s’il existe une skill pour une tâche précise."
             }
           ]
         }

@@ -685,6 +685,54 @@ input {
   margin-top: 0.15rem;
 }
 
+.row__when {
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.row__when strong {
+  color: var(--n-t1);
+  font-weight: 500;
+}
+
+.row--github {
+  position: relative;
+  padding-right: 5.5rem;
+}
+
+.row__github {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  padding: 0 0.5rem;
+  border-radius: 0;
+  background: var(--n-raise);
+  color: var(--n-t2);
+  font-family: var(--n-data);
+  font-size: 10px;
+  text-decoration: none;
+  transition: background 140ms var(--n-ease), color 140ms var(--n-ease);
+}
+
+.row__github::before {
+  content: "";
+  position: absolute;
+  inset: -8px 0;
+}
+
+.row__github:hover {
+  background: var(--n-raise-2);
+  color: var(--n-t1);
+}
+
+.row__github:active {
+  transform: scale(0.96);
+}
+
 /* Invocabilité — l'actif se lit par promotion, l'inactif s'éteint (§4) */
 .flag {
   font-family: var(--n-data);
@@ -946,6 +994,18 @@ input {
 @media (max-width: 40rem) {
   .row {
     grid-template-columns: 1fr;
+  }
+
+  .row--github {
+    padding-right: 0.6rem;
+  }
+
+  .row--github .row__name {
+    padding-right: 4.5rem;
+  }
+
+  .row__github::before {
+    inset: -10px 0;
   }
 
   .prompts__list {

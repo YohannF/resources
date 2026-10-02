@@ -144,6 +144,7 @@ function renderPrompts(prompts, skillName) {
 }
 
 function renderRow({ item, collection, source, group }) {
+  const github = hostOf(item.url) === "github.com";
   const row = document.createElement("div");
   row.className = "row";
   row.dataset.collection = collection;
@@ -153,7 +154,7 @@ function renderRow({ item, collection, source, group }) {
   const name = document.createElement("dt");
   name.className = "row__name";
 
-  if (item.url) {
+  if (item.url && !github) {
     const link = document.createElement("a");
     link.href = item.url;
     link.rel = "noopener noreferrer";
@@ -186,6 +187,15 @@ function renderRow({ item, collection, source, group }) {
   desc.className = "row__desc";
   desc.append(item.desc);
 
+  if (item.when) {
+    const when = document.createElement("span");
+    when.className = "row__when";
+    const label = document.createElement("strong");
+    label.textContent = "Quand l’utiliser : ";
+    when.append(label, item.when);
+    desc.append(when);
+  }
+
   if (item.invokes?.length) {
     const deps = document.createElement("span");
     deps.className = "row__deps";
@@ -194,7 +204,17 @@ function renderRow({ item, collection, source, group }) {
     desc.append(deps);
   }
 
-  if (item.url) {
+  if (github) {
+    row.classList.add("row--github");
+    const link = document.createElement("a");
+    link.className = "row__github";
+    link.href = item.url;
+    link.rel = "noopener noreferrer";
+    link.target = "_blank";
+    link.textContent = "GitHub";
+    link.setAttribute("aria-label", `GitHub de ${item.name} — ouvre un nouvel onglet`);
+    desc.append(link);
+  } else if (item.url) {
     const host = document.createElement("span");
     host.className = "row__host";
     host.textContent = hostOf(item.url);
@@ -211,6 +231,7 @@ function renderRow({ item, collection, source, group }) {
     [
       item.name,
       item.desc,
+      item.when,
       item.url,
       item.cat,
       source,
@@ -505,7 +526,7 @@ function reset() {
 
 async function boot() {
   const loaded = await Promise.all(
-    COLLECTIONS.map((id) => fetch(`data/${id}.json`).then((res) => res.json())),
+    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261002-skill-guide`).then((res) => res.json())),
   );
 
   for (const collection of loaded) {
