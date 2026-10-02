@@ -16,6 +16,7 @@ const els = {
 const labels = {};
 const sourceSections = [];
 const catalogue = [];
+const graphSelections = new Set();
 
 let activeCollection = "all";
 let activeCat = "all";
@@ -147,6 +148,7 @@ function renderRow({ item, collection, source, group }) {
   row.className = "row";
   row.dataset.collection = collection;
   row.dataset.cat = item.cat ?? "";
+  row.dataset.name = item.name;
 
   const name = document.createElement("dt");
   name.className = "row__name";
@@ -266,8 +268,12 @@ function renderSection(model) {
   }
 
   if (model.graphSource) {
-    const graph = window.buildFamilyGraph?.(model.graphSource);
+    const graph = window.buildFamilyGraph?.(model.graphSource, (name) => {
+      el.dataset.skillFilter = name || "";
+      applyFilter();
+    });
     if (graph) {
+      graphSelections.add(graph.clearSelection);
       const panel = document.createElement("div");
       panel.className = "graph-panel";
       panel.id = `graph-${model.graphSource.family}`;
@@ -293,6 +299,7 @@ function renderSection(model) {
         const open = toggle.getAttribute("aria-expanded") === "true";
         toggle.setAttribute("aria-expanded", String(!open));
         panel.hidden = open;
+        if (open) graph.clearSelection();
         syncLabel();
       });
 
@@ -361,6 +368,7 @@ function countOf(groups) {
 }
 
 function renderCollections() {
+  graphSelections.clear();
   els.collections.textContent = "";
   const models = view === "source" ? bySource() : byCategory();
   for (const model of models) els.collections.append(renderSection(model));
@@ -410,6 +418,7 @@ function applyFilter() {
 
   for (const section of els.collections.children) {
     let sectionVisible = 0;
+    const selectedSkill = section.dataset.skillFilter;
 
     for (const group of section.querySelectorAll(".group")) {
       let groupVisible = 0;
@@ -417,8 +426,10 @@ function applyFilter() {
       for (const row of group.querySelectorAll(".row")) {
         const match =
           (activeCollection === "all" || row.dataset.collection === activeCollection) &&
-          (activeCat === "all" || row.dataset.cat === activeCat) &&
-          queryTerms.every((term) => row.dataset.haystack.includes(term));
+          (selectedSkill
+            ? row.dataset.name === selectedSkill
+            : (activeCat === "all" || row.dataset.cat === activeCat) &&
+              queryTerms.every((term) => row.dataset.haystack.includes(term)));
         row.hidden = !match;
         if (match) groupVisible += 1;
       }
@@ -472,7 +483,12 @@ function catEntries() {
   return [["all", "Toutes"], ...sorted.map(([cat, n]) => [cat, `${cat} ${n}`])];
 }
 
+function clearGraphSelections() {
+  for (const clearSelection of graphSelections) clearSelection();
+}
+
 function reset() {
+  clearGraphSelections();
   els.search.value = "";
   activeCollection = "all";
   activeCat = "all";
@@ -529,6 +545,7 @@ async function boot() {
     [["all", "Tout"], ...COLLECTIONS.map((id) => [id, labels[id]])],
     (id) => id === activeCollection,
     (id) => {
+      clearGraphSelections();
       activeCollection = id;
       applyFilter();
     },
@@ -552,6 +569,7 @@ async function boot() {
     catEntries(),
     (id) => id === activeCat,
     (id) => {
+      clearGraphSelections();
       activeCat = id;
       applyFilter();
     },
@@ -561,7 +579,10 @@ async function boot() {
   renderCollections();
 }
 
-els.search.addEventListener("input", applyFilter);
+els.search.addEventListener("input", () => {
+  clearGraphSelections();
+  applyFilter();
+});
 els.emptyReset.addEventListener("click", reset);
 
 document.addEventListener("keydown", (event) => {

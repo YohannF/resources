@@ -470,7 +470,12 @@ input {
 }
 
 .graph__node {
-  cursor: default;
+  cursor: pointer;
+}
+
+.graph__node[aria-pressed="true"] .graph__dot {
+  stroke: var(--n-t1);
+  stroke-width: 2;
 }
 
 .graph__node[data-hub] .graph__dot {

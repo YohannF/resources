@@ -56,7 +56,7 @@ function buildDiagram(section) {
   const svg = el("svg", {
     viewBox: `${-width / 2} ${-height / 2} ${width} ${height}`,
     class: "graph__svg",
-    role: "img",
+    role: "group",
     "aria-label": `${nodes.length} skills liées, ${edges.length} dépendances`,
   });
 
@@ -80,7 +80,14 @@ function buildDiagram(section) {
   for (const name of nodes) {
     const p = pos[name];
     const isHub = radial && name === hub;
-    const g = el("g", { class: "graph__node", "data-name": name, tabindex: "0" });
+    const g = el("g", {
+      class: "graph__node",
+      "data-name": name,
+      tabindex: "0",
+      role: "button",
+      "aria-label": name,
+      "aria-pressed": "false",
+    });
     if (isHub) g.setAttribute("data-hub", "");
 
     g.append(el("circle", { cx: p.x, cy: p.y, r: isHub ? 5 : 3, class: "graph__dot" }));
@@ -105,8 +112,12 @@ function buildDiagram(section) {
   return { svg, nodes, edges, isolated, hub: radial ? hub : null };
 }
 
-function wire(svg) {
-  const clear = () => svg.removeAttribute("data-focused");
+function wire(svg, onSelect) {
+  let selected = null;
+  const clear = () => {
+    if (selected) focus(selected);
+    else svg.removeAttribute("data-focused");
+  };
   const focus = (name) => {
     svg.setAttribute("data-focused", "");
     for (const p of svg.querySelectorAll(".graph__edge")) {
@@ -123,15 +134,36 @@ function wire(svg) {
     }
   };
 
+  const select = (name) => {
+    if (selected === name) return;
+    selected = name;
+    for (const node of svg.querySelectorAll(".graph__node")) {
+      node.setAttribute("aria-pressed", String(node.dataset.name === selected));
+    }
+    clear();
+    onSelect(selected);
+  };
+
   for (const node of svg.querySelectorAll(".graph__node")) {
+    const activate = () => select(selected === node.dataset.name ? null : node.dataset.name);
     node.addEventListener("pointerenter", () => focus(node.dataset.name));
     node.addEventListener("focus", () => focus(node.dataset.name));
     node.addEventListener("pointerleave", clear);
     node.addEventListener("blur", clear);
+    node.addEventListener("click", activate);
+    node.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        activate();
+      } else if (event.key === "Escape") {
+        select(null);
+      }
+    });
   }
+  return () => select(null);
 }
 
-function buildFamilyGraph(section) {
+function buildFamilyGraph(section, onSelect = () => {}) {
   const built = buildDiagram(section);
   if (!built) return null;
 
@@ -147,12 +179,12 @@ function buildFamilyGraph(section) {
   const hint = document.createElement("p");
   hint.className = "graph__hint";
   hint.textContent =
-    "Un lien = une skill qui en cite explicitement une autre. Survole un nœud pour isoler ses liens.";
+    "Survole une skill pour isoler ses liens. Clique pour l’afficher dessous ; reclique pour retirer le filtre.";
 
   figure.append(caption, built.svg, hint);
-  wire(built.svg);
+  const clearSelection = wire(built.svg, onSelect);
 
-  return { figure, edges: built.edges.length, nodes: built.nodes.length };
+  return { figure, edges: built.edges.length, nodes: built.nodes.length, clearSelection };
 }
 
 window.buildFamilyGraph = buildFamilyGraph;
