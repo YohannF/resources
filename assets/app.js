@@ -22,6 +22,7 @@ let activeCollection = COLLECTIONS.includes(location.hash.slice(1)) ? location.h
 let activeCat = "all";
 let view = "source";
 let announceTimer;
+let promptPanelId = 0;
 
 /* ------------------------------------------------------------------ rendu */
 
@@ -125,6 +126,7 @@ function renderPrompt(prompt, name) {
 function renderPrompts(prompts, skillName) {
   const details = document.createElement("details");
   details.className = "prompts";
+  details.id = `skill-prompts-${++promptPanelId}`;
   const summary = document.createElement("summary");
   const label = document.createElement("span");
   label.textContent = "Prompts associés";
@@ -139,6 +141,28 @@ function renderPrompts(prompts, skillName) {
   }
   details.append(summary, list);
   return details;
+}
+
+function promptIndicator(details, count, skillName) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "ghost skill-prompts";
+  button.textContent = `Prompts · ${count}`;
+  button.setAttribute("aria-controls", details.id);
+  const sync = () => {
+    button.setAttribute("aria-expanded", String(details.open));
+    button.setAttribute(
+      "aria-label",
+      `${details.open ? "Masquer" : "Afficher"} les ${count} prompts associés à ${skillName}`,
+    );
+  };
+  button.addEventListener("click", () => {
+    details.open = !details.open;
+    sync();
+  });
+  details.addEventListener("toggle", sync);
+  sync();
+  return button;
 }
 
 function renderRow({ item, collection, source, group }) {
@@ -215,7 +239,9 @@ function renderRow({ item, collection, source, group }) {
 
   if (item.prompts?.length) {
     row.classList.add("row--has-prompts");
-    desc.append(renderPrompts(item.prompts, item.name));
+    const prompts = renderPrompts(item.prompts, item.name);
+    name.append(promptIndicator(prompts, item.prompts.length, item.name));
+    desc.append(prompts);
   }
 
   row.append(name, desc);

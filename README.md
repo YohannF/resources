@@ -22,6 +22,7 @@ quel autre libellé court (chip neutre). `tags` n'est pas affiché mais alimente
 
 La collection **Prompts** rassemble automatiquement les prompts associés aux skills.
 Le lien direct est `#prompts`. Les filtres par catégorie suivent la collection sélectionnée.
+Dans la liste des skills, le bouton **Prompts · N** indique leur nombre et déplie les textes associés.
 
 Une skill peut proposer des prompts prêts à copier :
 

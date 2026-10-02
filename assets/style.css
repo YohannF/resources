@@ -713,6 +713,21 @@ input {
   max-width: none;
 }
 
+.ghost.skill-prompts {
+  height: 32px;
+  padding: 0 0.5rem;
+  font-family: var(--n-data);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ghost.skill-prompts[aria-expanded="true"] {
+  background: var(--n-raise-2);
+  border-color: var(--n-line-2);
+  color: var(--n-t1);
+}
+
 .prompts {
   margin-top: 0.55rem;
   border-radius: var(--n-r);
@@ -1028,6 +1043,7 @@ input {
 
   .segmented button,
   .cat-chip,
+  .ghost.skill-prompts,
   .ghost.prompt__copy {
     min-height: 40px;
   }
