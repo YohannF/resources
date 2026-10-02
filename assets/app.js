@@ -1,9 +1,8 @@
-const COLLECTIONS = ["skills", "prompts", "inspiration", "tools"];
+const COLLECTIONS = ["skills", "inspiration", "tools"];
 const ANNOUNCE_DELAY = 500;
 
 const els = {
   search: document.getElementById("search"),
-  inventory: document.getElementById("inventory"),
   filters: document.getElementById("filters"),
   views: document.getElementById("views"),
   cats: document.getElementById("cats"),
@@ -18,11 +17,10 @@ const labels = {};
 const sourceSections = [];
 const catalogue = [];
 
-let activeCollection = COLLECTIONS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "all";
+let activeCollection = "all";
 let activeCat = "all";
 let view = "source";
 let announceTimer;
-let promptPanelId = 0;
 
 /* ------------------------------------------------------------------ rendu */
 
@@ -73,96 +71,75 @@ async function copyText(text) {
   if (!copied) throw new Error("La copie a échoué");
 }
 
-function copyButton(text, name) {
-  const copy = document.createElement("button");
-  copy.type = "button";
-  copy.className = "ghost prompt__copy";
-  copy.textContent = "Copier";
-  const copyLabel = `Copier le prompt ${name}`;
-  copy.setAttribute("aria-label", copyLabel);
-  copy.setAttribute("aria-live", "polite");
-
-  let resetTimer;
-  copy.addEventListener("click", async () => {
-    clearTimeout(resetTimer);
-    delete copy.dataset.copied;
-    delete copy.dataset.error;
-    try {
-      await copyText(text);
-      copy.textContent = "Copié";
-      copy.dataset.copied = "true";
-      copy.setAttribute("aria-label", `Prompt ${name} copié`);
-    } catch {
-      copy.textContent = "Échec";
-      copy.dataset.error = "true";
-      copy.setAttribute("aria-label", `Échec de la copie du prompt ${name}`);
-    }
-    resetTimer = setTimeout(() => {
-      copy.textContent = "Copier";
-      copy.setAttribute("aria-label", copyLabel);
-      delete copy.dataset.copied;
-      delete copy.dataset.error;
-    }, 1600);
-  });
-  return copy;
-}
-
-function renderPrompt(prompt, name) {
-  const card = document.createElement("article");
-  card.className = "prompt";
-  const head = document.createElement("div");
-  head.className = "prompt__head";
-  const title = document.createElement("h4");
-  title.className = "prompt__title";
-  title.textContent = prompt.label;
-  const text = document.createElement("p");
-  text.className = "prompt__text";
-  text.textContent = prompt.text;
-  head.append(title, copyButton(prompt.text, name));
-  card.append(head, text);
-  return card;
-}
-
 function renderPrompts(prompts, skillName) {
   const details = document.createElement("details");
   details.className = "prompts";
-  details.id = `skill-prompts-${++promptPanelId}`;
+
   const summary = document.createElement("summary");
   const label = document.createElement("span");
   label.textContent = "Prompts associés";
+
   const count = document.createElement("span");
   count.className = "prompts__count";
   count.textContent = String(prompts.length);
   summary.append(label, count);
+  details.append(summary);
+
   const list = document.createElement("div");
   list.className = "prompts__list";
-  for (const prompt of prompts) {
-    list.append(renderPrompt(prompt, `${skillName} · ${prompt.label}`));
-  }
-  details.append(summary, list);
-  return details;
-}
 
-function promptIndicator(details, count, skillName) {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = "ghost skill-prompts";
-  button.textContent = `Prompts · ${count}`;
-  button.setAttribute("aria-controls", details.id);
-  const sync = () => {
-    button.setAttribute("aria-expanded", String(details.open));
-    button.setAttribute(
-      "aria-label",
-      `${details.open ? "Masquer" : "Afficher"} les ${count} prompts associés à ${skillName}`,
-    );
-  };
-  button.addEventListener("click", () => {
-    details.open = !details.open;
-    sync();
+  prompts.forEach((prompt, index) => {
+    const card = document.createElement("article");
+    card.className = "prompt";
+
+    const head = document.createElement("div");
+    head.className = "prompt__head";
+
+    const title = document.createElement("h4");
+    title.className = "prompt__title";
+    title.textContent = prompt.label;
+
+    const copy = document.createElement("button");
+    copy.type = "button";
+    copy.className = "ghost prompt__copy";
+    copy.textContent = "Copier";
+    const copyLabel = `Copier le prompt ${index + 1} associé à ${skillName}`;
+    copy.setAttribute("aria-label", copyLabel);
+
+    let resetTimer;
+    copy.addEventListener("click", async () => {
+      clearTimeout(resetTimer);
+
+      try {
+        await copyText(prompt.text);
+        copy.textContent = "Copié";
+        copy.dataset.copied = "true";
+        copy.setAttribute("aria-label", `Prompt ${index + 1} copié`);
+      } catch {
+        copy.textContent = "Échec";
+        copy.dataset.error = "true";
+        copy.setAttribute("aria-label", `Échec de la copie du prompt ${index + 1}`);
+      }
+
+      resetTimer = setTimeout(() => {
+        copy.textContent = "Copier";
+        copy.setAttribute("aria-label", copyLabel);
+        delete copy.dataset.copied;
+        delete copy.dataset.error;
+      }, 1600);
+    });
+
+    const text = document.createElement("p");
+    text.className = "prompt__text";
+    text.textContent = prompt.text;
+
+    head.append(title, copy);
+    card.append(head, text);
+    list.append(card);
   });
-  details.addEventListener("toggle", sync);
-  sync();
-  return button;
+
+  details.append(list);
+  return details;
 }
 
 function renderRow({ item, collection, source, group }) {
@@ -207,25 +184,10 @@ function renderRow({ item, collection, source, group }) {
   desc.className = "row__desc";
   desc.append(item.desc);
 
-  if (item.installations?.length) {
-    const origin = document.createElement("span");
-    origin.className = "row__origin";
-    origin.textContent = item.installations
-      .map(({ platform, location }) => `${platform} · ${location}`)
-      .filter((value, index, values) => values.indexOf(value) === index)
-      .join(" / ");
-    desc.append(origin);
-  }
-
-  if (item.text) {
-    row.classList.add("row--has-prompts");
-    desc.append(renderPrompt({ label: item.origin || "Texte à copier", text: item.text }, item.name));
-  }
-
   if (item.invokes?.length) {
     const deps = document.createElement("span");
     deps.className = "row__deps";
-    deps.append(`${item.invokes.length} référence${item.invokes.length > 1 ? "s" : ""} : `);
+    deps.append(`invoque ${item.invokes.length} skill${item.invokes.length > 1 ? "s" : ""} : `);
     deps.append(item.invokes.join(" · "));
     desc.append(deps);
   }
@@ -239,9 +201,7 @@ function renderRow({ item, collection, source, group }) {
 
   if (item.prompts?.length) {
     row.classList.add("row--has-prompts");
-    const prompts = renderPrompts(item.prompts, item.name);
-    name.append(promptIndicator(prompts, item.prompts.length, item.name));
-    desc.append(prompts);
+    desc.append(renderPrompts(item.prompts, item.name));
   }
 
   row.append(name, desc);
@@ -251,9 +211,6 @@ function renderRow({ item, collection, source, group }) {
       item.desc,
       item.url,
       item.cat,
-      item.text,
-      item.origin,
-      ...(item.installations || []).flatMap(({ platform, location, command }) => [platform, location, command]),
       source,
       group,
       labels[collection],
@@ -328,7 +285,7 @@ function renderSection(model) {
         const open = toggle.getAttribute("aria-expanded") === "true";
         toggle.setAttribute(
           "aria-label",
-          `${open ? "Masquer" : "Afficher"} le graphe des références de ${model.title}`,
+          `${open ? "Masquer" : "Afficher"} le graphe des dépendances de ${model.title}`,
         );
       };
 
@@ -384,7 +341,6 @@ function byCategory() {
   const cats = new Map();
 
   for (const entry of catalogue) {
-    if (activeCollection !== "all" && entry.collection !== activeCollection) continue;
     const cat = entry.item.cat ?? "sans catégorie";
     if (!cats.has(cat)) cats.set(cat, new Map());
     const groups = cats.get(cat);
@@ -443,10 +399,6 @@ function renderEmpty(query) {
 
 function announceCount(visible) {
   clearTimeout(announceTimer);
-  if (!els.count.textContent) {
-    els.count.textContent = `${visible} résultat${visible > 1 ? "s" : ""}`;
-    return;
-  }
   announceTimer = setTimeout(() => {
     els.count.textContent = `${visible} résultat${visible > 1 ? "s" : ""}`;
   }, ANNOUNCE_DELAY);
@@ -512,8 +464,7 @@ function buildToggleGroup(mount, entries, isActive, onPick, className = "") {
 
 function catEntries() {
   const counts = new Map();
-  for (const { item, collection } of catalogue) {
-    if (activeCollection !== "all" && collection !== activeCollection) continue;
+  for (const { item } of catalogue) {
     const cat = item.cat ?? "sans catégorie";
     counts.set(cat, (counts.get(cat) ?? 0) + 1);
   }
@@ -521,68 +472,16 @@ function catEntries() {
   return [["all", "Toutes"], ...sorted.map(([cat, n]) => [cat, `${cat} ${n}`])];
 }
 
-function buildCategories() {
-  buildToggleGroup(
-    els.cats,
-    catEntries(),
-    (id) => id === activeCat,
-    (id) => {
-      activeCat = id;
-      applyFilter();
-    },
-    "cat-chip",
-  );
-}
-
-function associatedPrompts(skills) {
-  return {
-    id: "prompts",
-    label: "Prompts",
-    sections: skills.sections.flatMap((section) => {
-      const groups = section.groups.flatMap((group) => group.items.flatMap((item) => {
-        if (!item.prompts?.length) return [];
-        return [{
-          label: item.name,
-          items: item.prompts.map((prompt) => ({
-            name: prompt.label,
-            desc: `Prompt associé à ${item.name}.`,
-            origin: item.name,
-            cat: item.cat,
-            tags: [item.name, section.title],
-            text: prompt.text,
-          })),
-        }];
-      }));
-      return groups.length ? [{ title: `Prompts · ${section.title}`, groups }] : [];
-    }),
-  };
-}
-
-function syncCollectionFromHash() {
-  if (!catalogue.length) return;
-  const collection = location.hash.slice(1);
-  activeCollection = COLLECTIONS.includes(collection) ? collection : "all";
-  activeCat = "all";
-  for (const [index, button] of [...els.filters.children].entries()) {
-    const id = index === 0 ? "all" : COLLECTIONS[index - 1];
-    button.setAttribute("aria-pressed", String(id === activeCollection));
-  }
-  buildCategories();
-  renderCollections();
-}
-
 function reset() {
   els.search.value = "";
   activeCollection = "all";
   activeCat = "all";
-  history.replaceState(null, "", location.pathname + location.search);
-  buildCategories();
   for (const mount of [els.filters, els.cats]) {
     for (const [i, button] of [...mount.children].entries()) {
       button.setAttribute("aria-pressed", String(i === 0));
     }
   }
-  renderCollections();
+  applyFilter();
   els.search.focus();
 }
 
@@ -590,22 +489,8 @@ function reset() {
 
 async function boot() {
   const loaded = await Promise.all(
-    COLLECTIONS.map(async (id) => {
-      const response = await fetch(`data/${id}.json`);
-      if (!response.ok) throw new Error(`Chargement de ${id} : ${response.status}`);
-      return response.json();
-    }),
+    COLLECTIONS.map((id) => fetch(`data/${id}.json`).then((res) => res.json())),
   );
-
-  const skills = loaded.find(({ id }) => id === "skills");
-  const prompts = loaded.find(({ id }) => id === "prompts");
-  prompts.sections.push(...associatedPrompts(skills).sections);
-  const totalItems = (collection) => collection.sections.reduce(
-    (total, section) => total + section.groups.reduce((count, group) => count + group.items.length, 0), 0,
-  );
-  const date = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "UTC" })
-    .format(new Date(`${skills.updatedAt}T12:00:00Z`));
-  els.inventory.textContent = `Relevé du ${date} · ${totalItems(skills)} skills · ${totalItems(prompts)} prompts`;
 
   for (const collection of loaded) {
     labels[collection.id] = collection.label;
@@ -645,10 +530,7 @@ async function boot() {
     (id) => id === activeCollection,
     (id) => {
       activeCollection = id;
-      activeCat = "all";
-      history.replaceState(null, "", location.pathname + location.search + (id === "all" ? "" : `#${id}`));
-      buildCategories();
-      renderCollections();
+      applyFilter();
     },
   );
 
@@ -665,12 +547,20 @@ async function boot() {
     },
   );
 
-  buildCategories();
+  buildToggleGroup(
+    els.cats,
+    catEntries(),
+    (id) => id === activeCat,
+    (id) => {
+      activeCat = id;
+      applyFilter();
+    },
+    "cat-chip",
+  );
 
   renderCollections();
 }
 
-window.addEventListener("hashchange", syncCollectionFromHash);
 els.search.addEventListener("input", applyFilter);
 els.emptyReset.addEventListener("click", reset);
 

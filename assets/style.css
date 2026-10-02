@@ -713,21 +713,6 @@ input {
   max-width: none;
 }
 
-.ghost.skill-prompts {
-  height: 32px;
-  padding: 0 0.5rem;
-  font-family: var(--n-data);
-  font-size: 10px;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.ghost.skill-prompts[aria-expanded="true"] {
-  background: var(--n-raise-2);
-  border-color: var(--n-line-2);
-  color: var(--n-t1);
-}
-
 .prompts {
   margin-top: 0.55rem;
   border-radius: var(--n-r);
@@ -985,66 +970,5 @@ input {
 
   .graph {
     animation: none !important;
-  }
-}
-
-.console__count {
-  min-width: 14ch;
-}
-
-.masthead__inventory {
-  margin: 0;
-  color: var(--n-t3);
-  font-size: 10px;
-}
-
-.row__origin {
-  display: block;
-  margin-top: 0.3rem;
-  color: var(--n-t3);
-  font-family: var(--n-data);
-  font-size: 10px;
-}
-
-.row__desc > .prompt {
-  margin-top: 0.6rem;
-}
-
-.prompt__text {
-  overflow-wrap: anywhere;
-}
-
-@media (max-width: 40rem) {
-  .console {
-    position: static;
-  }
-
-  .console__row--sub {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .cats {
-    flex: none;
-    width: 100%;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 0.25rem;
-  }
-
-  .cat-chip {
-    flex: none;
-  }
-
-  #filters {
-    width: 100%;
-    flex-wrap: wrap;
-  }
-
-  .segmented button,
-  .cat-chip,
-  .ghost.skill-prompts,
-  .ghost.prompt__copy {
-    min-height: 40px;
   }
 }
