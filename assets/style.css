@@ -707,21 +707,26 @@ input {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 24px;
-  padding: 0 0.5rem;
-  border-radius: 0;
+  width: 32px;
+  height: 28px;
+  border-radius: var(--n-r-sm);
   background: var(--n-raise);
   color: var(--n-t2);
-  font-family: var(--n-data);
-  font-size: 10px;
   text-decoration: none;
   transition: background 140ms var(--n-ease), color 140ms var(--n-ease);
+}
+
+.row__github svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  pointer-events: none;
 }
 
 .row__github::before {
   content: "";
   position: absolute;
-  inset: -8px 0;
+  inset: -6px -4px;
 }
 
 .row__github:hover {
@@ -1005,7 +1010,7 @@ input {
   }
 
   .row__github::before {
-    inset: -10px 0;
+    inset: -8px -6px;
   }
 
   .prompts__list {
