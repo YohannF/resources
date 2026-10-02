@@ -868,10 +868,24 @@ input {
 }
 
 .ghost.prompt__copy {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
   flex: none;
+  width: 28px;
   height: 24px;
-  padding: 0 0.5rem;
-  font-size: 11px;
+  padding: 0;
+}
+
+.prompt__copy::before {
+  content: "";
+  position: absolute;
+  inset: -8px -6px;
+}
+
+.prompt__copy svg {
+  width: 16px;
+  height: 16px;
 }
 
 .ghost.prompt__copy[data-copied="true"] {
@@ -1090,6 +1104,10 @@ input {
 
   .row__github::before {
     inset: -8px -6px;
+  }
+
+  .prompt__copy::before {
+    inset: -10px -8px;
   }
 
   .prompts__list {

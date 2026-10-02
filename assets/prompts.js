@@ -139,6 +139,17 @@
     return text;
   }
 
+  function setCopyIcon(button, state, label) {
+    const shapes = {
+      copy: '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+      copied: '<path d="m5 12 4 4L19 6"/>',
+      error: '<path d="m6 6 12 12M18 6 6 18"/>',
+    };
+    button.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${shapes[state]}</svg>`;
+    button.title = label;
+    button.setAttribute("aria-label", label);
+  }
+
   function renderCard(prompt, copyLabel, copyText, showTitle = true) {
     const card = document.createElement("article");
     card.className = "prompt";
@@ -153,24 +164,22 @@
     const copy = document.createElement("button");
     copy.type = "button";
     copy.className = "ghost prompt__copy";
-    copy.textContent = "Copier";
-    copy.setAttribute("aria-label", copyLabel);
+    setCopyIcon(copy, "copy", copyLabel);
     let resetTimer;
     copy.addEventListener("click", async () => {
       clearTimeout(resetTimer);
+      delete copy.dataset.copied;
+      delete copy.dataset.error;
       try {
         await copyText(prompt.text);
-        copy.textContent = "Copié";
+        setCopyIcon(copy, "copied", "Prompt copié");
         copy.dataset.copied = "true";
-        copy.setAttribute("aria-label", "Prompt copié");
       } catch {
-        copy.textContent = "Échec";
+        setCopyIcon(copy, "error", "Échec de la copie du prompt");
         copy.dataset.error = "true";
-        copy.setAttribute("aria-label", "Échec de la copie du prompt");
       }
       resetTimer = setTimeout(() => {
-        copy.textContent = "Copier";
-        copy.setAttribute("aria-label", copyLabel);
+        setCopyIcon(copy, "copy", copyLabel);
         delete copy.dataset.copied;
         delete copy.dataset.error;
       }, 1600);
