@@ -153,13 +153,11 @@
   function renderCard(prompt, copyLabel, copyText, showTitle = true) {
     const card = document.createElement("article");
     card.className = "prompt";
-    const head = document.createElement("div");
-    head.className = "prompt__head";
     if (showTitle) {
       const title = document.createElement("h4");
       title.className = "prompt__title";
       title.textContent = prompt.label;
-      head.append(title);
+      card.append(title);
     }
     const copy = document.createElement("button");
     copy.type = "button";
@@ -184,8 +182,7 @@
         delete copy.dataset.error;
       }, 1600);
     });
-    head.append(copy);
-    card.append(head, renderText(prompt.text, prompt.variables));
+    card.append(renderText(prompt.text, prompt.variables), copy);
     return card;
   }
 

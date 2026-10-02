@@ -842,22 +842,17 @@ input {
 .prompt {
   min-width: 0;
   padding: 0.7rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0.55rem 0.6rem;
   border-radius: var(--n-r-sm);
   background: var(--n-panel-solid);
   box-shadow: inset 0 0 0 1px var(--n-line);
 }
 
-.prompt__head {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-}
-
 .prompt__title {
-  flex: 1;
+  grid-column: 1 / -1;
   margin: 0;
   color: var(--n-t3);
   font-family: var(--n-data);
@@ -872,20 +867,20 @@ input {
   display: inline-grid;
   place-items: center;
   flex: none;
-  width: 28px;
-  height: 24px;
+  width: 22px;
+  height: 20px;
   padding: 0;
 }
 
 .prompt__copy::before {
   content: "";
   position: absolute;
-  inset: -8px -6px;
+  inset: -10px -9px;
 }
 
 .prompt__copy svg {
-  width: 16px;
-  height: 16px;
+  width: 13px;
+  height: 13px;
 }
 
 .ghost.prompt__copy[data-copied="true"] {
@@ -909,10 +904,6 @@ input {
 
 .row--prompt .row__desc {
   max-width: none;
-}
-
-.row--prompt .prompt__head {
-  justify-content: flex-end;
 }
 
 .prompt__skill {
@@ -1107,7 +1098,7 @@ input {
   }
 
   .prompt__copy::before {
-    inset: -10px -8px;
+    inset: -12px -11px;
   }
 
   .prompts__list {
