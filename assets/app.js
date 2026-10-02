@@ -156,7 +156,7 @@ function renderRow({ item, collection, source, group }) {
   if (item.text) {
     row.classList.add("row--prompt");
     desc.append(window.resourcePrompts.renderCard(
-      { label: item.name, text: item.text },
+      { label: item.name, text: item.text, variables: item.variables },
       `Copier le prompt ${item.name}`,
       copyText,
       false,
@@ -528,7 +528,7 @@ function reset() {
 
 async function boot() {
   const loaded = await Promise.all(
-    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261002-prompt-retro`).then((res) => res.json())),
+    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261002-prompt-variable`).then((res) => res.json())),
   );
 
   const existingPrompts = loaded.find((collection) => collection.id === "skills").sections
@@ -559,7 +559,11 @@ async function boot() {
     const referencedSkills = new Set(window.resourcePrompts.references(prompt.text)
       .map((reference) => reference.entry.item));
     for (const item of referencedSkills) {
-      item.prompts = [...(item.prompts || []), { label: prompt.name, text: prompt.text }];
+      item.prompts = [...(item.prompts || []), {
+        label: prompt.name,
+        text: prompt.text,
+        variables: prompt.variables,
+      }];
     }
   }
 

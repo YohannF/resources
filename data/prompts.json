@@ -16,7 +16,13 @@
             {
               "name": "Faciliter la navigation des agents dans le repo",
               "cat": "matt's prompt of the day",
-              "text": "/retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. Find where agents take too long to find relevant information, or rely on out-of-date docs."
+              "text": "/retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. Find where agents take too long to find relevant information, or rely on out-of-date docs.",
+              "variables": [
+                {
+                  "value": "10",
+                  "label": "Nombre de sessions à analyser"
+                }
+              ]
             }
           ]
         }

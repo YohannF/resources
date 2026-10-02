@@ -100,12 +100,28 @@
     preview.style.top = `${top}px`;
   }
 
-  function renderText(value) {
+  function appendVariables(target, value, variables = []) {
+    let cursor = 0;
+    for (const match of value.matchAll(/\b\d+\b/g)) {
+      const variable = variables.find((item) => item.value === match[0]);
+      if (!variable) continue;
+      target.append(value.slice(cursor, match.index));
+      const token = document.createElement("span");
+      token.className = "prompt__variable";
+      token.textContent = match[0];
+      token.title = `${variable.label} — valeur à adapter`;
+      target.append(token);
+      cursor = match.index + match[0].length;
+    }
+    target.append(value.slice(cursor));
+  }
+
+  function renderText(value, variables) {
     const text = document.createElement("p");
     text.className = "prompt__text";
     let cursor = 0;
     for (const reference of references(value)) {
-      text.append(value.slice(cursor, reference.start));
+      appendVariables(text, value.slice(cursor, reference.start), variables);
       const button = document.createElement("button");
       button.type = "button";
       button.className = "prompt__skill";
@@ -119,7 +135,7 @@
       text.append(button);
       cursor = reference.end;
     }
-    text.append(value.slice(cursor));
+    appendVariables(text, value.slice(cursor), variables);
     return text;
   }
 
@@ -160,7 +176,7 @@
       }, 1600);
     });
     head.append(copy);
-    card.append(head, renderText(prompt.text));
+    card.append(head, renderText(prompt.text, prompt.variables));
     return card;
   }
 
