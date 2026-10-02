@@ -12,6 +12,11 @@
               "name": "Repérer les modules à supprimer",
               "cat": "matt's prompt of the day",
               "text": "/codebase-design Take a look in the repo for shallow modules, applying the deletion test and look for candidates for deletion. "
+            },
+            {
+              "name": "Faciliter la navigation des agents dans le repo",
+              "cat": "matt's prompt of the day",
+              "text": "/retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. Find where agents take too long to find relevant information, or rely on out-of-date docs."
             }
           ]
         }

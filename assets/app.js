@@ -528,7 +528,7 @@ function reset() {
 
 async function boot() {
   const loaded = await Promise.all(
-    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261002-prompt-references`).then((res) => res.json())),
+    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261002-prompt-retro`).then((res) => res.json())),
   );
 
   const existingPrompts = loaded.find((collection) => collection.id === "skills").sections
