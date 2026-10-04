@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>pstack — guide</title>
+<title>Guide pstack</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -422,19 +422,19 @@
   <input id="find" type="search" placeholder="Filtrer le sommaire" aria-label="Filtrer le sommaire">
   <div class="group">Commencer</div>
   <a href="#mise-en-place">Mise en place</a>
-  <a class="sub" href="#a-faire">À faire avant</a>
+  <a class="sub" href="#a-faire">Les sept étapes</a>
   <a class="sub" href="#feature-map">Carte des fonctions</a>
-  <a class="sub" href="#a-creuser">À creuser</a>
+  <a class="sub" href="#a-creuser">Avant d'aller plus loin</a>
   <div class="group">Guide</div>
-  <a href="#geste">Le geste</a>
-  <a href="#routeur">Le routeur</a>
+  <a href="#geste">Le geste du quotidien</a>
+  <a href="#routeur">Ce que le mode lance seul</a>
   <a href="#comprendre">Comprendre</a>
   <a href="#concevoir">Concevoir</a>
-  <a href="#construire">Construire</a>
-  <a href="#livrer">Livrer</a>
-  <a href="#nuit">La nuit</a>
+  <a href="#construire">Trois tâches courantes</a>
+  <a href="#livrer">Ouvrir une PR</a>
+  <a href="#nuit">Le laisser travailler seul</a>
   <a href="#principes">Principes</a>
-  <a href="#connexions">Connexions</a>
+  <a href="#connexions">Qui appelle qui</a>
   <div class="group">Skills</div>
   <a class="sub" href="#skill-poteto-mode">/poteto-mode</a>
   <a class="sub" href="#skill-setup-pstack">/setup-pstack</a>
@@ -451,6 +451,7 @@
   <a class="sub" href="#skill-unslop">/unslop</a>
   <a class="sub" href="#skill-technical-writing">/technical-writing</a>
   <a class="sub" href="#skill-no-comments">/no-comments</a>
+  <a class="sub" href="#skill-bro">/bro</a>
   <a class="sub" href="#skill-deslop">/deslop</a>
   <a class="sub" href="#skill-show-me-your-work">/show-me-your-work</a>
   <a class="sub" href="#skill-figure-it-out">/figure-it-out</a>
@@ -460,9 +461,8 @@
   <a class="sub" href="#skill-create-verification-skill">/create-verification-skill</a>
   <a class="sub" href="#skill-maintain-verification-skill">/maintain-verification-skill</a>
   <a class="sub" href="#skill-blast-radius">/blast-radius</a>
-  <a class="sub" href="#skill-bro">/bro</a>
   <a class="sub" href="#skill-typescript">typescript</a>
-  <div class="group">Suite</div>
+  <div class="group">Référence</div>
   <a href="#playbooks">Playbooks</a>
   <a href="#memo">Mémo</a>
 </nav>
@@ -470,255 +470,259 @@
 <main>
   <p class="lede">Première lecture · version 0.15.9 · 4 octobre 2026</p>
   <h1>pstack, depuis zéro</h1>
-  <p class="lede">pstack est un ajout pour Cursor. Il donne à l'agent des recettes écrites, pour qu'il code moins, et qu'il prouve ce qu'il a fait. Tu n'as rien à installer dans le projet. Tu tapes des commandes dans le chat.</p>
-  <p>Lis cette page de haut en bas la première fois. <kbd>⌘</kbd><kbd>K</kbd> cherche un mot, ou ce que tu veux faire. Les commandes sont en <span class="skill-swatch">bleu vif</span> : un survol montre un résumé et le fichier d'origine. Les renvois vers une section sont en <span class="link-swatch">bleu</span>.</p>
+  <p class="lede">pstack est un plugin pour Cursor, écrit par Lauren Tan (poteto). Il apprend à l'agent une façon de travailler : comprendre avant de modifier, écrire le moins de code possible, et prouver que le résultat marche. Rien à installer dans ton projet, tout passe par des commandes dans le chat.</p>
+  <p>La première fois, lis la page dans l'ordre. Ensuite, <kbd>⌘</kbd><kbd>K</kbd> cherche un mot ou ce que tu veux faire. Les skills sont en <span class="skill-swatch">bleu vif</span> : survole-les pour voir un résumé et le fichier d'origine. Les renvois vers une autre section de la page sont en <span class="link-swatch">bleu</span>.</p>
 
   <section id="mise-en-place">
     <h2>Mise en place</h2>
     <p>Trois mots reviennent partout.</p>
     <ul>
-      <li>Une <strong>commande</strong> commence par <code>/</code>. Tu l'écris au début d'un message dans le chat Cursor, comme <code>/add-plugin pstack</code>.</li>
-      <li>Un <strong>skill</strong> est une fiche d'instructions que l'agent lit avant d'agir. Chaque commande en bleu vif de ce guide en est un.</li>
-      <li>Un <strong>playbook</strong> est une liste d'étapes pour un type de travail : corriger un bug, ajouter un comportement, ouvrir une proposition de changement. Tu ne les nommes presque jamais. L'agent choisit.</li>
+      <li>Une <strong>commande</strong> commence par <code>/</code> et se tape en début de message dans le chat Cursor, par exemple <code>/add-plugin pstack</code>.</li>
+      <li>Un <strong>skill</strong> est un fichier d'instructions, le <code>SKILL.md</code>, que l'agent lit avant d'agir. Chaque commande en bleu vif de ce guide correspond à un skill.</li>
+      <li>Un <strong>playbook</strong> est la marche à suivre pour un type de travail : corriger un bug, ajouter une fonctionnalité, ouvrir une PR. Tu n'as presque jamais à le nommer, l'agent le choisit.</li>
     </ul>
-    <p>Un <strong>modèle</strong>, c'est le moteur d'IA derrière une réponse. Cursor en a plusieurs. pstack en assigne un par genre de travail : l'écriture de code, le jugement, la relecture. Tu choisis ça une fois.</p>
+    <p>Enfin, un <strong>modèle</strong> est l'IA qui produit la réponse. Cursor en propose plusieurs, et pstack en attribue un à chaque rôle : écrire du code, juger, relire. Ce réglage se fait une fois, à l'installation.</p>
 
-    <h3 id="a-faire">À faire avant la première vraie tâche</h3>
+    <h3 id="a-faire">Les sept étapes avant la première vraie tâche</h3>
     <ol class="steps">
       <li>
         <div>
           <strong>Installer le plugin.</strong>
           <p>Dans un chat Cursor, envoie :</p>
           <pre>/add-plugin pstack</pre>
-          <p>Cursor demande une confirmation. Ce guide décrit la version 0.15.9. Tant que cette commande n'a pas réussi, les suivantes n'existent pas.</p>
+          <p>Cursor demande une confirmation. Ce guide décrit la version 0.15.9. Tant que l'installation n'a pas réussi, aucune des commandes suivantes n'existe.</p>
         </div>
       </li>
       <li>
         <div>
-          <strong>Choisir les modèles avec <a class="ref" href="#skill-setup-pstack">/setup-pstack</a>.</strong>
-          <p>La commande détecte les modèles auxquels tu as droit, te demande un niveau d'effort (du plus léger au maximum), puis te montre une ligne par rôle. Tu peux accepter. Elle écrit un petit fichier de réglage, <code>~/.cursor/rules/pstack-models.mdc</code>. Ouvre ensuite un <em>nouveau</em> chat : l'ancien ne voit pas encore ce fichier.</p>
-          <p>Deux mots spéciaux, <code>auto</code> et <code>inherit-parent</code>, veulent dire « garde le même modèle que ce chat ». Ce ne sont pas des noms de modèles.</p>
+          <strong>Régler les modèles avec <a class="ref" href="#skill-setup-pstack">/setup-pstack</a>.</strong>
+          <p>Le skill détecte les modèles auxquels tu as accès et te demande un budget, de <code>small</code> à <code>unlimited</code>. Il affiche ensuite le modèle prévu pour chaque rôle, et tu peux tout accepter tel quel. Le réglage est écrit dans <code>~/.cursor/rules/pstack-models.mdc</code>. Ouvre ensuite un <em>nouveau</em> chat, car celui en cours ne voit pas encore ce fichier.</p>
+          <p><code>auto</code> et <code>inherit-parent</code> ne sont pas des noms de modèles. Ces deux valeurs veulent dire « utilise le même modèle que le chat principal ».</p>
         </div>
       </li>
       <li>
         <div>
-          <strong>Installer le plugin voisin, cursor-team-kit.</strong>
-          <p>Même geste : <code>/add-plugin cursor-team-kit</code>. pstack s'en sert pour nettoyer le code avant un enregistrement git (<a class="ref" href="#skill-deslop">/deslop</a>) et pour cliquer dans une interface ou un terminal quand il doit prouver qu'une chose marche. Sans ce plugin, demande la même chose en français clair.</p>
+          <strong>Installer le plugin compagnon, cursor-team-kit.</strong>
+          <p>Même geste : <code>/add-plugin cursor-team-kit</code>. pstack s'appuie dessus pour nettoyer le code avant un commit (<a class="ref" href="#skill-deslop">/deslop</a>) et pour piloter une interface ou un terminal quand il doit prouver qu'une chose marche (<code>control-ui</code>, <code>control-cli</code>). Sans ce plugin, il faut demander ces étapes à l'agent en toutes lettres.</p>
         </div>
       </li>
       <li>
         <div>
-          <strong>Donner à l'agent le moyen de vérifier tout seul.</strong>
-          <p>C'est l'étape que Lauren Tan, l'autrice de pstack, place avant toutes les autres. Sans elle, tu restes le goulot : tu copies des captures, tu colles des erreurs, et tu ne peux pas faire confiance à un seul agent, donc encore moins à plusieurs. Compiler, ou voir des tests passer, ne ferme pas la boucle. L'agent doit pouvoir lancer l'application, la parcourir comme toi, et garder une preuve.</p>
-          <p>Sur un projet neuf, envoie <a class="ref" href="#skill-create-verification-skill">/create-verification-skill</a>. La commande regarde le dépôt et écrit une fiche dans <code>.cursor/skills/</code>. Elle l'essaie une fois de bout en bout avant de te la donner. Si cet essai échoue, ne t'en sers pas. <a class="ref" href="#skill-setup-pstack">/setup-pstack</a> la propose aussi, une seule fois, s'il ne trouve rien.</p>
-          <p>Elle veut un petit outil en ligne de commande, pas seulement un mode d'emploi. L'agent tape une commande au lieu d'inventer un script à chaque clic. Les erreurs disent quoi faire ensuite. Une commande qui pourrait casser quelque chose a une option pour simuler sans rien toucher. Les réponses sont lisibles par une machine, par exemple en JSON. Rends cet outil fiable avant d'aller plus loin : compte de test, données de démo, lancement toujours identique.</p>
-          <p>Sur Nav Builder, la fiche existe déjà. Elle s'appelle verify-nav-builder. Avant une tâche visible, lance <code>bin/launch</code> puis <code>bin/doctor</code>. Le doctor doit répondre OK. S'il échoue, règle ça avant de confier un écran. Un exemple public, pour une application fictive : <a href="https://github.com/poteto/verification-skill-example">verification-skill-example</a>.</p>
+          <strong>Donner à l'agent un moyen de vérifier seul.</strong>
+          <p>C'est l'étape que Lauren Tan place avant toutes les autres. Sans elle, c'est toi qui vérifies : tu fais des captures, tu colles des messages d'erreur, et tu ne peux pas faire confiance à un agent seul, encore moins à plusieurs. Que le code compile ou que les tests passent ne suffit pas. L'agent doit pouvoir lancer l'application, s'en servir comme toi, et garder une preuve.</p>
+          <p>Sur un projet qui n'en a pas encore, lance <a class="ref" href="#skill-create-verification-skill">/create-verification-skill</a>. Il étudie le dépôt et génère un skill de vérification propre au projet, dans <code>.cursor/skills/verify-&lt;app&gt;/</code> : comment lancer l'app, comment vérifier qu'elle répond, comment la piloter, quelle preuve garder, comment tout arrêter. Il le fait tourner une fois de bout en bout avant de te le remettre, car un skill de vérification qui n'a jamais tourné n'est qu'un brouillon. <a class="ref" href="#skill-setup-pstack">/setup-pstack</a> le propose aussi, une seule fois, s'il ne trouve rien dans le projet.</p>
+          <p>Lauren conseille d'y joindre un petit outil en ligne de commande plutôt qu'un simple mode d'emploi. L'agent tape alors une commande au lieu de réinventer un script à chaque clic. Les messages d'erreur de l'outil disent quoi faire ensuite, une commande risquée a un mode simulation qui ne touche à rien, et la sortie est lisible par une machine, en JSON par exemple. Rends cet outil fiable avant d'aller plus loin : compte de test, données de démo, lancement toujours identique.</p>
+          <p>Sur Nav Builder, ce skill existe déjà et s'appelle verify-nav-builder. Avant une tâche visible, lance <code>bin/launch</code> puis <code>bin/doctor</code> depuis le dossier du skill. Le doctor doit répondre OK. Sinon, règle le problème avant de confier un écran à l'agent. Pour un exemple public, sur une application fictive : <a href="https://github.com/poteto/verification-skill-example">verification-skill-example</a>.</p>
         </div>
       </li>
       <li>
         <div>
-          <strong id="feature-map">Laisser la commande écrire la carte des fonctions.</strong>
-          <p>Lauren raconte qu'un agent savait ouvrir la fenêtre et prendre des mesures, sans savoir ce qu'était la fenêtre. « La barre de gauche rame » ou « l'onglet des propositions est cassé », et il tournait en rond, sans savoir où cliquer. Une capture Slack avec trois points d'interrogation ne lui dit rien non plus.</p>
-          <p>La feature map est cette carte, du point de vue de la personne qui utilise l'app. Tu ne l'écris pas à la main. <a class="ref" href="#skill-create-verification-skill">/create-verification-skill</a> parcourt l'application et la rédige. Le README est l'index. Chaque fonction a un fichier, dans <code>features/</code>, à côté du skill. Quatre parties.</p>
+          <strong id="feature-map">Laisser le skill écrire la carte des fonctions.</strong>
+          <p>Lauren raconte le cas d'un agent qui savait ouvrir la fenêtre de l'application et y prendre des mesures, mais ignorait ce que contenait cette fenêtre. Face à « la barre de gauche rame » ou « l'onglet des propositions est cassé », il tournait en rond, faute de savoir où cliquer. Une capture postée sur Slack avec trois points d'interrogation ne l'aidait pas davantage.</p>
+          <p>La carte des fonctions (la <em>feature map</em>) décrit l'application du point de vue de la personne qui s'en sert. Tu ne l'écris pas à la main : <a class="ref" href="#skill-create-verification-skill">/create-verification-skill</a> en amorce une avec les trois à cinq fonctions principales qu'il repère dans les routes, les menus ou la doc. Elle vit dans le dossier <code>features/</code> du skill de vérification, avec un README qui sert d'index et un fichier par fonction. Chaque fichier a quatre parties :</p>
           <ul>
-            <li>Les sous-fonctions, avec un nom court.</li>
-            <li>Comment un humain y arrive : un bouton, un raccourci.</li>
-            <li>Comment l'agent y arrive, avec les commandes exactes.</li>
-            <li>Les pièges : un onglet réservé à certains comptes, un focus perdu si on ferme trop tôt.</li>
+            <li>les sous-fonctions, chacune avec un nom court ;</li>
+            <li>comment un humain y accède : un bouton, un raccourci ;</li>
+            <li>comment l'agent la pilote, avec les commandes exactes ;</li>
+            <li>les pièges : un onglet réservé à certains comptes, un focus perdu si on ferme trop tôt.</li>
           </ul>
-          <p>Le code reste la vérité. La carte évite à l'agent de tout relire pour savoir où cliquer. Comme l'application bouge, lance <a class="ref" href="#skill-maintain-verification-skill">/maintain-verification-skill</a> au moins une fois par jour. Elle remet la carte à jour, et elle ne modifie pas le produit pour faire passer le contrôle. Les agents corrigent parfois la carte en travaillant. La passe du jour rattrape le reste.</p>
+          <p>Le code reste la référence. La carte évite simplement à l'agent de tout relire pour savoir où cliquer. Comme l'application évolue, Lauren lance <a class="ref" href="#skill-maintain-verification-skill">/maintain-verification-skill</a> au moins une fois par jour. Il rejoue chaque fonction dans l'app, corrige la carte si elle a dérivé, et ne touche jamais au produit pour faire passer la vérification. Les agents corrigent parfois la carte en cours de route, et la passe quotidienne rattrape le reste.</p>
         </div>
       </li>
       <li>
         <div>
-          <strong>Une question, sur un bout de code que tu connais.</strong>
-          <p>Tape <a class="ref" href="#skill-how">/how</a> suivi d'une question courte. Lis la réponse. Si elle invente, tu le verras, parce que tu connais ce coin. Ensuite seulement, une question <a class="ref" href="#skill-why">/why</a> : pourquoi ce choix a été fait. <a class="ref" href="#skill-teach">/teach</a> mélange les deux quand tu veux comprendre, sans que le code change. Avant tout correctif sur un message flou, demande d'abord une reformulation, dans les mots de l'agent. Si elle s'accroche à un détail inutile, tu le vois avant qu'elle code.</p>
-          <pre>/poteto-mode lis ce fil. reformule en français simple ce que tu crois être le vrai problème.</pre>
+          <strong>Poser une question sur du code que tu connais.</strong>
+          <p>Tape <a class="ref" href="#skill-how">/how</a> suivi d'une question courte, sur une partie du code que tu connais bien. Si la réponse invente, tu le verras tout de suite. Essaie ensuite <a class="ref" href="#skill-why">/why</a>, qui explique pourquoi un choix a été fait. <a class="ref" href="#skill-teach">/teach</a> combine les deux quand tu veux comprendre sans rien modifier.</p>
+          <p>Avant de demander un correctif à partir d'un message flou, comme un ticket ou un fil Slack, demande d'abord à l'agent de reformuler le problème avec ses mots. S'il s'accroche à un détail sans importance, tu le vois avant qu'il code.</p>
+          <pre>/poteto-mode lis ce fil. reformule simplement ce que tu crois être le vrai problème.</pre>
         </div>
       </li>
       <li>
         <div>
-          <strong>Une première tâche petite, prouvée dans l'app.</strong>
-          <p>Dis ce que tu veux, ce qui ne doit pas changer, et demande la preuve via le skill de vérification. Dans Cursor, après l'autocomplétion de <a class="ref" href="#skill-poteto-mode">/poteto-mode</a>, Option et Entrée l'épinglent : l'agent se la rappelle à chaque tour. Évite pour ce premier essai les nuits automatiques et les files de propositions à fusionner.</p>
-          <pre>/poteto-mode ajoute un garde sur ce champ. le texte déjà affiché reste identique. sers-toi du skill de vérification, et montre-moi une capture comme preuve.</pre>
+          <strong>Une première petite tâche, prouvée dans l'app.</strong>
+          <p>Dis ce que tu veux, ce qui ne doit pas changer, et demande une preuve obtenue avec le skill de vérification. Dans Cursor, quand l'autocomplétion propose <a class="ref" href="#skill-poteto-mode">/poteto-mode</a>, <kbd>⌥</kbd><kbd>Entrée</kbd> l'épingle : le mode est alors rappelé à l'agent à chaque tour. Pour ce premier essai, évite le travail de nuit et les files de PR à fusionner.</p>
+          <pre>/poteto-mode ajoute une validation sur ce champ. le texte déjà affiché ne change pas. sers-toi du skill de vérification et montre-moi une capture comme preuve.</pre>
         </div>
       </li>
     </ol>
 
     <h3 id="a-creuser">Avant d'aller plus loin</h3>
     <ul>
-      <li>Les noms de la section <a href="#principes">Principes</a>. Tu les diras plus tard, en une phrase, pour corriger une dérive. Inutile de les apprendre par cœur maintenant.</li>
-      <li>Deux chats dans les mêmes fichiers s'écrasent. Pour quelques agents sur ta machine, chacun a sa copie, un worktree. <a class="ref" href="#skill-arena">/arena</a> les crée tout seul. Lauren, elle, déconseille d'en empiler des dizaines en local : ça remplit le disque. Quand le skill de vérification est solide, elle passe aux agents cloud de Cursor, qui ont un ordinateur à eux et peuvent lancer l'app, filmer, cliquer.</li>
-      <li>Quand tu changes de sujet dans le même chat, commence par <code>new task</code>. Sinon l'agent continue la tâche d'avant.</li>
-      <li><a class="ref" href="#skill-arena">/arena</a> et <a class="ref" href="#skill-swarm">/swarm</a> se ressemblent et ne font pas la même chose. La section <a href="#concevoir">Concevoir</a> les sépare. <a class="ref" href="#skill-swarm">/swarm</a> sert aussi à rejouer le skill de vérification plusieurs fois, pour confirmer un gain de vitesse sur assez d'essais.</li>
-      <li>Au début, lis les appels d'outils et les blocs de réflexion. C'est là que tu vois où l'agent échoue, et donc quelle fiche écrire. Lauren a amélioré son outil de vérification en boucle, avec <code>/loop</code>, jusqu'à une note haute. Les premiers essais n'étaient pas fluides.</li>
+      <li>Parcours les noms de la section <a href="#principes">Principes</a>. Tu les citeras plus tard, en une phrase, pour recadrer l'agent. Inutile de les apprendre maintenant.</li>
+      <li>Deux agents qui travaillent dans les mêmes fichiers s'écrasent l'un l'autre. Pour en faire tourner plusieurs sur ta machine, chacun a sa propre copie du dépôt, un worktree, et <a class="ref" href="#skill-arena">/arena</a> les crée tout seul. Lauren déconseille quand même d'en empiler des dizaines en local, car le disque sature. Une fois son skill de vérification solide, elle passe aux agents cloud de Cursor, qui ont leur propre machine et peuvent lancer l'app, cliquer et filmer.</li>
+      <li>Pour changer de sujet dans le même chat, commence ton message par <code>new task</code>. Sinon, l'agent poursuit la tâche précédente.</li>
+      <li><a class="ref" href="#skill-arena">/arena</a> et <a class="ref" href="#skill-swarm">/swarm</a> se ressemblent mais ne font pas la même chose. La section <a href="#concevoir">Concevoir</a> les distingue.</li>
+      <li>Au début, lis les appels d'outils et les blocs de réflexion de l'agent. C'est là que tu vois où il bute, et donc quel skill écrire ou corriger. Lauren elle-même a amélioré son outil de vérification en boucle, avec <code>/loop</code>, jusqu'à obtenir une bonne note. Les premiers essais étaient laborieux.</li>
     </ul>
-    <div class="note"><p>Laisser l'agent tourner pendant que tu dors vient après un petit essai dont tu as lu la preuve. « Travaille quatre heures » n'est pas une fin. Ses textes : <a href="https://threadnavigator.com/thread/2094457600259842065/">partie 1</a>, <a href="https://threadnavigator.com/thread/2097732320606507506/">partie 2</a>, <a href="https://www.youtube.com/watch?v=Cmoh-yR-usA">l'atelier</a>.</p></div>
+    <div class="note"><p>Laisser l'agent tourner pendant que tu dors ne vient qu'après un petit essai dont tu as lu la preuve. Et « travaille quatre heures » n'est pas un critère de fin. Pour aller plus loin, les textes de Lauren : <a href="https://threadnavigator.com/thread/2094457600259842065/">partie 1</a>, <a href="https://threadnavigator.com/thread/2097732320606507506/">partie 2</a>, et <a href="https://www.youtube.com/watch?v=Cmoh-yR-usA">l'atelier en vidéo</a>.</p></div>
   </section>
 
   <section id="geste">
     <h2>Le geste du quotidien</h2>
-    <p>Une fois installé, presque tout commence par <a class="ref" href="#skill-poteto-mode">/poteto-mode</a>. Tu décris le problème comme à un collègue, et tu dis comment tu sauras que c'est fini. L'agent choisit une des 23 listes d'étapes, les affiche dans sa liste de tâches, et les suit. S'il en saute une, la ligne reste, avec <code>skip:</code> et la raison. Tu vois donc ce qu'il a choisi de ne pas faire.</p>
-    <pre>/poteto-mode l'export écrit des lignes en double quand un nouvel essai tombe en plein milieu. reproduis d'abord, puis corrige, et vérifie.</pre>
-    <p>« reproduis d'abord » suffit pour qu'il prenne la liste « corriger un bug ». Tu n'as pas à écrire le nom de cette liste. Le mode reste actif dans ce chat jusqu'à ce que tu dises de l'arrêter. Si la suite est évidente, <code>continue</code> suffit.</p>
-    <p>Pour les gros morceaux, l'agent ouvre d'autres agents, chacun avec une copie fraîche de la demande. Cinq commandes ont leur propre façon de le faire : <a class="ref" href="#skill-how">/how</a>, <a class="ref" href="#skill-why">/why</a>, <a class="ref" href="#skill-interrogate">/interrogate</a>, <a class="ref" href="#skill-reflect">/reflect</a> et <a class="ref" href="#skill-swarm">/swarm</a>. Tu n'as pas à t'en occuper.</p>
+    <p>Une fois pstack installé, presque tout commence par <a class="ref" href="#skill-poteto-mode">/poteto-mode</a>. Décris le problème comme à un collègue, et dis comment tu sauras que c'est fini. L'agent choisit l'un des 23 playbooks, en recopie les étapes dans sa liste de tâches et les suit. S'il en saute une, elle reste dans la liste, précédée de <code>skip:</code> et de la raison. Tu vois donc aussi ce qu'il a choisi de ne pas faire.</p>
+    <pre>/poteto-mode l'export écrit des lignes en double quand une nouvelle tentative arrive en plein milieu. reproduis d'abord, puis corrige et vérifie.</pre>
+    <p>« Reproduis d'abord » suffit pour qu'il choisisse le playbook Bug fix, inutile de le nommer. Le mode reste actif dans ce chat jusqu'à ce que tu lui dises d'arrêter. Quand la suite est évidente, <code>continue</code> suffit.</p>
+    <p>Pour les gros morceaux, l'agent délègue à des sous-agents. Chacun repart d'une consigne complète plutôt que de l'historique du chat. Cinq skills choisissent eux-mêmes leurs sous-agents : <a class="ref" href="#skill-how">/how</a>, <a class="ref" href="#skill-why">/why</a>, <a class="ref" href="#skill-interrogate">/interrogate</a>, <a class="ref" href="#skill-reflect">/reflect</a> et <a class="ref" href="#skill-swarm">/swarm</a>. Tu n'as pas à t'en occuper.</p>
   </section>
 
   <section id="routeur">
-    <h2>Ce que le mode lance tout seul</h2>
-    <p>Tu n'as pas à citer ces commandes. <a class="ref" href="#skill-poteto-mode">/poteto-mode</a> les sort quand la situation correspond.</p>
+    <h2>Ce que le mode lance seul</h2>
+    <p>Tu n'as pas à citer ces skills. <a class="ref" href="#skill-poteto-mode">/poteto-mode</a> les appelle quand la situation s'y prête.</p>
     <ul>
-      <li>Tu demandes comment quelque chose marche, ou si on est sûrs : <a class="ref" href="#skill-how">/how</a>.</li>
-      <li>La modification touche plusieurs fonctions : <a class="ref" href="#skill-architect">/architect</a>, qui dessine avant d'écrire.</li>
-      <li>Il faut couvrir beaucoup de dossiers, ou faire la course entre des options déjà séparées : <a class="ref" href="#skill-swarm">/swarm</a>. Il faut plusieurs essais du même problème, puis garder le meilleur mélange : <a class="ref" href="#skill-arena">/arena</a>.</li>
-      <li>Le dessin est contesté : <a class="ref" href="#skill-interrogate">/interrogate</a> le fait relire par d'autres modèles. Rien n'est appliqué sans tri.</li>
-      <li>La réponse elle-même est nettoyée par <a class="ref" href="#skill-unslop">/unslop</a>. Un document, un README ou le texte d'une proposition passe par <a class="ref" href="#skill-technical-writing">/technical-writing</a>.</li>
-      <li>Avant d'enregistrer dans git : <a class="ref" href="#skill-deslop">/deslop</a>. Avant une relecture des commentaires : <a class="ref" href="#skill-no-comments">/no-comments</a>.</li>
-      <li>Un chiffre mesuré (un temps, un débit) : <a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a> avant de te l'annoncer.</li>
-      <li>Tu t'absentes : <a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a> tient un journal. Si aucune liste d'étapes ne convient : <a class="ref" href="#skill-figure-it-out">/figure-it-out</a>.</li>
+      <li>Un changement non trivial, une décision d'architecture, ou un doute du type « on est sûrs ? » : <a class="ref" href="#skill-how">/how</a>.</li>
+      <li>Un changement qui touche plusieurs fonctions : <a class="ref" href="#skill-architect">/architect</a>, qui conçoit avant de coder.</li>
+      <li>Du travail à répartir entre plusieurs agents, pour couvrir beaucoup de terrain ou faire la course : <a class="ref" href="#skill-swarm">/swarm</a>. Plusieurs tentatives du même problème, dont on garde la meilleure enrichie des autres : <a class="ref" href="#skill-arena">/arena</a>.</li>
+      <li>Une conception contestée : <a class="ref" href="#skill-interrogate">/interrogate</a> la fait attaquer par plusieurs modèles. Rien n'est appliqué sans tri.</li>
+      <li>Tout texte passe par <a class="ref" href="#skill-unslop">/unslop</a>, y compris les réponses de l'agent. Une doc, un README, une description de PR ou un message de commit passent aussi par <a class="ref" href="#skill-technical-writing">/technical-writing</a>.</li>
+      <li>Avant un commit : <a class="ref" href="#skill-deslop">/deslop</a>. Avant de demander une relecture : <a class="ref" href="#skill-no-comments">/no-comments</a>.</li>
+      <li>Un chiffre mesuré, comme un temps ou un débit : <a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a>, avant de te l'annoncer.</li>
+      <li>Une question sur l'état d'une PR : le playbook Babysit.</li>
+      <li>Une tâche longue, ou que tu reliras après t'être absenté : <a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a> tient un journal. Un gros chantier, ou aucun playbook ne convient : <a class="ref" href="#skill-figure-it-out">/figure-it-out</a>.</li>
     </ul>
-    <p>Le réglage des modèles se fait dans <a class="ref" href="#skill-setup-pstack">/setup-pstack</a>. Par défaut, sans ce réglage, le code part vers Grok, et le jugement vers Claude. Tu peux tout changer.</p>
+    <p>Les modèles se règlent dans <a class="ref" href="#skill-setup-pstack">/setup-pstack</a>. Sans réglage, le code part vers Grok, le jugement et la rédaction vers Claude Opus, et les panels de relecture mélangent Claude, GPT et Grok. Tout se change.</p>
   </section>
 
   <section id="comprendre">
-    <h2>Comprendre avant de modifier</h2>
-    <p><a class="ref" href="#skill-how">/how</a> répond à « comment ça marche maintenant ». <a class="ref" href="#skill-why">/why</a> répond à « pourquoi c'est fait comme ça ». L'un n'appelle pas l'autre. C'est toi, ou une liste d'étapes, ou <a class="ref" href="#skill-teach">/teach</a>, qui les demande ensemble.</p>
-    <p>Sur une petite question, <a class="ref" href="#skill-how">/how</a> lit et explique. Sur un gros morceau du projet, il envoie d'abord plusieurs lecteurs en parallèle, puis un autre agent rédige l'explication. Tu reçois ce texte, pas un résumé réécrit par-dessus.</p>
-    <p><a class="ref" href="#skill-why">/why</a> commence par l'historique git : qui a touché ces lignes, dans quel commit, quelle proposition. Ensuite il interroge, s'ils sont branchés, le suivi de tickets, la documentation, le chat d'équipe, les erreurs en production. Il distingue ce qui est écrit de ce qu'il déduit. S'il n'a rien trouvé, il le dit. C'est une réponse.</p>
-    <p><a class="ref" href="#skill-teach">/teach</a> sert quand tu veux comprendre, pas quand tu veux un correctif. Lauren s'en sert pour se faire prouver un choix : pourquoi cette voie, et pas une autre, et quels compromis. Cet effort aide aussi l'agent, qui arrête d'affirmer sans avoir lu. <a class="ref" href="#skill-recall">/recall</a> recharge les chats des jours précédents, pour ne pas reconstruire le contexte à chaque nouvelle conversation.</p>
+    <h2>Comprendre</h2>
+    <p><a class="ref" href="#skill-how">/how</a> répond à « comment ça marche aujourd'hui ? », <a class="ref" href="#skill-why">/why</a> à « pourquoi est-ce fait comme ça ? ». L'un n'appelle pas l'autre. C'est toi, un playbook ou <a class="ref" href="#skill-teach">/teach</a> qui les lance ensemble.</p>
+    <p>Pour une question simple, <a class="ref" href="#skill-how">/how</a> confie la lecture et l'explication à un seul agent. Pour un sous-système entier, il envoie d'abord deux à quatre explorateurs en parallèle, puis un autre agent rédige l'explication à partir de leurs notes. Tu reçois ce texte tel quel, pas un résumé réécrit par-dessus.</p>
+    <p><a class="ref" href="#skill-why">/why</a> commence par l'historique git : qui a modifié ces lignes, dans quel commit, dans quelle PR. Ensuite, si ces outils sont branchés, il interroge le suivi de tickets, la documentation, le chat d'équipe et le suivi des erreurs en production. Il distingue ce qui est écrit de ce qu'il déduit. S'il ne trouve rien, il le dit, et c'est déjà une réponse.</p>
+    <p><a class="ref" href="#skill-teach">/teach</a> sert quand tu veux comprendre, pas obtenir un correctif. Lauren s'en sert pour se faire démontrer un choix : pourquoi cette approche plutôt qu'une autre, et avec quels compromis. L'exercice profite aussi à l'agent, qui cesse d'affirmer sans avoir lu. Enfin, <a class="ref" href="#skill-recall">/recall</a> reconstitue où tu en étais à partir de tes chats des jours précédents, pour ne pas tout réexpliquer à chaque nouvelle conversation.</p>
   </section>
 
   <section id="concevoir">
-    <h2>Dessiner avant d'écrire</h2>
-    <p>Quand un changement traverse plusieurs fonctions, <a class="ref" href="#skill-architect">/architect</a> s'arrête pour dessiner. Il demande d'abord <a class="ref" href="#skill-how">/how</a> sur les morceaux touchés. Il demande <a class="ref" href="#skill-why">/why</a> seulement si le changement déplace « qui possède quoi ». Puis il lance <a class="ref" href="#skill-arena">/arena</a> : plusieurs modèles proposent un dessin, chacun dans sa copie du projet, en commençant par la façon dont le reste du code s'en servira. Un modèle d'une autre famille note les propositions. On en garde une, et on y reporte les bonnes idées des autres. Après le code, <a class="ref" href="#skill-how">/how</a> relit ce qui a été construit.</p>
-    <p>Si tu veux voir le dessin avant qu'il code, ajoute <code>with checkpoint</code>. S'il y a désaccord, <a class="ref" href="#skill-interrogate">/interrogate</a> fait relire l'esquisse. Lauren jette le dessin quand il se révèle faux en l'écrivant : le même contournement revient partout, ou les types doivent être forcés. Elle ne fait pas relire un plan encore abstrait. Les agents inventent alors des risques qui n'arriveront pas. Elle fait prototyper deux ou trois variantes, les fait conduire avec le skill de vérification, et choisit sur des captures.</p>
-    <pre>/poteto-mode prototype quelques options pour ce menu. sers-toi du skill de vérification, et prends des captures pour que je choisisse.</pre>
-    <h3>Deux façons de lancer plusieurs agents</h3>
-    <p><a class="ref" href="#skill-arena">/arena</a> donne le même problème à plusieurs agents. À la fin, un seul résultat, enrichi des meilleures idées. Utile pour un nom, un format, un algorithme que tu ne voudras pas changer dans trois mois.</p>
-    <p><a class="ref" href="#skill-swarm">/swarm</a> donne à chaque agent un morceau différent : un dossier, un paquet, une case d'une liste. Chacun répond réussi, problèmes, ou bloqué. Tu reçois un seul rapport. Utile pour vérifier beaucoup de choses en parallèle. Il n'y a pas de mélange des réponses.</p>
-    <p><a class="ref" href="#skill-interrogate">/interrogate</a> envoie le même changement à plusieurs modèles, pour qu'ils essaient de le casser. Le responsable trie : à faire, à considérer, noté, écarté, avec une raison pour chaque écart. Tu peux contredire ce tri. Rien n'est modifié tout seul.</p>
+    <h2>Concevoir</h2>
+    <p>Quand un changement touche plusieurs fonctions, <a class="ref" href="#skill-architect">/architect</a> s'arrête pour concevoir avant d'écrire. Il lance d'abord <a class="ref" href="#skill-how">/how</a> sur les parties concernées, et <a class="ref" href="#skill-why">/why</a> seulement si le changement déplace une responsabilité d'un module à un autre. Puis il passe par <a class="ref" href="#skill-arena">/arena</a> : plusieurs modèles proposent chacun une conception dans leur propre copie du projet, en partant de la façon dont le reste du code l'utilisera. Un modèle d'une autre famille les évalue, on en retient une, et on y greffe les bonnes idées des autres. Une fois le code écrit, <a class="ref" href="#skill-how">/how</a> relit ce qui a été construit.</p>
+    <p>Pour valider la conception avant qu'il code, ajoute <code>with checkpoint</code> à ta demande. En cas de désaccord, <a class="ref" href="#skill-interrogate">/interrogate</a> fait relire l'esquisse. Lauren abandonne une conception dès que l'écriture du code la contredit : le même contournement revient partout, ou il faut forcer les types. En revanche, elle ne fait pas relire un plan encore abstrait, parce que les agents inventent alors des risques qui n'arriveront jamais. Elle fait plutôt prototyper deux ou trois variantes, les fait parcourir avec le skill de vérification, et choisit sur captures.</p>
+    <pre>/poteto-mode prototype quelques options pour ce menu. sers-toi du skill de vérification et prends des captures pour que je choisisse.</pre>
+    <h3>Arena, swarm, interrogate</h3>
+    <p><a class="ref" href="#skill-arena">/arena</a> confie le même problème à plusieurs agents et rend un seul résultat : la meilleure tentative, enrichie des bonnes idées des autres. C'est utile pour un nom, un format ou un algorithme que tu ne voudras pas changer dans trois mois.</p>
+    <p><a class="ref" href="#skill-swarm">/swarm</a> lance plusieurs agents, dans le cloud par défaut, et rend un seul rapport. Le plus souvent, chacun reçoit une part différente du travail, comme un dossier, un paquet ou une ligne d'une liste, et répond PASS, ISSUES ou BLOCKED. Il peut aussi faire courir plusieurs agents sur la même consigne, mais il ne fusionne jamais leurs résultats. C'est ce qui le distingue d'<a class="ref" href="#skill-arena">/arena</a>.</p>
+    <p><a class="ref" href="#skill-interrogate">/interrogate</a> soumet un même changement à plusieurs modèles, qui cherchent à le prendre en défaut. L'agent principal trie leurs remarques en quatre catégories (à corriger, à considérer, noté, écarté) et justifie chaque écart. Tu peux contester ce tri, et rien n'est modifié automatiquement.</p>
   </section>
 
   <section id="construire">
     <h2>Trois tâches courantes</h2>
-    <p>Tu décris ce que tu observes. La liste d'étapes fait le reste. Tu n'as pas à nommer la liste.</p>
+    <p>Décris ce que tu observes, le playbook fait le reste. Tu n'as pas à le nommer.</p>
     <ul>
-      <li><strong>Un bug.</strong> L'agent le reproduit d'abord, avec le skill de vérification, sur le même écran que toi. La formule courte de Lauren, quand le fil est déjà clair : reproduis, et si ça se reproduit sur la branche principale, corrige et montre une vidéo. Il se sert de <a class="ref" href="#skill-how">/how</a> et de <a class="ref" href="#skill-why">/why</a> pour écarter les fausses pistes. S'il existe un test simple, <a class="ref" href="#skill-tdd">/tdd</a> écrit d'abord le test qui échoue, l'enregistre, puis écrit le correctif.</li>
-      <li><strong>Un comportement nouveau.</strong> Dis ce qui doit apparaître, et ce qui doit rester identique. Nomme le skill de vérification dans le message, et demande une capture. L'agent comprend le code avec <a class="ref" href="#skill-how">/how</a>, dessine avec <a class="ref" href="#skill-architect">/architect</a>, et, s'il reste plusieurs façons valables, compare avec <a class="ref" href="#skill-arena">/arena</a>.</li>
-      <li><strong>Une lenteur.</strong> Donne un chiffre, pas une impression. Demande d'abord une trace de l'état actuel, puis un correctif ciblé, puis <a class="ref" href="#skill-swarm">/swarm</a> pour confirmer le gain sur assez d'essais. <a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a> contrôle la mesure. Si l'amélioration doit durer des heures sur un seul nombre, c'est une autre liste, hillclimb : une idée à la fois, et on ne garde que ce qui améliore vraiment.</li>
+      <li><strong>Un bug.</strong> L'agent commence par le reproduire avec le skill de vérification, sur le même écran que toi. Quand le fil est déjà clair, la formule courte de Lauren suffit : reproduis, et si le bug existe aussi sur la branche principale, corrige et montre une vidéo. L'agent s'appuie sur <a class="ref" href="#skill-how">/how</a> et <a class="ref" href="#skill-why">/why</a> pour écarter les fausses pistes. S'il existe un test simple et rapide à lancer, <a class="ref" href="#skill-tdd">/tdd</a> écrit d'abord ce test, vérifie qu'il échoue pour la bonne raison, puis écrit le correctif.</li>
+      <li><strong>Un nouveau comportement.</strong> Dis ce qui doit apparaître et ce qui doit rester identique, nomme le skill de vérification et demande une capture. L'agent comprend le code avec <a class="ref" href="#skill-how">/how</a>, conçoit avec <a class="ref" href="#skill-architect">/architect</a> et, s'il reste plusieurs options valables, les compare avec <a class="ref" href="#skill-arena">/arena</a>.</li>
+      <li><strong>Une lenteur.</strong> Donne un chiffre, pas une impression. Demande d'abord une mesure de l'état actuel, puis un correctif ciblé, puis <a class="ref" href="#skill-swarm">/swarm</a> pour confirmer le gain sur suffisamment d'essais. <a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a> vérifie que la mesure est fiable. Si le but est d'améliorer un seul chiffre pendant des heures, c'est un autre playbook, Hillclimb : une hypothèse à la fois, et on ne garde que ce qui améliore vraiment.</li>
     </ul>
-    <p>Sur les fichiers TypeScript, <a class="ref" href="#skill-typescript">typescript-best-practices</a> s'active seul, sans commande. Il pousse l'agent à rendre les cas impossibles impossibles à écrire.</p>
+    <p>Sur les fichiers TypeScript, <a class="ref" href="#skill-typescript">typescript-best-practices</a> s'active tout seul, sans commande. Il pousse l'agent à écrire des types qui rendent les états impossibles impossibles à représenter.</p>
   </section>
 
   <section id="livrer">
-    <h2>Proposer le changement</h2>
-    <p>Une PR, ou proposition, c'est le paquet que tu envoies pour faire relire un changement avant de le fusionner. Presque toutes les listes d'étapes finissent par en ouvrir une, dans cet ordre.</p>
+    <h2>Ouvrir une PR</h2>
+    <p>Une PR (pull request) est le paquet que tu soumets pour faire relire un changement avant de le fusionner. Presque tous les playbooks se terminent par le playbook Opening a PR, qui enchaîne ces étapes dans cet ordre.</p>
     <ol>
-      <li><a class="ref" href="#skill-deslop">/deslop</a> enlève du code le superflu : commentaires qui racontent ce que la ligne fait déjà, protections sans raison, vieux chemins inutiles.</li>
-      <li><a class="ref" href="#skill-no-comments">/no-comments</a> fait relire les commentaires par un agent qui ne les a pas écrits. On l'appelle Comment Sicko. Il en garde très peu.</li>
-      <li><a class="ref" href="#skill-technical-writing">/technical-writing</a> rédige le titre et le texte de la proposition, puis <a class="ref" href="#skill-unslop">/unslop</a> retire le style trop lisse.</li>
-      <li>Si c'est un agent délégué qui ouvre la proposition, il lance aussi <a class="ref" href="#skill-interrogate">/interrogate</a>, t'envoie le lien, et s'arrête. Il ne surveille pas la suite, sauf si tu lui as confié une file entière à mener jusqu'au bout.</li>
+      <li><a class="ref" href="#skill-deslop">/deslop</a> retire le superflu du code : commentaires qui répètent ce que fait la ligne, protections sans raison, vieux chemins devenus inutiles.</li>
+      <li><a class="ref" href="#skill-no-comments">/no-comments</a> fait relire les commentaires restants par un agent qui ne les a pas écrits, surnommé Comment Sicko. Il en garde très peu.</li>
+      <li><a class="ref" href="#skill-technical-writing">/technical-writing</a> rédige le titre et la description de la PR, puis <a class="ref" href="#skill-unslop">/unslop</a> en retire le style trop lisse.</li>
+      <li>Si c'est un sous-agent qui ouvre la PR, il lance aussi <a class="ref" href="#skill-interrogate">/interrogate</a>, t'envoie le lien et s'arrête. Il ne suit pas la PR ensuite, sauf si tu lui as confié toute une file à mener jusqu'au bout.</li>
     </ol>
-    <p>Babysit, c'est « rends cette proposition prête » : conflits, commentaires de relecture, tests automatiques. Il ne fusionne pas. Shipping, c'est l'étape d'après : un autre agent, qui n'a pas écrit le code, revérifie, puis on fusionne seulement la suite déjà vérifiée, en commençant par la plus ancienne.</p>
-    <p>Ce qui compte comme preuve dépend de ce que tu as changé, et c'est le skill de vérification qui le joue. Une commande en terminal : lance-la. Un écran : parcours-le, sur Nav Builder avec verify-nav-builder, et garde une capture. Un temps de chargement : le chiffre d'avant et celui d'après. Une valeur enregistrée : relis-la. Les tests seuls ne suffisent pas. Une réponse sûre d'elle, sans la commande ni la sortie, ne compte pas. Quand le dessin est prêt, un plan d'exécution vient après, pas avant : chaque étape n'est faite que si le code a tourné. Lauren retire ce plan du dépôt une fois le travail fini.</p>
-    <p><a class="ref" href="#skill-blast-radius">/blast-radius</a> sert quand le changement a l'air petit et que tu veux savoir ce qu'il peut casser ailleurs. Tu le demandes. Le mode ne le lance pas tout seul.</p>
+    <p>Deux playbooks prennent ensuite le relais. Babysit rend la PR prête à fusionner (conflits, commentaires de relecture, CI), mais ne la fusionne pas. Shipping fait la suite : un agent qui n'a pas écrit le code revérifie chaque PR, puis on ne fusionne que la série déjà vérifiée, en partant de la plus ancienne.</p>
+    <h3>Ce qui compte comme preuve</h3>
+    <p>La preuve dépend de ce que tu as changé, et c'est le skill de vérification qui la produit. Pour une commande en terminal, on la lance. Pour un écran, on le parcourt (sur Nav Builder, avec verify-nav-builder) et on garde une capture. Pour un temps de chargement, on donne le chiffre avant et après. Pour une donnée enregistrée, on la relit. Des tests qui passent ne suffisent pas, et une réponse assurée sans la commande ni sa sortie ne compte pas.</p>
+    <p>Un plan d'exécution vient après la conception, jamais avant, et chaque étape n'est cochée que si le code a tourné. Lauren supprime ce plan du dépôt une fois le travail terminé.</p>
+    <p><a class="ref" href="#skill-blast-radius">/blast-radius</a> sert quand un changement a l'air petit mais que tu veux savoir ce qu'il peut casser ailleurs. Le mode ne le lance jamais seul, c'est toi qui le demandes.</p>
   </section>
 
   <section id="nuit">
-    <h2>Le laisser travailler sans toi</h2>
-    <p>À réserver pour plus tard. Trois conditions, sinon tu te réveilles devant du mouvement sans résultat.</p>
+    <h2>Le laisser travailler seul</h2>
+    <p>À garder pour plus tard. Il faut réunir trois conditions, sinon tu te réveilles devant beaucoup d'activité et aucun résultat.</p>
     <ul>
-      <li>Une fin qui peut échouer. « Zéro ancien appel restant, et les essais passent », pas « améliore ça ».</li>
-      <li>Une copie séparée du projet, pour ne rien écraser de ce que tu as ouvert.</li>
-      <li>Un journal, via <a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a>. Au matin, lis d'abord la section Attention : c'est ce qu'un autre modèle a jugé douteux.</li>
+      <li>Un critère de fin qui peut échouer : « plus aucun appel à l'ancienne fonction, et les tests passent », pas « améliore ça ».</li>
+      <li>Une copie séparée du projet, un worktree, pour ne rien écraser de ce que tu as ouvert.</li>
+      <li>Un journal, tenu par <a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a>. Au réveil, lis d'abord la section Attention : ce qu'un modèle d'une autre famille a jugé douteux.</li>
     </ul>
-    <pre>/poteto-mode je vais me coucher. migre les appelants dans une copie fraîche du projet.
-fini = plus aucun ancien appel, les essais passent, l'ancienne fonction est supprimée.
-tiens un journal. /loop jusqu'à ce que ce soit fini. si tu es vraiment bloqué, arrête et explique pourquoi.</pre>
-    <p><code>/loop</code> est une commande de Cursor, pas de pstack. Elle réveille l'agent jusqu'à la fin. Une file de propositions indépendantes peut aller jusqu'à la fusion, chacune revérifiée par <a class="ref" href="#skill-swarm">/swarm</a>. Tu peux aussi demander la pile sans fusion, pour la relire toi-même. Un chantier de plusieurs jours a un agent coordinateur qui ne code pas : il distribue le travail.</p>
-    <p>Après coup, <a class="ref" href="#skill-reflect">/reflect</a> propose d'améliorer les fiches d'instructions, et attend ton accord. <a class="ref" href="#skill-correct">/correct</a>, tu le lances toi-même : il rend impossibles les erreurs que tu as déjà corrigées deux fois. <a class="ref" href="#skill-automate-me">/automate-me</a> lit tes chats et rédige un mode à ton nom, par-dessus pstack. Utile seulement quand tu as déjà une habitude.</p>
+    <pre>/poteto-mode je vais me coucher. migre les appelants dans un worktree neuf.
+fini = plus aucun appel à l'ancienne fonction, les tests passent, l'ancienne fonction est supprimée.
+tiens un journal. /loop jusqu'à ce que ce soit fini. si tu es vraiment bloqué, arrête-toi et explique pourquoi.</pre>
+    <p><code>/loop</code> est une commande de Cursor, pas de pstack. Elle relance l'agent jusqu'à ce que la condition de fin soit remplie. Une file de PR indépendantes peut aller jusqu'à la fusion, chacune revérifiée par <a class="ref" href="#skill-swarm">/swarm</a> (playbook Autopilot-full). Tu peux aussi demander une pile de PR non fusionnées, pour la relire toi-même (Autopilot-stack). Un chantier de plusieurs jours a un agent coordinateur qui ne code pas et se contente de distribuer le travail (Orchestrate).</p>
+    <p>Après coup, <a class="ref" href="#skill-reflect">/reflect</a> propose d'améliorer les skills à partir de la conversation, et attend ton accord avant de modifier quoi que ce soit. <a class="ref" href="#skill-correct">/correct</a>, tu le lances toi-même quand tu as corrigé deux fois la même erreur : il modifie le dépôt pour la rendre impossible. <a class="ref" href="#skill-automate-me">/automate-me</a> lit tes chats et rédige un mode à ton nom, qui s'ajoute à pstack. Il ne sert qu'une fois que tu as pris des habitudes.</p>
   </section>
 
   <section id="principes">
     <h2>Principes</h2>
-    <p>Vingt-quatre noms courts. Tu ne les lances pas comme des commandes. Tu les dis dans le chat quand l'agent part de travers. Il connaît déjà la règle, et il doit répondre en disant quelle décision il a changée. S'il cite le nom sans dire ce qu'il a fait autrement, il a récité.</p>
+    <p>pstack repose sur vingt-quatre principes, chacun désigné par un nom court. Ce ne sont pas des commandes : tu les cites dans le chat quand l'agent part de travers. Il connaît déjà la règle, et doit répondre en précisant quelle décision il a changée. S'il cite le nom sans dire ce qu'il fait autrement, il récite.</p>
     <table>
-      <thead><tr><th>Nom</th><th>Tu le dis quand</th></tr></thead>
+      <thead><tr><th>Nom</th><th>Ce qu'il demande</th></tr></thead>
       <tbody>
         <tr><td><code>laziness-protocol</code></td><td>Le plus petit changement qui résout le problème.</td></tr>
-        <tr><td><code>foundational-thinking</code></td><td>Choisir les données avant d'écrire la logique.</td></tr>
-        <tr><td><code>subtract-before-you-add</code></td><td>Enlever l'inutile, puis dessiner ce qui reste.</td></tr>
-        <tr><td><code>model-the-domain</code></td><td>Une structure claire, plutôt que des conditions empilées.</td></tr>
-        <tr><td><code>separate-before-serializing</code></td><td>Une copie du projet par tentative. <a class="ref" href="#skill-arena">/arena</a> le fait.</td></tr>
-        <tr><td><code>prove-it-works</code></td><td>Montre le résultat réel. « Ça compile » ne suffit pas.</td></tr>
-        <tr><td><code>fix-root-causes</code></td><td>Reproduis la cause avant de corriger.</td></tr>
-        <tr><td><code>explain-the-number</code></td><td>Dis ce que le chiffre mesure vraiment. <a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a> détaille comment.</td></tr>
+        <tr><td><code>foundational-thinking</code></td><td>Choisir les types et les données avant d'écrire la logique.</td></tr>
+        <tr><td><code>subtract-before-you-add</code></td><td>Retirer d'abord ce qui ne sert plus, puis construire sur la base allégée.</td></tr>
+        <tr><td><code>model-the-domain</code></td><td>Une structure claire (machine à états, table, modèle typé) plutôt que des conditions éparpillées.</td></tr>
+        <tr><td><code>separate-before-serializing-shared-state</code></td><td>Supprimer le partage avant de le synchroniser : une copie du projet par tentative. <a class="ref" href="#skill-arena">/arena</a> le fait.</td></tr>
+        <tr><td><code>prove-it-works</code></td><td>Vérifier sur le vrai résultat. « Ça compile » ne suffit pas.</td></tr>
+        <tr><td><code>fix-root-causes</code></td><td>Reproduire, puis remonter jusqu'à la cause avant de corriger.</td></tr>
+        <tr><td><code>explain-the-number</code></td><td>Dire ce qui limite un chiffre mesuré, et s'assurer qu'il mesure bien le travail. <a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a> détaille la méthode.</td></tr>
         <tr><td><code>encode-lessons-in-structure</code></td><td>Une erreur répétée devient un contrôle automatique, pas un paragraphe de plus.</td></tr>
-        <tr><td><code>type-system-discipline</code></td><td>Les cas impossibles ne doivent pas pouvoir s'écrire.</td></tr>
-        <tr><td><code>guard-the-context-window</code></td><td>Les longues lectures partent dans d'autres agents. Le chat garde le résumé.</td></tr>
-        <tr><td><code>never-block-on-the-human</code></td><td>Sur une action réversible, avance et montre le résultat.</td></tr>
+        <tr><td><code>type-system-discipline</code></td><td>Les états impossibles ne doivent pas pouvoir s'écrire.</td></tr>
+        <tr><td><code>guard-the-context-window</code></td><td>Confier les longues lectures à des sous-agents et ne garder que leur résumé dans le chat.</td></tr>
+        <tr><td><code>never-block-on-the-human</code></td><td>Sur un travail réversible, avancer et montrer le résultat plutôt que demander.</td></tr>
       </tbody>
     </table>
-    <p>Les autres, mêmes familles : redesign-from-first-principles, attack-the-premise, minimize-reader-load, outcome-oriented-execution, experience-first, exhaust-the-design-space, build-the-lever, boundary-discipline, make-operations-idempotent, migrate-callers-then-delete, sequence-verifiable-units, test-behavior-not-implementation.</p>
-    <pre>use subtract before you add. delete the obsolete adapters first, then design what's left.
-apply prove it works. run the real import and show me the written records.</pre>
+    <p>Les douze autres : <code>redesign-from-first-principles</code>, <code>attack-the-premise</code>, <code>minimize-reader-load</code>, <code>outcome-oriented-execution</code>, <code>experience-first</code>, <code>exhaust-the-design-space</code>, <code>build-the-lever</code>, <code>boundary-discipline</code>, <code>make-operations-idempotent</code>, <code>migrate-callers-then-delete-legacy-apis</code>, <code>sequence-verifiable-units</code> et <code>test-behavior-not-implementation</code>.</p>
+    <pre>applique subtract-before-you-add. supprime d'abord les adaptateurs obsolètes, puis conçois ce qui reste.
+applique prove-it-works. lance le vrai import et montre-moi les enregistrements écrits.</pre>
   </section>
 
   <section id="connexions">
-    <h2>Connexions</h2>
-    <p>Deux choses différentes. L'ordre, c'est « pendant un bug, on comprend d'abord, puis on cherche l'histoire ». L'appel, c'est « cette fiche en ouvre une autre ». <a class="ref" href="#skill-how">/how</a> n'ouvre pas <a class="ref" href="#skill-why">/why</a>. C'est la liste « corriger un bug » qui demande les deux, au même moment. La table liste les appels. Chaque page de skill, plus bas, reprend les siens.</p>
+    <h2>Qui appelle qui</h2>
+    <p>Ne confonds pas l'ordre et l'appel. L'ordre, c'est « pendant un bug, on comprend d'abord, puis on cherche l'historique ». L'appel, c'est « ce skill en lance un autre ». <a class="ref" href="#skill-how">/how</a> ne lance pas <a class="ref" href="#skill-why">/why</a> : c'est le playbook Bug fix qui demande les deux en même temps. Le tableau liste les appels, et chaque fiche de skill, plus bas, reprend les siens.</p>
     <table>
-      <thead><tr><th>De</th><th>Vers</th><th>Pourquoi</th></tr></thead>
+      <thead><tr><th>De</th><th>Vers</th><th>Quand</th></tr></thead>
       <tbody>
-        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-how">/how</a></td><td>Règle permanente. Feature étape 1. Perf étape 2. Bug fix étape 2.</td></tr>
-        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-why">/why</a></td><td>Bug fix étape 2, historique de régression. En parallèle de how.</td></tr>
-        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-architect">/architect</a></td><td>Le code traverse une fonction. Feature étape 2.</td></tr>
-        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-arena">/arena</a></td><td>Feature étape 4 si plusieurs formes restent valides.</td></tr>
-        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-swarm">/swarm</a></td><td>Couverture, course. Autopilot : verdict à chaque round.</td></tr>
-        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-interrogate">/interrogate</a></td><td>Design contesté. Bug fix, avec architect, après la preuve runtime.</td></tr>
-        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-tdd">/tdd</a></td><td>Bug fix étape 5, test local bon marché.</td></tr>
-        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a></td><td>Avant de rapporter un nombre. Perf : baseline et suite.</td></tr>
-        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a></td><td>Tâche longue, ou que tu reliras.</td></tr>
-        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-figure-it-out">/figure-it-out</a></td><td>Aucun playbook, effort large, ou absence.</td></tr>
-        <tr><td><a class="ref" href="#skill-teach">/teach</a></td><td><a class="ref" href="#skill-how">/how</a> · <a class="ref" href="#skill-why">/why</a></td><td>En parallèle. Un seul des deux sur un petit changement.</td></tr>
-        <tr><td><a class="ref" href="#skill-teach">/teach</a></td><td><a class="ref" href="#skill-unslop">/unslop</a></td><td>L'explication.</td></tr>
-        <tr><td><a class="ref" href="#skill-architect">/architect</a></td><td><a class="ref" href="#skill-how">/how</a></td><td>Avant le dessin, et encore après le code.</td></tr>
-        <tr><td><a class="ref" href="#skill-architect">/architect</a></td><td><a class="ref" href="#skill-why">/why</a></td><td>Si la propriété ou les couches bougent.</td></tr>
-        <tr><td><a class="ref" href="#skill-architect">/architect</a></td><td><a class="ref" href="#skill-arena">/arena</a></td><td>Coureurs : ligne architect runners. Juge : celui d'arena.</td></tr>
-        <tr><td><a class="ref" href="#skill-how">/how</a></td><td>explorateurs, explainer</td><td>2 à 4 explorateurs Grok si la question est large. Explainer Fable toujours.</td></tr>
-        <tr><td><a class="ref" href="#skill-why">/why</a></td><td>investigateurs, synthétiseur</td><td>Un investigateur Grok par source. Synthèse Fable.</td></tr>
-        <tr><td><a class="ref" href="#skill-recall">/recall</a></td><td>investigateurs de why</td><td>Mêmes rôles, question d'état actuel. Brief via <a class="ref" href="#skill-unslop">/unslop</a>.</td></tr>
-        <tr><td><a class="ref" href="#skill-no-comments">/no-comments</a></td><td>Comment Sicko</td><td>Puis <a class="ref" href="#skill-how">/how</a> ou <a class="ref" href="#skill-why">/why</a> si un keep est mince. <a class="ref" href="#skill-architect">/architect</a> jusqu'à l'esquisse si la forme manque.</td></tr>
-        <tr><td><a class="ref" href="#skill-figure-it-out">/figure-it-out</a></td><td><a class="ref" href="#skill-architect">/architect</a></td><td>Décision à sens unique. Puis <a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a>.</td></tr>
-        <tr><td><a class="ref" href="#skill-reflect">/reflect</a></td><td>3 relecteurs + synthétiseur</td><td>Fable, Sol, Fable, puis Fable. Accord avant d'éditer un skill.</td></tr>
-        <tr><td><a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a></td><td>explain-the-number</td><td>Le principe dit pourquoi. La checklist est la procédure.</td></tr>
-        <tr><td><a class="ref" href="#skill-technical-writing">/technical-writing</a></td><td><a class="ref" href="#skill-unslop">/unslop</a></td><td>Chaque document. Automate-me et le journal aussi.</td></tr>
-        <tr><td><a class="ref" href="#skill-setup-pstack">/setup-pstack</a></td><td><a class="ref" href="#skill-create-verification-skill">/create-verification-skill</a></td><td>Une offre, s'il n'y a ni verify-* ni harness.</td></tr>
-        <tr><td>Opening a PR</td><td><a class="ref" href="#skill-deslop">/deslop</a>, <a class="ref" href="#skill-no-comments">/no-comments</a>, <a class="ref" href="#skill-technical-writing">/technical-writing</a>, <a class="ref" href="#skill-unslop">/unslop</a></td><td>Dans cet ordre. Interrogate en plus si un sous-agent ouvre.</td></tr>
+        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-how">/how</a></td><td>Règle permanente. Étape 1 de Feature, étape 2 de Perf issue et de Bug fix.</td></tr>
+        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-why">/why</a></td><td>Étape 2 de Bug fix, pour l'historique d'une régression, en parallèle de /how.</td></tr>
+        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-architect">/architect</a></td><td>Le changement touche plusieurs fonctions. Étape 2 de Feature.</td></tr>
+        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-arena">/arena</a></td><td>Étape 4 de Feature, si plusieurs conceptions restent valables.</td></tr>
+        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-swarm">/swarm</a></td><td>Couverture ou course. En Autopilot, un verdict indépendant par PR.</td></tr>
+        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-interrogate">/interrogate</a></td><td>Conception contestée. Dans Bug fix, avec /architect, une fois le bug prouvé à l'exécution.</td></tr>
+        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-tdd">/tdd</a></td><td>Étape 5 de Bug fix, s'il existe un test local peu coûteux.</td></tr>
+        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a></td><td>Avant d'annoncer un chiffre. Dans Perf issue, pour la mesure de départ et les suivantes.</td></tr>
+        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a></td><td>Tâche longue, ou que tu reliras plus tard.</td></tr>
+        <tr><td><a class="ref" href="#skill-poteto-mode">/poteto-mode</a></td><td><a class="ref" href="#skill-figure-it-out">/figure-it-out</a></td><td>Aucun playbook ne convient, gros chantier, ou tu t'absentes.</td></tr>
+        <tr><td><a class="ref" href="#skill-teach">/teach</a></td><td><a class="ref" href="#skill-how">/how</a> · <a class="ref" href="#skill-why">/why</a></td><td>En parallèle. Un seul des deux suffit pour un petit changement.</td></tr>
+        <tr><td><a class="ref" href="#skill-teach">/teach</a></td><td><a class="ref" href="#skill-unslop">/unslop</a></td><td>Pour l'explication finale.</td></tr>
+        <tr><td><a class="ref" href="#skill-architect">/architect</a></td><td><a class="ref" href="#skill-how">/how</a></td><td>Avant la conception, puis après le code.</td></tr>
+        <tr><td><a class="ref" href="#skill-architect">/architect</a></td><td><a class="ref" href="#skill-why">/why</a></td><td>Si les responsabilités ou les couches bougent.</td></tr>
+        <tr><td><a class="ref" href="#skill-architect">/architect</a></td><td><a class="ref" href="#skill-arena">/arena</a></td><td>Les candidats viennent de la ligne <code>architect runners</code>, le juge est celui d'/arena.</td></tr>
+        <tr><td><a class="ref" href="#skill-how">/how</a></td><td>explorateurs, rédacteur</td><td>Deux à quatre explorateurs si la question est large (Grok par défaut). Toujours un rédacteur (Claude Opus par défaut).</td></tr>
+        <tr><td><a class="ref" href="#skill-why">/why</a></td><td>enquêteurs, synthèse</td><td>Un enquêteur par source (Grok par défaut), puis une synthèse (Claude Opus par défaut).</td></tr>
+        <tr><td><a class="ref" href="#skill-recall">/recall</a></td><td>enquêteurs de /why</td><td>Mêmes rôles, mais sur l'état actuel plutôt que sur l'origine. Le compte rendu passe par <a class="ref" href="#skill-unslop">/unslop</a>.</td></tr>
+        <tr><td><a class="ref" href="#skill-no-comments">/no-comments</a></td><td>Comment Sicko</td><td>Puis <a class="ref" href="#skill-how">/how</a> ou <a class="ref" href="#skill-why">/why</a> si la raison de garder un commentaire est mince, et <a class="ref" href="#skill-architect">/architect</a> jusqu'à l'esquisse s'il manque une structure.</td></tr>
+        <tr><td><a class="ref" href="#skill-figure-it-out">/figure-it-out</a></td><td><a class="ref" href="#skill-architect">/architect</a></td><td>Pour une décision difficile à défaire. Puis <a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a>.</td></tr>
+        <tr><td><a class="ref" href="#skill-reflect">/reflect</a></td><td>trois relecteurs, une synthèse</td><td>Claude, GPT et Claude, puis une synthèse Claude. Ton accord avant toute modification d'un skill.</td></tr>
+        <tr><td><a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a></td><td><code>explain-the-number</code></td><td>Le principe dit pourquoi, la checklist dit comment.</td></tr>
+        <tr><td><a class="ref" href="#skill-technical-writing">/technical-writing</a></td><td><a class="ref" href="#skill-unslop">/unslop</a></td><td>Pour chaque document. /automate-me et le journal aussi.</td></tr>
+        <tr><td><a class="ref" href="#skill-setup-pstack">/setup-pstack</a></td><td><a class="ref" href="#skill-create-verification-skill">/create-verification-skill</a></td><td>Proposé une fois, si le projet n'a ni skill <code>verify-*</code> ni autre moyen de piloter l'app.</td></tr>
+        <tr><td>Opening a PR</td><td><a class="ref" href="#skill-deslop">/deslop</a>, <a class="ref" href="#skill-no-comments">/no-comments</a>, <a class="ref" href="#skill-technical-writing">/technical-writing</a>, <a class="ref" href="#skill-unslop">/unslop</a></td><td>Dans cet ordre. Plus /interrogate si c'est un sous-agent qui ouvre la PR.</td></tr>
       </tbody>
     </table>
   </section>
 
   <section id="skills">
     <h2>Skills</h2>
-    <p>Une page par commande, pour y revenir plus tard. Le premier paragraphe est celui qui apparaît au survol. « Cité dans » liste les endroits de ce guide qui en parlent. « Lire le SKILL.md » ouvre le fichier que l'agent lit vraiment : il est en anglais, c'est normal, c'est écrit pour lui.</p>
+    <p>Une fiche par skill, pour y revenir plus tard. Le premier paragraphe est celui qui s'affiche au survol. « Cité dans » liste les sections de ce guide qui en parlent. « Lire le SKILL.md » ouvre le fichier que l'agent lit réellement. Il est en anglais, et c'est normal : il est écrit pour l'agent.</p>
 
     <section id="skill-poteto-mode">
-      <p class="kind">Entrée</p>
+      <p class="kind">Point d'entrée</p>
       <h2>/poteto-mode</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-poteto-mode">Lire le SKILL.md</button></p>
-      <p>La commande du quotidien, une fois pstack installé. Tu décris le but et la preuve. Elle choisit une liste d'étapes, l'affiche, et la suit. Elle reste active dans ce chat jusqu'à ce que tu l'arrêtes. Pour changer de sujet, commence par <code>new task</code>.</p>
-      <p>Les sous-agents d'étape sont des poteto-agent frais. Cinq skills fixent leur type eux-mêmes : how, why, interrogate, reflect, swarm.</p>
-      <pre>/poteto-mode repro d'abord, puis fix et vérifie.</pre>
+      <p>La commande du quotidien. Tu décris le but et la preuve attendue. Le mode choisit un playbook, en affiche les étapes et les suit. Il reste actif dans le chat jusqu'à ce que tu l'arrêtes. Pour changer de sujet, commence par <code>new task</code>.</p>
+      <p>Les sous-agents lancés pendant une étape sont des poteto-agent neufs. Cinq skills choisissent eux-mêmes le type de leurs sous-agents : /how, /why, /interrogate, /reflect et /swarm.</p>
+      <pre>/poteto-mode reproduis d'abord, puis corrige et vérifie.</pre>
       <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li><a class="ref" href="#skill-how">/how</a>, <a class="ref" href="#skill-why">/why</a>, <a class="ref" href="#skill-architect">/architect</a>, <a class="ref" href="#skill-arena">/arena</a>, <a class="ref" href="#skill-swarm">/swarm</a>, <a class="ref" href="#skill-interrogate">/interrogate</a></li><li><a class="ref" href="#skill-tdd">/tdd</a>, <a class="ref" href="#skill-benchmark-checklist">/benchmark-checklist</a>, <a class="ref" href="#skill-unslop">/unslop</a>, <a class="ref" href="#skill-technical-writing">/technical-writing</a></li><li><a class="ref" href="#skill-deslop">/deslop</a>, <a class="ref" href="#skill-no-comments">/no-comments</a>, <a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a>, <a class="ref" href="#skill-figure-it-out">/figure-it-out</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-poteto-mode"></ul></div></div>
     </section>
 
     <section id="skill-setup-pstack">
-      <p class="kind">Entrée</p>
+      <p class="kind">Point d'entrée</p>
       <h2>/setup-pstack</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-setup-pstack">Lire le SKILL.md</button></p>
-      <p>À lancer juste après l'installation. Elle te demande quels modèles utiliser pour chaque genre de travail, et à quel niveau d'effort. Elle écrit le réglage dans un fichier de ton dossier personnel. Ouvre un nouveau chat ensuite, sinon l'ancien ne le voit pas. <code>auto</code> veut dire « le même modèle que ce chat ».</p>
-      <p>Si tu relances la commande plus tard, elle garde les modèles que tu as déjà changés. Une ligne que tu effaces revient au réglage d'origine. À la fin, s'il n'existe aucun moyen de prouver l'application, elle propose une fois <a class="ref" href="#skill-create-verification-skill">/create-verification-skill</a>.</p>
+      <p>À lancer juste après l'installation. Il te demande un budget, puis te montre le modèle prévu pour chaque rôle : code, jugement, relecture. Le réglage est écrit dans <code>~/.cursor/rules/pstack-models.mdc</code> et ne s'applique qu'aux nouveaux chats. <code>auto</code> veut dire « le même modèle que le chat principal ».</p>
+      <p>Si tu le relances plus tard, il conserve les rôles que tu as modifiés. Une ligne supprimée du fichier revient au réglage par défaut. À la fin, si le projet n'a aucun moyen de prouver que l'application marche, il propose une fois <a class="ref" href="#skill-create-verification-skill">/create-verification-skill</a>.</p>
       <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li><a class="ref" href="#skill-create-verification-skill">/create-verification-skill</a>, une fois, si besoin</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-setup-pstack"></ul></div></div>
     </section>
 
@@ -726,28 +730,28 @@ apply prove it works. run the real import and show me the written records.</pre>
       <p class="kind">Comprendre</p>
       <h2>/how</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-how">Lire le SKILL.md</button></p>
-      <p>Demande comment un bout du projet marche, sans le modifier. Sur une petite question, une seule explication. Sur un gros morceau, plusieurs lectures en parallèle, puis un texte unique. C'est la commande à essayer en premier, sur un endroit que tu connais déjà.</p>
-      <p>Il est appelé par le mode, par Feature, Perf et Bug fix, par <a class="ref" href="#skill-architect">/architect</a> (avant et après), par <a class="ref" href="#skill-teach">/teach</a>, et par <a class="ref" href="#skill-no-comments">/no-comments</a> quand un commentaire « à garder » est trop mince.</p>
+      <p>Explique comment une partie du projet fonctionne, sans rien modifier. Une question simple reçoit une seule explication. Un sous-système entier est d'abord lu par plusieurs explorateurs en parallèle, puis expliqué en un seul texte. C'est la commande à essayer en premier, sur du code que tu connais.</p>
+      <p>Il est appelé par le mode, par les playbooks Feature, Perf issue et Bug fix, par <a class="ref" href="#skill-architect">/architect</a> avant et après le code, par <a class="ref" href="#skill-teach">/teach</a>, et par <a class="ref" href="#skill-no-comments">/no-comments</a> quand la raison de garder un commentaire est mince.</p>
       <pre>/how comment on déduplique les notifications ?</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Explorateurs Grok, explainer Fable</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-how"></ul></div></div>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Deux à quatre explorateurs (Grok par défaut), un rédacteur (Claude Opus par défaut)</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-how"></ul></div></div>
     </section>
 
     <section id="skill-why">
       <p class="kind">Comprendre</p>
       <h2>/why</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-why">Lire le SKILL.md</button></p>
-      <p>Demande pourquoi ce code a été écrit ainsi. Elle commence par l'historique git, puis, si tu as branché des outils (tickets, docs, chat), elle les interroge. Elle sépare ce qui est écrit de ce qu'elle suppose. Si personne n'a noté la raison, elle le dit.</p>
-      <p>Bug fix l'allume avec how pour l'historique de régression. Architect l'allume si la propriété bouge. Teach l'allume en parallèle, sweep étroit par défaut. <a class="ref" href="#skill-recall">/recall</a> réutilise ses investigateurs avec une question d'état, pas d'origine.</p>
-      <pre>/why la limite de retry est à cinq. la raison tient-elle encore ?</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Investigateurs Grok, synthétiseur Fable</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-why"></ul></div></div>
+      <p>Explique pourquoi le code est écrit ainsi. Il part de l'historique git, puis interroge les outils branchés : tickets, docs, chat d'équipe, erreurs en production. Il sépare ce qui est écrit de ce qu'il suppose. Si personne n'a noté la raison, il le dit.</p>
+      <p>Bug fix l'appelle avec /how pour retracer une régression. /architect l'appelle si les responsabilités bougent. /teach l'appelle en parallèle de /how, avec une recherche restreinte par défaut. <a class="ref" href="#skill-recall">/recall</a> réutilise ses enquêteurs pour une question sur l'état actuel plutôt que sur l'origine.</p>
+      <pre>/why la limite de tentatives est à cinq. la raison tient-elle toujours ?</pre>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Un enquêteur par source (Grok par défaut), une synthèse (Claude Opus par défaut)</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-why"></ul></div></div>
     </section>
 
     <section id="skill-teach">
       <p class="kind">Comprendre</p>
       <h2>/teach</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-teach">Lire le SKILL.md</button></p>
-      <p>Pour comprendre vraiment, sans changer le code. Elle lance <a class="ref" href="#skill-how">/how</a> et <a class="ref" href="#skill-why">/why</a>, puis t'explique avec des schémas, une idée à la fois. Utile quand un résumé ne te suffit pas.</p>
-      <pre>/teach me how this PR changes retries. convince me it fixes the cause.</pre>
+      <p>Pour vraiment comprendre, sans modifier le code. Il lance <a class="ref" href="#skill-how">/how</a> et <a class="ref" href="#skill-why">/why</a>, puis t'explique le tout à ton rythme, une idée à la fois, avec des schémas quand ils aident. Utile quand un résumé ne suffit pas.</p>
+      <pre>/teach explique-moi comment cette PR change les tentatives. convaincs-moi qu'elle corrige la cause.</pre>
       <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li><a class="ref" href="#skill-how">/how</a>, <a class="ref" href="#skill-why">/why</a>, <a class="ref" href="#skill-unslop">/unslop</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-teach"></ul></div></div>
     </section>
 
@@ -755,17 +759,17 @@ apply prove it works. run the real import and show me the written records.</pre>
       <p class="kind">Comprendre</p>
       <h2>/recall</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-recall">Lire le SKILL.md</button></p>
-      <p>Pour te remettre dans un sujet après une pause. Elle relit tes chats récents et l'historique partagé, et te dit où vous en étiez. Pour reprendre une branche précise laissée à moitié, demande plutôt de reprendre le travail en cours.</p>
-      <pre>/recall catch me up on the export work from last week</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Investigateurs de <a class="ref" href="#skill-why">/why</a>, <a class="ref" href="#skill-unslop">/unslop</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-recall"></ul></div></div>
+      <p>Pour te remettre dans un sujet après une pause. Il relit tes chats récents, l'état actuel du dépôt et l'historique partagé (signalements, correctifs, incidents), puis te dit où tu en étais. Pour reprendre une branche laissée à moitié, demande plutôt de reprendre le travail en cours : c'est le playbook Session pickup.</p>
+      <pre>/recall où en était le chantier de l'export la semaine dernière ?</pre>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Les enquêteurs de <a class="ref" href="#skill-why">/why</a>, <a class="ref" href="#skill-unslop">/unslop</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-recall"></ul></div></div>
     </section>
 
     <section id="skill-architect">
       <p class="kind">Concevoir</p>
       <h2>/architect</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-architect">Lire le SKILL.md</button></p>
-      <p>À utiliser avant d'écrire un changement qui touche plusieurs fonctions. Elle fait d'abord comprendre le code, puis compare plusieurs dessins, en commençant par la façon dont le reste du programme s'en servira. Ajoute <code>with checkpoint</code> si tu veux voir le dessin avant le code.</p>
-      <pre>/architect with checkpoint. stop and show me before implementing.</pre>
+      <p>À utiliser avant d'écrire un changement qui touche plusieurs fonctions. Il fait d'abord comprendre le code, puis compare plusieurs conceptions (types, signatures, découpage en modules) en partant de la façon dont le reste du programme les utilisera. Ajoute <code>with checkpoint</code> pour valider la conception avant le code.</p>
+      <pre>/architect with checkpoint. montre-moi la conception avant d'implémenter.</pre>
       <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li><a class="ref" href="#skill-how">/how</a>, <a class="ref" href="#skill-why">/why</a>, <a class="ref" href="#skill-arena">/arena</a>, <a class="ref" href="#skill-interrogate">/interrogate</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-architect"></ul></div></div>
     </section>
 
@@ -773,199 +777,200 @@ apply prove it works. run the real import and show me the written records.</pre>
       <p class="kind">Concevoir</p>
       <h2>/arena</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-arena">Lire le SKILL.md</button></p>
-      <p>Plusieurs agents tentent le même problème, chacun dans sa copie du projet. Un autre modèle compare. On garde une base et on y ajoute les meilleures idées des autres. Demande plus de tentatives quand le choix sera cher à défaire plus tard.</p>
-      <pre>/arena take my prompt to the arena verbatim.</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Coureurs du panel, un juge, un worktree par candidat</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-arena"></ul></div></div>
+      <p>Plusieurs agents tentent le même problème, chacun dans sa copie du projet. Un modèle d'une autre famille les compare. On garde la meilleure tentative et on y greffe les bonnes idées des autres. Demande plus de candidats quand le choix sera coûteux à défaire.</p>
+      <pre>/arena envoie mon prompt tel quel dans l'arène.</pre>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Un candidat par modèle du panel, chacun dans son worktree, puis un juge</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-arena"></ul></div></div>
     </section>
 
     <section id="skill-swarm">
-      <p class="kind">Concevoir</p>
+      <p class="kind">Paralléliser</p>
       <h2>/swarm</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-swarm">Lire le SKILL.md</button></p>
-      <p>Plusieurs agents, plusieurs morceaux différents : un dossier chacun, par exemple. Chacun dit réussi, problèmes, ou bloqué. Tu reçois un seul rapport. Ce n'est pas une comparaison du même problème : pour ça, c'est <a class="ref" href="#skill-arena">/arena</a>.</p>
-      <pre>/swarm check every package. one worker per package. one report.</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Workers, modèle <code>swarm workers</code></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-swarm"></ul></div></div>
+      <p>Lance plusieurs agents en parallèle et rend un seul rapport. Chacun couvre une part différente du travail, ou court sur la même consigne que les autres, et répond PASS, ISSUES ou BLOCKED. Il ne fusionne pas les résultats. Pour améliorer une tentative avec les idées des autres, c'est <a class="ref" href="#skill-arena">/arena</a>.</p>
+      <pre>/swarm vérifie chaque paquet. un agent par paquet, un seul rapport.</pre>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Des workers sur le modèle de la ligne <code>swarm workers</code>, dans le cloud par défaut</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-swarm"></ul></div></div>
     </section>
 
     <section id="skill-interrogate">
-      <p class="kind">Concevoir</p>
+      <p class="kind">Relire</p>
       <h2>/interrogate</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-interrogate">Lire le SKILL.md</button></p>
-      <p>Plusieurs modèles lisent le même changement et essaient de le casser. Le responsable trie ce qu'il faut corriger et ce qu'il écarte, avec une raison. Rien n'est modifié tout seul. Lis aussi les écarts : tu peux les contredire.</p>
-      <pre>/interrogate the whole branch, but skeptically. don't change anything yet.</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Relecteurs Fable, Sol, Grok</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-interrogate"></ul></div></div>
+      <p>Plusieurs modèles lisent le même changement et cherchent à le prendre en défaut. L'agent principal trie leurs remarques et justifie chaque écart. Rien n'est modifié automatiquement. Lis aussi les remarques écartées, car tu peux contester le tri.</p>
+      <pre>/interrogate toute la branche, avec scepticisme. ne modifie rien pour l'instant.</pre>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Trois relecteurs par défaut : Claude Opus, GPT et Grok</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-interrogate"></ul></div></div>
     </section>
 
     <section id="skill-tdd">
       <p class="kind">Construire</p>
       <h2>/tdd</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-tdd">Lire le SKILL.md</button></p>
-      <p>Écrit d'abord le test qui échoue, pour la raison que tu vises, puis le correctif, puis relance le test. Seulement si ce test est simple à lancer chez toi. Sinon, la commande réelle vaut mieux qu'un test fragile.</p>
-      <pre>/tdd implement</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Le test, puis le délégué bug-fix sur Sol</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-tdd"></ul></div></div>
+      <p>Écrit d'abord un test qui échoue pour la raison visée, puis le correctif, puis relance le test. Seulement si ce test est simple et rapide à lancer en local. Sinon, une vérification réelle vaut mieux qu'un test fragile.</p>
+      <pre>/tdd écris d'abord le test de régression, puis corrige.</pre>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Aucun autre skill</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-tdd"></ul></div></div>
     </section>
 
     <section id="skill-benchmark-checklist">
       <p class="kind">Construire</p>
       <h2>/benchmark-checklist</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-benchmark-checklist">Lire le SKILL.md</button></p>
-      <p>À passer avant de croire un temps, un débit, ou un « c'est 30 % plus rapide ». Elle vérifie que le chiffre mesure bien le travail, pas une erreur, un cache, ou une machine occupée. Une estimation rapide doit être annoncée comme telle.</p>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Le principe explain-the-number</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-benchmark-checklist"></ul></div></div>
+      <p>À passer avant de croire un temps, un débit ou un « c'est 30 % plus rapide ». Il vérifie que le chiffre mesure bien le travail visé, et pas une erreur, un cache ou une machine occupée. Une estimation rapide doit être présentée comme telle.</p>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Le principe <code>explain-the-number</code></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-benchmark-checklist"></ul></div></div>
     </section>
 
     <section id="skill-unslop">
-      <p class="kind">Prose</p>
+      <p class="kind">Écrire</p>
       <h2>/unslop</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-unslop">Lire le SKILL.md</button></p>
-      <p>Rend un texte plus direct : moins de formules creuses, moins de tournures trop lisses. Le mode l'applique déjà à ses réponses. Tu peux ajouter une préférence, par exemple pas de tirets longs.</p>
-      <pre>/unslop the readme changes, no emdashes</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Rien. C'est une feuille.</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-unslop"></ul></div></div>
+      <p>Rend un texte plus direct : moins de formules creuses, moins de tournures trop lisses. Le mode l'applique déjà à toutes ses réponses. Tu peux ajouter tes propres préférences, par exemple pas de tiret long.</p>
+      <pre>/unslop les modifications du readme, sans tirets longs</pre>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Aucun autre skill</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-unslop"></ul></div></div>
     </section>
 
     <section id="skill-technical-writing">
-      <p class="kind">Prose</p>
+      <p class="kind">Écrire</p>
       <h2>/technical-writing</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-technical-writing">Lire le SKILL.md</button></p>
-      <p>Pour un document, un README, ou le texte d'une proposition de changement. Elle décide d'abord si c'est un tutoriel, un mode d'emploi, une référence ou une explication, puis écrit phrase par phrase. Le style est ensuite passé à <a class="ref" href="#skill-unslop">/unslop</a>.</p>
-      <pre>/technical-writing review the readme changes</pre>
+      <p>Pour une doc, un README, une description de PR ou un message de commit. Il décide d'abord du type de document (tutoriel, guide pratique, référence ou explication), puis rédige phrase par phrase selon des règles de style précises. Le texte passe ensuite par <a class="ref" href="#skill-unslop">/unslop</a>.</p>
+      <pre>/technical-writing relis les modifications du readme</pre>
       <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li><a class="ref" href="#skill-unslop">/unslop</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-technical-writing"></ul></div></div>
     </section>
 
     <section id="skill-no-comments">
-      <p class="kind">Prose</p>
+      <p class="kind">Écrire</p>
       <h2>/no-comments</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-no-comments">Lire le SKILL.md</button></p>
-      <p>Fait relire les commentaires du code par un agent qui ne les a pas écrits. Il garde les licences, la documentation d'une fonction publique, et les contraintes venues d'ailleurs. Le reste est retiré, ou transformé en test ou en type quand le commentaire prétendait interdire quelque chose.</p>
-      <pre>/no-comments the diff</pre>
+      <p>Fait relire les commentaires du code par un agent qui ne les a pas écrits, surnommé Comment Sicko. Il garde surtout ce que le code ne peut pas dire : une raison non évidente, une contrainte imposée de l'extérieur. Quand un commentaire prétend interdire quelque chose, il propose de le remplacer par un type, un test ou un contrôle, et attend ton accord.</p>
+      <pre>/no-comments sur le diff</pre>
       <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Comment Sicko, <a class="ref" href="#skill-how">/how</a>, <a class="ref" href="#skill-why">/why</a>, <a class="ref" href="#skill-architect">/architect</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-no-comments"></ul></div></div>
+    </section>
+
+    <section id="skill-bro">
+      <p class="kind">Écrire</p>
+      <h2>/bro</h2>
+      <p class="src-row"><button type="button" class="src" data-src="skill-bro">Lire le SKILL.md</button></p>
+      <p>Reformule le dernier message en langage simple, sans jargon. Tu tapes seulement le nom de la commande.</p>
+      <pre>/bro</pre>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Aucun autre skill</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-bro"></ul></div></div>
     </section>
 
     <section id="skill-deslop">
       <p class="kind">Hors pstack · cursor-team-kit</p>
       <h2>/deslop</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-deslop">Lire le SKILL.md</button></p>
-      <p>Cette commande n'est pas dans pstack. Elle vient du plugin cursor-team-kit, à installer à part. Elle enlève du code le superflu avant un enregistrement git. <a class="ref" href="#skill-unslop">/unslop</a> fait la même chose pour les phrases. <a class="ref" href="#skill-no-comments">/no-comments</a> fait relire les commentaires qui restent.</p>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Rien dans pstack</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-deslop"></ul></div></div>
+      <p>Retire le superflu du code avant un commit. Ce skill ne fait pas partie de pstack : il vient du plugin cursor-team-kit, à installer à part. <a class="ref" href="#skill-unslop">/unslop</a> fait le même travail sur le texte, et <a class="ref" href="#skill-no-comments">/no-comments</a> s'occupe des commentaires qui restent.</p>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Aucun skill de pstack</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-deslop"></ul></div></div>
     </section>
 
     <section id="skill-show-me-your-work">
-      <p class="kind">Nuit</p>
+      <p class="kind">Autonomie</p>
       <h2>/show-me-your-work</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-show-me-your-work">Lire le SKILL.md</button></p>
-      <p>Tient un journal des décisions : l'heure, le choix, la raison, et la preuve. Utile quand tu laisses l'agent travailler et que tu relis le lendemain. Commence par la section Attention du résumé.</p>
-      <pre>/show-me-your-work catch me up on what you did last night</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li><a class="ref" href="#skill-unslop">/unslop</a>, un relecteur d'une autre famille</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-show-me-your-work"></ul></div></div>
+      <p>Tient un journal des décisions : l'heure, le choix, la raison, la preuve et le résultat. Utile quand tu laisses l'agent travailler seul et que tu relis ensuite. Commence par la section Attention de son compte rendu, rédigée par un modèle d'une autre famille.</p>
+      <pre>/show-me-your-work résume ce que tu as fait cette nuit</pre>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li><a class="ref" href="#skill-unslop">/unslop</a>, un relecteur d'une autre famille de modèles</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-show-me-your-work"></ul></div></div>
     </section>
 
     <section id="skill-figure-it-out">
-      <p class="kind">Nuit</p>
+      <p class="kind">Autonomie</p>
       <h2>/figure-it-out</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-figure-it-out">Lire le SKILL.md</button></p>
-      <p>Quand aucune des listes habituelles ne convient, ou que tu t'absentes et que tu veux pouvoir faire confiance au retour. Elle invente les étapes, les note, et tient un journal. Pour un chantier de plusieurs jours avec beaucoup de propositions, il existe une liste plus lourde, Orchestrate.</p>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Principes du mode, <a class="ref" href="#skill-architect">/architect</a>, <a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-figure-it-out"></ul></div></div>
+      <p>Quand aucun playbook ne convient, pour un gros chantier, ou quand tu t'absentes et veux pouvoir faire confiance au résultat. Il conçoit un playbook sur mesure, le suit, et tient un journal. Pour un programme de plusieurs jours avec de nombreuses PR, il existe un playbook plus lourd, Orchestrate.</p>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Les principes du mode, <a class="ref" href="#skill-architect">/architect</a>, <a class="ref" href="#skill-show-me-your-work">/show-me-your-work</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-figure-it-out"></ul></div></div>
     </section>
 
     <section id="skill-reflect">
-      <p class="kind">Méta</p>
+      <p class="kind">Apprendre</p>
       <h2>/reflect</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-reflect">Lire le SKILL.md</button></p>
-      <p>Après une tâche qui t'a appris quelque chose que tu ne veux pas répéter. Plusieurs relectures proposent des ajouts aux fiches. Rien n'est modifié sans ton accord. Une seule session bizarre ne devient pas une règle.</p>
-      <pre>/reflect that took too long. capture what we learned.</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Trois relecteurs, un synthétiseur</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-reflect"></ul></div></div>
+      <p>Après une tâche dont tu as tiré une leçon à ne pas oublier. Trois relecteurs analysent la conversation et proposent des modifications précises de skills existants. Rien n'est modifié sans ton accord, et un cas isolé ne devient pas une règle.</p>
+      <pre>/reflect c'était trop long. retiens ce qu'on a appris.</pre>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Trois relecteurs, une synthèse</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-reflect"></ul></div></div>
     </section>
 
     <section id="skill-correct">
-      <p class="kind">Méta</p>
+      <p class="kind">Apprendre</p>
       <h2>/correct</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-correct">Lire le SKILL.md</button></p>
-      <p>À lancer toi-même, quand les agents refont la même erreur. Elle cherche comment rendre cette erreur impossible : d'abord dans la forme du code, ensuite dans les types, ensuite dans un contrôle automatique, et seulement à la fin dans un texte. La documentation seule n'empêche rien.</p>
+      <p>À lancer toi-même quand les agents refont les mêmes erreurs. Il cherche comment rendre chacune impossible : d'abord par l'architecture, puis par les types, puis par un contrôle automatique ou un test. La documentation vient en dernier, car elle n'empêche rien.</p>
       <pre>/correct</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Le dépôt. Pas un autre skill.</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-correct"></ul></div></div>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Aucun autre skill. Il modifie le dépôt directement.</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-correct"></ul></div></div>
     </section>
 
     <section id="skill-automate-me">
-      <p class="kind">Méta</p>
+      <p class="kind">Apprendre</p>
       <h2>/automate-me</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-automate-me">Lire le SKILL.md</button></p>
-      <p>Pour plus tard. Elle lit tes chats, te demande quelles habitudes sont vraiment les tiennes, et rédige un mode à ton nom, par-dessus pstack. Tu relis le résultat comme n'importe quel autre changement, dans une proposition.</p>
+      <p>Pour plus tard. Il lit tes chats, te demande quelles habitudes sont vraiment les tiennes, et rédige un mode à ton nom qui s'ajoute à pstack. Tu relis le résultat comme n'importe quel autre changement.</p>
       <pre>/automate-me</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>create-skill, <a class="ref" href="#skill-unslop">/unslop</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-automate-me"></ul></div></div>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>create-skill (intégré à Cursor), <a class="ref" href="#skill-unslop">/unslop</a></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-automate-me"></ul></div></div>
     </section>
 
     <section id="skill-create-verification-skill">
       <p class="kind">Preuve</p>
       <h2>/create-verification-skill</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-create-verification-skill">Lire le SKILL.md</button></p>
-      <p>Crée, dans le projet, la fiche qui apprend à l'agent à utiliser l'application comme toi : comment la lancer, comment vérifier qu'elle répond, comment jouer un scénario, quelle preuve garder. Elle essaie cette fiche une fois avant de te la donner. Sur Nav Builder, cette fiche existe déjà : verify-nav-builder.</p>
-      <p>C'est l'étape centrale de la <a href="#a-faire">mise en place</a>. La commande écrit aussi la carte des fonctions, dans <code>features/</code> : un index, puis une fiche par fonction. Quatre parties : les sous-fonctions, comment un humain y arrive, comment l'agent conduit le scénario, les pièges. Le pas à pas est dans <a href="#feature-map">la carte des fonctions</a>.</p>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Le dépôt, puis une preuve réelle du skill généré</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-create-verification-skill"></ul></div></div>
+      <p>Crée, dans le projet, le skill qui apprend à l'agent à se servir de l'application comme toi : la lancer, vérifier qu'elle répond, la piloter, garder une preuve, tout arrêter. Il le fait tourner une fois de bout en bout avant de te le remettre. Sur Nav Builder, ce skill existe déjà : verify-nav-builder.</p>
+      <p>C'est l'étape centrale de la <a href="#a-faire">mise en place</a>. Il amorce aussi la carte des fonctions dans <code>features/</code> : un index, puis un fichier par fonction en quatre parties (sous-fonctions, accès pour un humain, pilotage par l'agent, pièges). Le détail est dans <a href="#feature-map">la carte des fonctions</a>.</p>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Aucun autre skill. Il étudie le dépôt, puis fait tourner le skill généré.</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-create-verification-skill"></ul></div></div>
     </section>
 
     <section id="skill-maintain-verification-skill">
       <p class="kind">Preuve</p>
       <h2>/maintain-verification-skill</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-maintain-verification-skill">Lire le SKILL.md</button></p>
-      <p>Quand l'application a changé et que la carte des fonctions ne suit plus. Elle relit, rejoue les scénarios, et, s'il faut corriger la fiche, le fait dans une proposition à part. Elle ne modifie pas le produit pour faire passer le contrôle. Dans la mise en place, c'est la passe du jour : au moins une fois, tant que l'app bouge.</p>
+      <p>Quand l'application a changé et que la carte des fonctions ne suit plus. Il relit le code de chaque fonction, les rejoue toutes dans l'app et, s'il faut corriger le skill de vérification, le fait dans une seule PR. Il ne modifie jamais le produit pour faire passer la vérification.</p>
+      <p>C'est la passe quotidienne que recommande Lauren dans la <a href="#feature-map">mise en place</a>, tant que l'application évolue.</p>
       <pre>/maintain-verification-skill</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Les recettes existantes, puis un passage dans l'app</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-maintain-verification-skill"></ul></div></div>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Un lecteur par fonction, puis un passage complet dans l'app</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-maintain-verification-skill"></ul></div></div>
     </section>
 
     <section id="skill-blast-radius">
       <p class="kind">Preuve</p>
       <h2>/blast-radius</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-blast-radius">Lire le SKILL.md</button></p>
-      <p>Pour un petit changement dont tu crains les effets ailleurs. Elle cherche le fait qui le rend sûr, et elle le prouve en lançant du code. Tu la demandes. Elle ne part pas toute seule.</p>
+      <p>Pour un petit changement dont tu crains les effets ailleurs. Il cherche le fait dont dépend la sûreté du changement, et le prouve en exécutant du vrai code plutôt qu'en le rédigeant. C'est toi qui le demandes, le mode ne le lance pas seul.</p>
       <pre>/blast-radius</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Une exécution, pas un essai</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-blast-radius"></ul></div></div>
-    </section>
-
-    <section id="skill-bro">
-      <p class="kind">Prose</p>
-      <h2>/bro</h2>
-      <p class="src-row"><button type="button" class="src" data-src="skill-bro">Lire le SKILL.md</button></p>
-      <p>Reformule le dernier message en phrases simples, plus courtes, sans jargon. Tu n'écris que le nom de la commande.</p>
-      <pre>/bro</pre>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Rien</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-bro"></ul></div></div>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li><a class="ref" href="#skill-why">/why</a> pour retrouver la PR, <a class="ref" href="#skill-arena">/arena</a> pour un changement large</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-blast-radius"></ul></div></div>
     </section>
 
     <section id="skill-typescript">
-      <p class="kind">Sans slash</p>
+      <p class="kind">Sans commande</p>
       <h2>typescript-best-practices</h2>
       <p class="src-row"><button type="button" class="src" data-src="skill-typescript">Lire le SKILL.md</button></p>
-      <p>Pas une commande. Dès que l'agent touche un fichier TypeScript, cette fiche s'ouvre toute seule. Elle lui demande d'écrire des types qui rendent les cas impossibles impossibles à représenter.</p>
-      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Le principe type-system-discipline</li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-typescript"></ul></div></div>
+      <p>Pas une commande. Dès que l'agent lit ou modifie un fichier <code>.ts</code> ou <code>.tsx</code>, ce skill s'active tout seul. Il lui demande d'écrire des types qui rendent les états impossibles impossibles à représenter.</p>
+      <div class="pair"><div><h3>Appelle</h3><ul class="calls"><li>Le principe <code>type-system-discipline</code></li></ul></div><div><h3>Cité dans</h3><ul class="backlinks" data-back="skill-typescript"></ul></div></div>
     </section>
   </section>
 
   <section id="playbooks">
     <h2>Playbooks</h2>
-    <p>Les vingt-trois listes d'étapes. Tu ne les tapes pas. Cette table sert à reconnaître celle que l'agent a affichée dans ses tâches.</p>
+    <p>Les vingt-trois playbooks. Tu ne les tapes pas : ce tableau sert à reconnaître celui que l'agent affiche dans sa liste de tâches.</p>
     <table>
-      <thead><tr><th>Playbook</th><th>Il s'allume quand</th></tr></thead>
+      <thead><tr><th>Playbook</th><th>Quand il s'applique</th></tr></thead>
       <tbody>
-        <tr><td>investigation</td><td>Une question, sans modifier le code.</td></tr>
-        <tr><td>bug fix</td><td>Un défaut à reproduire, puis à corriger avec une preuve.</td></tr>
-        <tr><td>perf</td><td>Une lenteur mesurée, avec un chiffre avant et après.</td></tr>
-        <tr><td>hillclimb</td><td>Améliorer un seul chiffre, une idée à la fois.</td></tr>
-        <tr><td>runtime forensics</td><td>Un symptôme en cours, fuite ou blocage. Le résultat est un diagnostic.</td></tr>
-        <tr><td>trace forensics</td><td>Un fichier de trace déjà enregistré.</td></tr>
-        <tr><td>feature</td><td>Un comportement nouveau.</td></tr>
-        <tr><td>refactoring</td><td>Ranger le code sans changer ce qu'il fait. On note d'abord la sortie actuelle.</td></tr>
-        <tr><td>prototype</td><td>Une esquisse jetable pour trancher.</td></tr>
-        <tr><td>visual parity</td><td>Deux écrans doivent se ressembler au pixel près.</td></tr>
-        <tr><td>authoring a skill</td><td>Écrire une fiche d'instructions. Pas à la main, librement.</td></tr>
-        <tr><td>eval</td><td>Mesurer si un changement de fiche change vraiment le comportement de l'agent.</td></tr>
-        <tr><td>babysit</td><td>Rendre une proposition prête. Elle n'est pas fusionnée.</td></tr>
-        <tr><td>shipping</td><td>Revérifier, puis fusionner, en commençant par la plus ancienne. L'auteur ne juge pas son propre travail.</td></tr>
-        <tr><td>autonomous run</td><td>Une tâche longue, jusqu'à une fin qui peut échouer.</td></tr>
-        <tr><td>orchestrate</td><td>Plusieurs jours. Un coordinateur distribue, et ne code pas.</td></tr>
-        <tr><td>autopilot-full</td><td>Une file de propositions indépendantes, menées jusqu'à la fusion.</td></tr>
-        <tr><td>autopilot-stack</td><td>La même file, empilée, pour que tu fusionnes toi-même.</td></tr>
-        <tr><td>session pickup</td><td>Reprendre une branche laissée à moitié, sans refaire ce qui est fini.</td></tr>
-        <tr><td>pause safely</td><td>Mettre en pause proprement, pour reprendre plus tard.</td></tr>
-        <tr><td>multi-phase plan</td><td>Un travail en plusieurs étapes ou plusieurs propositions.</td></tr>
-        <tr><td>worktree cleanup</td><td>Libérer le disque. On ne supprime que ce qui est clairement abandonné.</td></tr>
-        <tr><td>opening a pr</td><td>La fin des autres listes : nettoyer, puis ouvrir la proposition.</td></tr>
+        <tr><td>Investigation</td><td>Une question, sans modifier le code.</td></tr>
+        <tr><td>Bug fix</td><td>Un défaut à reproduire, à expliquer et à corriger, preuve à l'appui.</td></tr>
+        <tr><td>Perf issue</td><td>Une lenteur mesurée, avec un chiffre avant et après.</td></tr>
+        <tr><td>Hillclimb</td><td>Améliorer un seul chiffre dans la durée, une hypothèse à la fois.</td></tr>
+        <tr><td>Runtime forensics</td><td>Un symptôme en direct : fuite, processeur qui tourne à vide, glitch. Le livrable est un diagnostic, pas un correctif.</td></tr>
+        <tr><td>Trace forensics</td><td>Un fichier de profilage déjà capturé. Le livrable est aussi un diagnostic.</td></tr>
+        <tr><td>Feature</td><td>Un comportement nouveau ou modifié, construit à partir d'une forme de données nommée.</td></tr>
+        <tr><td>Refactoring</td><td>Changer la structure du code sans changer son comportement.</td></tr>
+        <tr><td>Prototype</td><td>Une esquisse jetable pour trancher, ou pour observer au lieu de demander.</td></tr>
+        <tr><td>Visual parity</td><td>Deux écrans qui doivent être identiques au pixel près.</td></tr>
+        <tr><td>Authoring a skill</td><td>Écrire ou modifier un SKILL.md.</td></tr>
+        <tr><td>Eval</td><td>Mesurer si un changement de skill modifie vraiment le comportement de l'agent.</td></tr>
+        <tr><td>Babysit</td><td>Rendre une PR prête à fusionner (conflits, relecture, CI), sans la fusionner.</td></tr>
+        <tr><td>Shipping</td><td>Revérifier une pile de PR, puis fusionner en partant de la plus ancienne. L'auteur ne juge pas son propre travail.</td></tr>
+        <tr><td>Autonomous run</td><td>Une tâche longue, menée jusqu'à un critère de fin vérifiable.</td></tr>
+        <tr><td>Orchestrate</td><td>Un projet de plusieurs jours. Un coordinateur distribue le travail et ne code pas.</td></tr>
+        <tr><td>Autopilot-full</td><td>Une file de PR indépendantes, menées jusqu'à la fusion.</td></tr>
+        <tr><td>Autopilot-stack</td><td>La même file, livrée en pile pour que tu fusionnes toi-même.</td></tr>
+        <tr><td>Session pickup</td><td>Reprendre le travail d'un autre agent sans refaire ce qui est fini.</td></tr>
+        <tr><td>Pause safely</td><td>Suspendre proprement un travail pour le reprendre plus tard.</td></tr>
+        <tr><td>Multi-phase plan</td><td>Un travail en plusieurs phases ou plusieurs PR.</td></tr>
+        <tr><td>Worktree cleanup</td><td>Libérer de l'espace disque. On ne supprime que ce qui est fusionné ou clairement abandonné.</td></tr>
+        <tr><td>Opening a PR</td><td>La fin de tous les autres playbooks : nettoyer, puis ouvrir la PR.</td></tr>
       </tbody>
     </table>
   </section>
@@ -973,17 +978,17 @@ apply prove it works. run the real import and show me the written records.</pre>
   <section id="memo">
     <h2>Mémo</h2>
     <ul>
-      <li>Installe, choisis les modèles, ouvre un chat neuf, puis une petite tâche avec une fin vérifiable.</li>
-      <li>Dis le but et la preuve. La liste d'étapes choisit les commandes.</li>
-      <li><a class="ref" href="#skill-how">/how</a> dit comment. <a class="ref" href="#skill-why">/why</a> dit pourquoi. L'un n'appelle pas l'autre.</li>
-      <li><a class="ref" href="#skill-arena">/arena</a> compare plusieurs essais du même problème. <a class="ref" href="#skill-swarm">/swarm</a> répartit des morceaux différents.</li>
-      <li>Opening a PR enchaîne deslop, no-comments, technical-writing, unslop.</li>
-      <li>Un build vert n'est pas une preuve. Le flux dans l'app, si.</li>
-      <li>Une fin vague ne se vérifie pas. Une durée non plus.</li>
-      <li>Un worktree par agent. <code>auto</code> n'est pas un slug.</li>
-      <li>Un skill se modifie dans sa PR, puis se mesure avec le playbook eval.</li>
+      <li>Installe, règle les modèles, ouvre un nouveau chat, puis commence par une petite tâche avec une fin vérifiable.</li>
+      <li>Donne le but et la preuve attendue. Le playbook choisit les skills.</li>
+      <li><a class="ref" href="#skill-how">/how</a> dit comment, <a class="ref" href="#skill-why">/why</a> dit pourquoi. L'un n'appelle pas l'autre.</li>
+      <li><a class="ref" href="#skill-arena">/arena</a> améliore une tentative avec les idées des autres. <a class="ref" href="#skill-swarm">/swarm</a> répartit le travail et rend un rapport.</li>
+      <li>Opening a PR enchaîne /deslop, /no-comments, /technical-writing et /unslop.</li>
+      <li>Un build vert n'est pas une preuve. Le parcours réel dans l'app, si.</li>
+      <li>Une fin vague ne se vérifie pas, une durée non plus.</li>
+      <li>Un worktree par agent. <code>auto</code> n'est pas un nom de modèle.</li>
+      <li>Un skill se modifie dans sa propre PR, puis se mesure avec le playbook Eval.</li>
     </ul>
-    <p>Source : plugin pstack 0.15.9, commit e43c7ee, playbooks et règle locale du 4 octobre 2026.</p>
+    <p>Source : plugin pstack 0.15.9 (commit e43c7ee), ses playbooks et la règle locale, au 4 octobre 2026.</p>
   </section>
 </main>
 </div>
@@ -1030,7 +1035,7 @@ apply prove it works. run the real import and show me the written records.</pre>
   document.querySelectorAll(".backlinks").forEach(function (ul) {
     var map = lists[ul.getAttribute("data-back")];
     if (!map || map.size === 0) {
-      ul.innerHTML = "<li>Pas encore cité plus haut.</li>";
+      ul.innerHTML = "<li>Cité nulle part ailleurs dans ce guide.</li>";
       return;
     }
     ul.innerHTML = Array.from(map.entries()).map(function (pair) {
@@ -1235,7 +1240,7 @@ apply prove it works. run the real import and show me the written records.</pre>
     ["Comparer plusieurs essais", "arena même problème", "#skill-arena"],
     ["Couvrir beaucoup de dossiers", "swarm rapport", "#skill-swarm"],
     ["Faire relire un changement", "interrogate casser", "#skill-interrogate"],
-    ["Ouvrir une proposition", "pull request deslop", "#livrer"],
+    ["Ouvrir une PR", "pull request proposition deslop", "#livrer"],
     ["Laisser tourner sans moi", "nuit loop journal", "#nuit"],
     ["Corriger une dérive", "principe nom", "#principes"],
     ["Rendre une erreur impossible", "correct deux fois", "#skill-correct"]
