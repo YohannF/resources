@@ -418,6 +418,7 @@
 <nav id="toc">
   <p class="mark">pstack</p>
   <p class="ver">guide 0.15.9</p>
+  <p class="ver" id="back-ressources"><a href="./">Ressources</a></p>
   <input id="find" type="search" placeholder="Filtrer le sommaire" aria-label="Filtrer le sommaire">
   <div class="group">Commencer</div>
   <a href="#mise-en-place">Mise en place</a>
@@ -1329,6 +1330,12 @@ apply prove it works. run the real import and show me the written records.</pre>
     location.hash = button.getAttribute("data-href");
   });
 })();
+</script>
+<script>
+if (window.top !== window.self) {
+  var back = document.getElementById("back-ressources");
+  if (back) back.remove();
+}
 </script>
 </body>
 </html>
