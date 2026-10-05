@@ -224,6 +224,22 @@ input {
     color 140ms var(--n-ease);
 }
 
+.cat-chip--person {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding-left: 0.3rem;
+}
+
+.avatar {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  object-fit: cover;
+  flex: none;
+  outline: 1px solid rgb(255 255 255 / 0.1);
+}
+
 .cat-chip:hover {
   color: var(--n-t2);
   background: var(--n-raise);
@@ -642,7 +658,7 @@ input {
 
 .row__name {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   gap: 0.4rem;
   font-family: var(--n-data);

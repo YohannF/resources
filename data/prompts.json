@@ -12,6 +12,8 @@
               "name": "Repérer les modules à supprimer",
               "creator": "Matt Pocock",
               "cat": "Matt Pocock",
+              "x": "mattpocockuk",
+              "avatar": "assets/avatars/matt-pocock.jpg",
               "text": "/codebase-design Take a look in the repo for shallow modules, applying the deletion test and look for candidates for deletion. "
             }
           ]
@@ -23,6 +25,8 @@
               "name": "Faciliter la navigation des agents dans le repo",
               "creator": "Poteto",
               "cat": "Poteto",
+              "x": "poteto",
+              "avatar": "assets/avatars/poteto.jpg",
               "url": "https://x.com/poteto/status/2104744961904394699",
               "text": "/retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. Find where agents take too long to find relevant information, or rely on out-of-date docs.",
               "variables": [
@@ -31,6 +35,16 @@
                   "label": "Nombre de sessions à analyser"
                 }
               ]
+            },
+            {
+              "name": "Reformuler le but et le problème",
+              "creator": "Poteto",
+              "cat": "Poteto",
+              "x": "poteto",
+              "avatar": "assets/avatars/poteto.jpg",
+              "url": "https://x.com/poteto",
+              "text": "restate in your own words what you think my goals are and what the problem i'm trying to solve is",
+              "when": "Avant un travail compliqué. Vérifier que l'agent a compris le but, pas encore le résoudre."
             }
           ]
         }

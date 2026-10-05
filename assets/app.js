@@ -111,6 +111,21 @@ function renderPrompts(prompts, skillName) {
   return details;
 }
 
+function avatarFor(name) {
+  const file = {
+    "Matt Pocock": "assets/avatars/matt-pocock.jpg",
+    "Poteto": "assets/avatars/poteto.jpg",
+  }[name];
+  if (!file) return null;
+  const img = document.createElement("img");
+  img.className = "avatar";
+  img.src = file;
+  img.alt = "";
+  img.width = 18;
+  img.height = 18;
+  return img;
+}
+
 function renderRow({ item, collection, source, group }) {
   const github = hostOf(item.url) === "github.com";
   const row = document.createElement("div");
@@ -133,6 +148,9 @@ function renderRow({ item, collection, source, group }) {
   } else {
     name.append(item.name);
   }
+
+  const avatar = avatarFor(item.creator);
+  if (avatar) name.prepend(avatar);
 
   if (item.state) {
     const chip = document.createElement("span");
@@ -466,6 +484,11 @@ function buildToggleGroup(mount, entries, isActive, onPick, className = "") {
     button.type = "button";
     if (className) button.className = className;
     button.textContent = label;
+    const avatar = avatarFor(id);
+    if (avatar) {
+      button.classList.add("cat-chip--person");
+      button.prepend(avatar);
+    }
     button.setAttribute("aria-pressed", String(isActive(id)));
     button.addEventListener("click", () => {
       for (const sibling of mount.children) {
@@ -529,7 +552,7 @@ function reset() {
 
 async function boot() {
   const loaded = await Promise.all(
-    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261005-prompt-creator`).then((res) => res.json())),
+    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261005-prompt-avatar`).then((res) => res.json())),
   );
 
   const existingPrompts = loaded.find((collection) => collection.id === "skills").sections
