@@ -33,12 +33,38 @@
   a { color: #1857c4; text-decoration: underline; text-decoration-color: #b7cdf0; text-underline-offset: 3px; }
   article.item[data-kind="skill"] h3 { color: #0043ce; }
   article.item[data-kind="prompt"] h3 { color: var(--ink); }
-  .prompt-box { position: relative; max-width: 68ch; margin: 8px 0 4px; }
-  .prompt-box pre { margin: 0; max-width: none; padding: 40px 14px 14px; }
-  .prompt-box .copy { position: absolute; top: 8px; right: 8px; border: 1px solid #d9d9d9; background: #fff; border-radius: 999px; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; padding: 3px 10px; cursor: pointer; color: var(--ink); }
+  .prompt-head { display: flex; align-items: flex-start; gap: 8px; max-width: 68ch; }
+  .prompt-head h3 { flex: 1; min-width: 0; }
+  .prompt-box { max-width: 68ch; margin: 8px 0 4px; }
+  .prompt-box pre { margin: 0; max-width: none; }
+  button.copy.chip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 22px;
+    height: 22px;
+    margin-top: 24px;
+    padding: 0;
+    border: 1px solid #e4e4e4;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--dim);
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  button.copy.chip::before { content: ""; position: absolute; inset: -11px; }
+  button.copy.chip svg { width: 12px; height: 12px; pointer-events: none; }
+  @media (hover: hover) and (pointer: fine) {
+    button.copy.chip:hover { color: var(--ink); background: #f7f7f8; }
+  }
+  button.copy.chip.is-copied { color: var(--ink); background: #f4f4f5; }
+  button.copy.chip:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   article.item { padding-bottom: 8px; border-bottom: 1px solid var(--line); scroll-margin-top: 24px; }
+  article.item.is-hidden { display: none; }
   pre { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; line-height: 1.55; background: var(--code); border-radius: 8px; padding: 12px 14px; white-space: pre-wrap; max-width: 68ch; }
-  button.copy { border: 1px solid #e4e4e4; background: #fff; border-radius: 6px; font: inherit; font-size: 13px; padding: 5px 10px; cursor: pointer; }
+  nav a.sub, nav button.nav.sub { padding-left: 16px; font-size: 12.5px; }
   kbd { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; border: 1px solid #e4e4e4; border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; }
   #palette { position: fixed; inset: 0; z-index: 40; background: rgba(23,23,23,0.28); display: flex; justify-content: center; padding: 12vh 16px 16px; }
   #palette[hidden] { display: none; }
@@ -119,6 +145,10 @@
   <button class="nav" type="button" data-filter="course">pstack</button>
   <p class="group">Skills</p>
   <a class="sub" href="#sec-0-jakub-krehel">Jakub Krehel</a><a class="sub" href="#sec-1-emil-kowalski">Emil Kowalski</a><a class="sub" href="#sec-2-matt-pocock">Matt Pocock</a><a class="sub" href="#sec-3-nextlevelbuilder">nextlevelbuilder</a><a class="sub" href="#sec-4-layers">Layers</a><a class="sub" href="#sec-5-orca">Orca</a><a class="sub" href="#sec-6-skills-locales-codex">Skills locales · Codex</a><a class="sub" href="#sec-7-skills-locales-claude-code">Skills locales · Claude Code</a><a class="sub" href="#sec-8-skills-partag-es">Skills partagées</a><a class="sub" href="#sec-9-claude-skills-synchronis-es">Claude · skills synchronisées</a><a class="sub" href="#sec-10-navbuilder-projet">NavBuilder · projet</a><a class="sub" href="#sec-11-larashero3-dotcom-lieflat-charts">larashero3-dotcom/lieflat-charts</a><a class="sub" href="#sec-12-leonxlnx-taste-skill">Leonxlnx/taste-skill</a><a class="sub" href="#sec-13-shadcn-improve">shadcn/improve</a><a class="sub" href="#sec-14-vercel-labs-skills">vercel-labs/skills</a>
+  <p class="group">Prompts</p>
+  <button class="nav sub" type="button" data-filter="prompt" data-creator="all">Tous</button>
+  <button class="nav sub" type="button" data-filter="prompt" data-creator="matt-pocock">Matt Pocock</button>
+  <button class="nav sub" type="button" data-filter="prompt" data-creator="poteto">Poteto</button>
   <p class="group">Suite</p>
   <a href="#plugins">Plugins</a>
   <a href="#prompts">Prompts</a>
@@ -145,7 +175,7 @@
       <button type="button" data-filter="prompt">
         <span class="k">Prompts</span>
         <strong>2</strong>
-        <span>Des messages prêts à coller. La puce copie le texte.</span>
+        <span>Des messages prêts à coller. La chip copie le texte.</span>
       </button>
     </div>
   </section>
@@ -166,7 +196,7 @@
 <section id="sec-13-shadcn-improve" data-kind="skill"><h2>shadcn/improve</h2><h3 class="group">Skills installées</h3><article class="item" id="skill-shadcn-improve-improve" data-kind="skill" data-name="improve" data-find="improve audite le code et produit des plans d’amélioration prioritaires sans modifier les sources. workflow /improve shadcn/improve skills installées"><h3>/improve</h3><p>Audite le code et produit des plans d’amélioration prioritaires sans modifier les sources.</p><p class="meta">shadcn/improve · workflow</p></article></section>
 <section id="sec-14-vercel-labs-skills" data-kind="skill"><h2>vercel-labs/skills</h2><h3 class="group">Skills installées</h3><article class="item" id="skill-vercel-labs-skills-find-skills" data-kind="skill" data-name="find-skills" data-find="find-skills recherche des skills disponibles et aide à installer celle qui couvre un besoin. outillage /find-skills vercel-labs/skills skills installées"><h3>/find-skills</h3><p>Recherche des skills disponibles et aide à installer celle qui couvre un besoin.</p><p class="meta">vercel-labs/skills · outillage</p></article></section>
 <section id="plugins" data-kind="plugin"><h2>Plugins</h2><p class="aim">Les plugins Cursor installés sur cette machine. Chacun branche un service ou une façon de travailler dans le chat.</p><article class="item" id="plugin-pstack" data-kind="plugin" data-find="pstack recettes pour faire travailler un agent avec rigueur. moins de code, une preuve à la fin. cours depuis zéro"><h3><a href="https://cursor.com/marketplace/cursor/pstack">pstack</a></h3><p>Recettes pour faire travailler un agent avec rigueur. Moins de code, une preuve à la fin.</p><p><button type="button" class="as-link" data-filter="course">Cours, depuis zéro</button></p></article><article class="item" id="plugin-cursor-team-kit" data-kind="plugin" data-find="cursor team kit revue, livraison, nettoyage du code, et la conduite d&#x27;une interface ou d&#x27;un terminal."><h3><a href="https://cursor.com/marketplace">Cursor Team Kit</a></h3><p>Revue, livraison, nettoyage du code, et la conduite d&#x27;une interface ou d&#x27;un terminal.</p></article><article class="item" id="plugin-github" data-kind="plugin" data-find="github dépôts, issues et propositions de changement, depuis le chat."><h3><a href="https://github.com">GitHub</a></h3><p>Dépôts, issues et propositions de changement, depuis le chat.</p></article><article class="item" id="plugin-slack" data-kind="plugin" data-find="slack lire les canaux et envoyer des messages depuis l&#x27;agent."><h3><a href="https://slack.com">Slack</a></h3><p>Lire les canaux et envoyer des messages depuis l&#x27;agent.</p></article><article class="item" id="plugin-supabase" data-kind="plugin" data-find="supabase tables, configuration et requêtes sur les projets supabase."><h3><a href="https://supabase.com">Supabase</a></h3><p>Tables, configuration et requêtes sur les projets Supabase.</p></article><article class="item" id="plugin-vercel" data-kind="plugin" data-find="vercel déployer l&#x27;application et suivre les mises en ligne."><h3><a href="https://vercel.com">Vercel</a></h3><p>Déployer l&#x27;application et suivre les mises en ligne.</p></article><article class="item" id="plugin-mobbin" data-kind="plugin" data-find="mobbin captures d&#x27;applications réelles, classées par parcours."><h3><a href="https://mobbin.com">Mobbin</a></h3><p>Captures d&#x27;applications réelles, classées par parcours.</p></article><article class="item" id="plugin-paper" data-kind="plugin" data-find="paper un canvas de design que l&#x27;agent peut lire et modifier."><h3><a href="https://paper.design">Paper</a></h3><p>Un canvas de design que l&#x27;agent peut lire et modifier.</p></article><article class="item" id="plugin-x" data-kind="plugin" data-find="x chercher des posts et lire une timeline."><h3><a href="https://x.com">X</a></h3><p>Chercher des posts et lire une timeline.</p></article><article class="item" id="plugin-agentmail" data-kind="plugin" data-find="agentmail boîtes mail que les agents peuvent lire et écrire."><h3><a href="https://agentmail.to">Agentmail</a></h3><p>Boîtes mail que les agents peuvent lire et écrire.</p></article><article class="item" id="plugin-cursor-sdk" data-kind="plugin" data-find="cursor sdk scripts et applications qui pilotent cursor."><h3><a href="https://cursor.com">Cursor SDK</a></h3><p>Scripts et applications qui pilotent Cursor.</p></article><article class="item" id="plugin-thermos" data-kind="plugin" data-find="thermos revue sévère d&#x27;une branche : bugs, sécurité, et qualité du code."><h3><a href="https://cursor.com/marketplace">Thermos</a></h3><p>Revue sévère d&#x27;une branche : bugs, sécurité, et qualité du code.</p></article></section>
-<section id="prompts" data-kind="prompt"><h2>Prompts</h2><p class="aim">Des messages prêts à coller dans le chat. La puce en haut à droite copie le texte.</p><article class="item" id="prompt-rep-rer-les-modules-supprimer" data-kind="prompt" data-find="repérer les modules à supprimer /codebase-design take a look in the repo for shallow modules, applying the deletion test and look for candidates for deletion. "><h3>Repérer les modules à supprimer</h3><p class="aim">Quand le dépôt a grossi. Le but est d'appliquer le test de suppression et de lister les modules trop minces, candidats à disparaître.</p><div class="prompt-box"><button type="button" class="copy" data-copy="/codebase-design Take a look in the repo for shallow modules, applying the deletion test and look for candidates for deletion. ">Copier</button><pre>/codebase-design Take a look in the repo for shallow modules, applying the deletion test and look for candidates for deletion. </pre></div></article><article class="item" id="prompt-faciliter-la-navigation-des-agents-dans-le-repo" data-kind="prompt" data-find="faciliter la navigation des agents dans le repo /retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. find where agents take too long to find relevant information, or rely on out-of-date docs."><h3>Faciliter la navigation des agents dans le repo</h3><p class="aim">Après une série de sessions d'agent. Ici, les 10 dernières. Le but est de voir où l'agent cherche trop longtemps, ou s'appuie sur une doc périmée.</p><div class="prompt-box"><button type="button" class="copy" data-copy="/retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. Find where agents take too long to find relevant information, or rely on out-of-date docs.">Copier</button><pre>/retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. Find where agents take too long to find relevant information, or rely on out-of-date docs.</pre></div></article></section>
+<section id="prompts" data-kind="prompt"><h2>Prompts</h2><p class="aim">Des messages prêts à coller dans le chat. La chip à côté du titre copie le texte. Filtrer par créateur dans la colonne de gauche.</p><article class="item" id="prompt-rep-rer-les-modules-supprimer" data-kind="prompt" data-creator="matt-pocock" data-find="repérer les modules à supprimer matt pocock /codebase-design take a look in the repo for shallow modules, applying the deletion test and look for candidates for deletion. "><div class="prompt-head"><h3>Repérer les modules à supprimer</h3><button type="button" class="copy chip" aria-label="Copier le prompt" data-copy="/codebase-design Take a look in the repo for shallow modules, applying the deletion test and look for candidates for deletion. "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><p class="aim">Quand le dépôt a grossi. Le but est d'appliquer le test de suppression et de lister les modules trop minces, candidats à disparaître.</p><p class="meta">Matt Pocock</p><div class="prompt-box"><pre>/codebase-design Take a look in the repo for shallow modules, applying the deletion test and look for candidates for deletion. </pre></div></article><article class="item" id="prompt-faciliter-la-navigation-des-agents-dans-le-repo" data-kind="prompt" data-creator="poteto" data-find="faciliter la navigation des agents dans le repo poteto /retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. find where agents take too long to find relevant information, or rely on out-of-date docs."><div class="prompt-head"><h3>Faciliter la navigation des agents dans le repo</h3><button type="button" class="copy chip" aria-label="Copier le prompt" data-copy="/retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. Find where agents take too long to find relevant information, or rely on out-of-date docs."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><p class="aim">Après une série de sessions d'agent. Ici, les 10 dernières. Le but est de voir où l'agent cherche trop longtemps, ou s'appuie sur une doc périmée.</p><p class="meta"><a href="https://x.com/poteto/status/2104744961904394699" rel="noopener noreferrer" target="_blank">Poteto · X</a></p><div class="prompt-box"><pre>/retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. Find where agents take too long to find relevant information, or rely on out-of-date docs.</pre></div></article></section>
 <section id="cours" data-kind="course" class="is-hidden"><iframe title="Cours pstack, depuis zéro" data-src="pstack.html"></iframe></section>
 </main>
 </div>
@@ -211,13 +241,27 @@
 <script>
 (function () {
   var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-filter]"));
-  function apply(kind) {
-    buttons.forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-filter") === kind); });
+  var creator = "all";
+  var copyIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+  var copiedIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 12 4 4L19 6"></path></svg>';
+  function apply(kind, nextCreator) {
+    if (kind !== "prompt") creator = "all";
+    else if (nextCreator) creator = nextCreator;
+    buttons.forEach(function (b) {
+      var sameKind = b.getAttribute("data-filter") === kind;
+      var bCreator = b.getAttribute("data-creator");
+      var on = sameKind && (!bCreator || bCreator === creator);
+      b.classList.toggle("on", on);
+    });
     var garde = document.getElementById("garde");
     if (garde) garde.classList.toggle("is-hidden", kind !== "all");
     document.querySelectorAll("main section[data-kind]").forEach(function (sec) {
       var show = kind !== "all" && sec.getAttribute("data-kind") === kind;
       sec.classList.toggle("is-hidden", !show);
+    });
+    document.querySelectorAll("article.item[data-kind=\"prompt\"]").forEach(function (el) {
+      var match = creator === "all" || el.getAttribute("data-creator") === creator;
+      el.classList.toggle("is-hidden", kind === "prompt" && !match);
     });
     document.body.classList.toggle("show-course", kind === "course");
     if (kind === "course") {
@@ -225,13 +269,17 @@
       if (frame && !frame.getAttribute("src")) frame.setAttribute("src", frame.getAttribute("data-src"));
     }
   }
-  buttons.forEach(function (b) { b.addEventListener("click", function () { apply(b.getAttribute("data-filter")); }); });
+  buttons.forEach(function (b) {
+    b.addEventListener("click", function () {
+      apply(b.getAttribute("data-filter"), b.getAttribute("data-creator") || "all");
+    });
+  });
   document.querySelectorAll("nav a[href^='#']").forEach(function (a) {
     a.addEventListener("click", function () {
       var id = (a.getAttribute("href") || "").slice(1);
       var el = document.getElementById(id);
       var kind = el && el.getAttribute("data-kind");
-      if (kind) apply(kind);
+      if (kind) apply(kind, "all");
       else if (id.indexOf("sec-") === 0) apply("skill");
     });
   });
@@ -240,9 +288,14 @@
     var btn = e.target.closest("button.copy");
     if (!btn) return;
     navigator.clipboard.writeText(btn.getAttribute("data-copy") || "").then(function () {
-      var prev = btn.textContent;
-      btn.textContent = "Copié";
-      setTimeout(function () { btn.textContent = prev; }, 1200);
+      btn.classList.add("is-copied");
+      btn.setAttribute("aria-label", "Prompt copié");
+      btn.innerHTML = copiedIcon;
+      setTimeout(function () {
+        btn.classList.remove("is-copied");
+        btn.setAttribute("aria-label", "Copier le prompt");
+        btn.innerHTML = copyIcon;
+      }, 1200);
     });
   });
   function fold(v) { return (v || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
@@ -259,7 +312,7 @@
   var intents = [
     ["Installer pstack", "plugin rigueur", "#plugin-pstack"],
     ["Conduire une interface", "control-ui team kit", "#plugin-cursor-team-kit"],
-    ["Copier un prompt", "matt sessions", "#prompts"],
+    ["Copier un prompt", "matt poteto sessions retro", "#prompts"],
     ["Une skill d'interface", "better interface", "#sec-0-jakub-krehel"],
     ["Motion et design", "emil animation", "#sec-1-emil-kowalski"]
   ].map(function (r) { return { kind: "Intention", title: r[0], text: r[1], href: r[2] }; });

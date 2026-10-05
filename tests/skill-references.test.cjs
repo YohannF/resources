@@ -58,6 +58,6 @@ test("copies the original prompt rather than its annotated display", async () =>
   context.window.resourcePrompts.renderCard({ label: "Test", text }, "Copy", async (value) => {
     copied = value;
   });
-  await buttons.find((button) => button.className === "ghost prompt__copy").events.click();
+  await buttons.find((button) => button.className === "chip prompt__copy").events.click();
   assert.equal(copied, text);
 });

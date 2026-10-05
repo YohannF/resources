@@ -116,7 +116,7 @@ function renderRow({ item, collection, source, group }) {
   const row = document.createElement("div");
   row.className = "row";
   row.dataset.collection = collection;
-  row.dataset.cat = item.cat ?? "";
+  row.dataset.cat = item.creator || item.cat || "";
   row.dataset.name = item.name;
 
   const name = document.createElement("dt");
@@ -214,6 +214,7 @@ function renderRow({ item, collection, source, group }) {
       item.when,
       item.url,
       item.cat,
+      item.creator,
       source,
       group,
       labels[collection],
@@ -528,7 +529,7 @@ function reset() {
 
 async function boot() {
   const loaded = await Promise.all(
-    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261002-prompt-variable`).then((res) => res.json())),
+    COLLECTIONS.map((id) => fetch(`data/${id}.json?v=20261005-prompt-creator`).then((res) => res.json())),
   );
 
   const existingPrompts = loaded.find((collection) => collection.id === "skills").sections

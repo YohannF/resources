@@ -153,15 +153,9 @@
   function renderCard(prompt, copyLabel, copyText, showTitle = true) {
     const card = document.createElement("article");
     card.className = "prompt";
-    if (showTitle) {
-      const title = document.createElement("h4");
-      title.className = "prompt__title";
-      title.textContent = prompt.label;
-      card.append(title);
-    }
     const copy = document.createElement("button");
     copy.type = "button";
-    copy.className = "ghost prompt__copy";
+    copy.className = "chip prompt__copy";
     setCopyIcon(copy, "copy", copyLabel);
     let resetTimer;
     copy.addEventListener("click", async () => {
@@ -182,7 +176,15 @@
         delete copy.dataset.error;
       }, 1600);
     });
-    card.append(renderText(prompt.text, prompt.variables), copy);
+    if (showTitle) {
+      const title = document.createElement("h4");
+      title.className = "prompt__title";
+      title.textContent = prompt.label;
+      card.append(title, copy);
+    } else {
+      card.append(copy);
+    }
+    card.append(renderText(prompt.text, prompt.variables));
     return card;
   }
 
