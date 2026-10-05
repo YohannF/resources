@@ -15,19 +15,14 @@
               "x": "mattpocockuk",
               "avatar": "assets/avatars/matt-pocock.jpg",
               "text": "/codebase-design Take a look in the repo for shallow modules, applying the deletion test and look for candidates for deletion. "
-            }
-          ]
-        },
-        {
-          "label": "Poteto",
-          "items": [
+            },
             {
               "name": "Faciliter la navigation des agents dans le repo",
-              "creator": "Poteto",
-              "cat": "Poteto",
-              "x": "poteto",
-              "avatar": "assets/avatars/poteto.jpg",
-              "url": "https://x.com/poteto/status/2104744961904394699",
+              "creator": "Matt Pocock",
+              "cat": "Matt Pocock",
+              "x": "mattpocockuk",
+              "avatar": "assets/avatars/matt-pocock.jpg",
+              "url": "https://x.com/mattpocockuk/status/2105951409887949107",
               "text": "/retro read my last 10 coding agent sessions and find ways to make my repo easier to navigate. Find where agents take too long to find relevant information, or rely on out-of-date docs.",
               "variables": [
                 {
@@ -35,7 +30,12 @@
                   "label": "Nombre de sessions à analyser"
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "label": "Poteto",
+          "items": [
             {
               "name": "Reformuler le but et le problème",
               "creator": "Poteto",
