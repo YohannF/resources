@@ -30,6 +30,14 @@
                   "label": "Nombre de sessions à analyser"
                 }
               ]
+            },
+            {
+              "name": "Restructurer un AGENTS.md trop chargé",
+              "creator": "Matt Pocock",
+              "cat": "Matt Pocock",
+              "x": "mattpocockuk",
+              "avatar": "assets/avatars/matt-pocock.jpg",
+              "text": "/writing-for-agents my AGENTS.md is a hot mess, propose a series of restructurings that:\n\n- Remove no-ops\n- Use progressive disclosure\n- Move instructions to CODING_STANDARDS.md\n\nApply your work over three subagents, each more radical than the last. Create a single PR."
             }
           ]
         },
